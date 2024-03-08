@@ -68,18 +68,19 @@ def getResponseByPageId(pageId):
     return matches
 
 
+def saveLog(arr):
+    with open("/app/data/fileLog.txt","a") as f:
+        for i in arr:
+            data = {"seqnum":i[0],"cbub_code":i[1]}
+            data = json.dumps(data,ensure_ascii=False)
+            f.write(data+"\n")
 
 i = 1
 while True:
     
-    response = getResponseByPageId(i)
-    html = response.text
-    matches = re.findall(pattern, html)
+    matches = getResponseByPageId(i)
     if not matches:
         break
     i+=1
-    with open("result.txt","a") as f:
-        for match in matches:
-            data = {"seqnum" : match[0], "cbub_code" : match[1]}
-            send_data = json.dumps(data)
-            f.write(send_data+"\n")
+    saveLog(matches)
+    
