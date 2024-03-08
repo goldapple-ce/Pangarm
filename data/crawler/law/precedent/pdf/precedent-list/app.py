@@ -4,12 +4,8 @@ import requests
 from kafka import KafkaProducer
 import os
 KAFKA_BOOTSTRAP_SERVER = os.environ.get("KAFKA_BOOTSTRAP_SERVER")
-KAFKA_CONSUME_TOPIC = os.environ.get("KAFKA_CONSUME_TOPIC")
-KAFKA_CONSUME_GROUP = os.environ.get("KAFKA_CONSUME_GROUP")
 KAFKA_PRODUCE_TOPIC = os.environ.get("KAFKA_PRODUCE_TOPIC")
 assert KAFKA_BOOTSTRAP_SERVER!= None
-assert KAFKA_CONSUME_TOPIC!= None
-assert KAFKA_CONSUME_GROUP != None
 assert KAFKA_PRODUCE_TOPIC != None
 
 def getResponseByPageId(pageId):
@@ -75,6 +71,21 @@ def saveLog(arr):
             data = json.dumps(data,ensure_ascii=False)
             f.write(data+"\n")
 
+
+def produceKafka(arr):
+    for i in arr:
+        data = {"seqnum":i[0],"cbub_code":i[1]}
+        producer.send(KAFKA_PRODUCE_TOPIC, value=data)
+        producer.flush() 
+
+producer = KafkaProducer(
+    acks=0, # 메시지 전송 완료에 대한 체크
+    compression_type=None, # 메시지 전달할 때 압축(None, gzip, snappy, lz4 등)
+    bootstrap_servers=KAFKA_BOOTSTRAP_SERVER, # 전달하고자 하는 카프카 브로커의 주소 리스트
+    value_serializer=lambda x:json.dumps(x).encode('utf-8') # 메시지의 값 직렬화
+)
+
+
 i = 1
 while True:
     
@@ -83,4 +94,5 @@ while True:
         break
     i+=1
     saveLog(matches)
+    produceKafka(matches)
     
