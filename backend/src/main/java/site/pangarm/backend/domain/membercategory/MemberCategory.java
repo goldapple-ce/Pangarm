@@ -1,9 +1,14 @@
 package site.pangarm.backend.domain.membercategory;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import site.pangarm.backend.domain.category.Category;
 import site.pangarm.backend.domain.member.Member;
 
+@Builder
+@AllArgsConstructor @NoArgsConstructor
 @Entity
 @IdClass(MemberCategoryId.class)
 public class MemberCategory {
