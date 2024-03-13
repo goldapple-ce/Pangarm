@@ -24,7 +24,7 @@ public class Member {
     private String name;
 
     @Column(nullable = false)
-    private String gender;
+    private Integer gender;
 
     @Column(nullable = false)
     private String job;
