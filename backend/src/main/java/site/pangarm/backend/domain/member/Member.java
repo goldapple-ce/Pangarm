@@ -2,9 +2,14 @@ package site.pangarm.backend.domain.member;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CollectionId;
 import org.springframework.lang.NonNull;
 
+@Builder
+@AllArgsConstructor @NoArgsConstructor
 @Entity
 public class Member {
 
@@ -12,11 +17,9 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @org.springframework.lang.NonNull
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @lombok.NonNull
     @Column(nullable = false)
     private String password;
 
@@ -28,5 +31,9 @@ public class Member {
 
     @Column(nullable = false)
     private String job;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }

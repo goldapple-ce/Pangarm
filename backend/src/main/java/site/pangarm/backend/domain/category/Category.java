@@ -1,7 +1,12 @@
 package site.pangarm.backend.domain.category;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
+@Builder
+@AllArgsConstructor @NoArgsConstructor
 @Entity
 public class Category {
     
