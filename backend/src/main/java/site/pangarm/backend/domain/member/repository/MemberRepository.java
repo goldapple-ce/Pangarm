@@ -1,0 +1,8 @@
+package site.pangarm.backend.domain.member.repository;
+
+import jakarta.persistence.criteria.CriteriaBuilder;
+import org.springframework.data.jpa.repository.JpaRepository;
+import site.pangarm.backend.domain.member.Member;
+
+public interface MemberRepository extends JpaRepository<Member, Integer> {
+}
