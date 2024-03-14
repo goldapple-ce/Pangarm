@@ -16,13 +16,17 @@ public class MemberServiceImpl implements MemberService{
 
     @Transactional
     @Override
-    public void signup(MemberSignUpRequest memberJoinDto) {
-        memberJoinDto.setEncodedPassword(bCryptPasswordEncoder.encode(memberJoinDto.getPassword()));
-        memberRepository.save(memberJoinDto.toMemberEntity());
+    public void signup(MemberSignUpRequest memberDto) {
+        Member foundMember= findMemberByEmail(memberDto.getEmail());
+        if(foundMember != null) {
+            throw new IllegalArgumentException("이미 존재하는 회원입니다.");
+        }
+        memberDto.setEncodedPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
+        memberRepository.save(memberDto.toMemberEntity());
     }
 
     @Override
-    public Member findByEmail(String email) {
+    public Member findMemberByEmail(String email) {
         return memberRepository.findByEmail(email);
     }
 
