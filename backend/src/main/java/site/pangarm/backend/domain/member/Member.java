@@ -4,6 +4,7 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CollectionId;
 import org.springframework.lang.NonNull;
@@ -11,6 +12,7 @@ import org.springframework.lang.NonNull;
 @Builder
 @AllArgsConstructor @NoArgsConstructor
 @Entity
+@Getter
 public class Member {
 
     @Id
@@ -31,9 +33,5 @@ public class Member {
 
     @Column(nullable = false)
     private String job;
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
 }
