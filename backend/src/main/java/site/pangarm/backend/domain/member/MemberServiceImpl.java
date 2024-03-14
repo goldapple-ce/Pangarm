@@ -1,12 +1,10 @@
-package site.pangarm.backend.domain.member.service;
+package site.pangarm.backend.domain.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.pangarm.backend.domain.member.Member;
-import site.pangarm.backend.domain.member.dto.MemberJoinDto;
-import site.pangarm.backend.domain.member.repository.MemberRepository;
+import site.pangarm.backend.application.member.dto.request.MemberSignUpRequest;
 
 @Service
 @Transactional(readOnly = true)
@@ -18,10 +16,14 @@ public class MemberServiceImpl implements MemberService{
 
     @Transactional
     @Override
-    public void signup(MemberJoinDto memberJoinDto) {
-        Member joinMember = memberJoinDto.toMemberEntity();
-        joinMember.setPassword(bCryptPasswordEncoder.encode(memberJoinDto.getPassword()));
-        memberRepository.save(joinMember);
+    public void signup(MemberSignUpRequest memberJoinDto) {
+        memberJoinDto.setEncodedPassword(bCryptPasswordEncoder.encode(memberJoinDto.getPassword()));
+        memberRepository.save(memberJoinDto.toMemberEntity());
+    }
+
+    @Override
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email);
     }
 
 }
