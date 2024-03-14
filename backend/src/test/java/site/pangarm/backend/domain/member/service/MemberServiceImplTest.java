@@ -37,7 +37,7 @@ class MemberServiceImplTest {
 
             memberService.signup(memberJoinDto);
 
-            Member findMember = memberService.findByEmail("testemail@gmail.com");
+            Member findMember = memberService.findMemberByEmail("testemail@gmail.com");
 
             assertEquals("Jane", findMember.getName());
         }
