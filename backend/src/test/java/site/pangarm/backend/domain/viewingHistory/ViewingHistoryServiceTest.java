@@ -1,4 +1,4 @@
-package site.pangarm.backend.domain.precedentBookmark;
+package site.pangarm.backend.domain.viewingHistory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -11,10 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
 @SpringBootTest
-class PrecedentBookmarkServiceTest {
+class ViewingHistoryServiceTest {
     @Autowired
-    private PrecedentBookmarkService precedentBookmarkService;
-
+    private ViewingHistoryService viewingHistoryService;
 
     @Nested
     @DisplayName("save 테스트")
