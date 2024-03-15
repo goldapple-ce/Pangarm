@@ -2,6 +2,7 @@ package site.pangarm.backend.application.member.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import site.pangarm.backend.application.member.dto.request.MemberLoginRequest;
 import site.pangarm.backend.application.member.dto.request.MemberSignUpRequest;
 import site.pangarm.backend.domain.member.MemberService;
 
@@ -16,5 +17,12 @@ public class MemberController {
         memberService.signup(memberJoinDto);
         return "회원가입 성공";
     }
+
+    @PostMapping("/login")
+    public String login(@RequestBody MemberLoginRequest memberLoginRequest) {
+        memberService.login(memberLoginRequest);
+        return "회원가입 성공";
+    }
+
 
 }
