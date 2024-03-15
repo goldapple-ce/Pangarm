@@ -13,7 +13,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import site.pangarm.backend.global.filter.LoginFilter2;
+import site.pangarm.backend.global.filter.JwtAuthenticationFilter;
+import site.pangarm.backend.global.jwt.JwtProvider;
 
 @EnableWebSecurity
 @Configuration
@@ -21,6 +22,7 @@ import site.pangarm.backend.global.filter.LoginFilter2;
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
+    private final JwtProvider jwtProvider;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -54,7 +56,7 @@ public class SecurityConfig {
                             .anyRequest().permitAll();
                 })
                 .authenticationManager(authenticationManager)
-                .addFilter(new LoginFilter2(authenticationManager))
+                .addFilter(new JwtAuthenticationFilter(authenticationManager, jwtProvider))
                 .build();
 
     }
