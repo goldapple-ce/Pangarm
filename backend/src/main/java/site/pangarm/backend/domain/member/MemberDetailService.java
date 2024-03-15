@@ -23,14 +23,8 @@ public class MemberDetailService implements UserDetailsService {
         if (member == null) {
             throw new UsernameNotFoundException(username);
         }
+        return new MemberDetails(member);
         //UserDetails에 담아서 return 하면 AuthenticationManager가 검증함
-        UserDetails userDetails = new User(
-                member.getEmail(),
-                member.getPassword(),
-                new ArrayList<>()
-        );
-        System.out.println(userDetails.getUsername() + " " + userDetails.getPassword() + " " + userDetails.getAuthorities());
-        return userDetails;
     }
 
 }
