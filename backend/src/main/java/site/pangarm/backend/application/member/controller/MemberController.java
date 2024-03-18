@@ -18,10 +18,9 @@ public class MemberController {
         return "회원가입 성공";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestBody MemberLoginRequest memberLoginRequest) {
-        memberService.login(memberLoginRequest);
-        return "회원가입 성공";
+    @GetMapping("/test")
+    public String test() {
+        return "접근 성공";
     }
 
 

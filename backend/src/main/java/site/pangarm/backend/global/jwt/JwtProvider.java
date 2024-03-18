@@ -1,6 +1,7 @@
 package site.pangarm.backend.global.jwt;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
@@ -11,9 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -55,7 +54,7 @@ public class JwtProvider {
         return createAccessToken(email, (Collection<? extends GrantedAuthority>) claims.get("role"));
     }
 
-    public String createRefreshToken(String email, Collection<? extends GrantedAuthority> role) {
+    public String createRefreshToken(String email, List<String> role) {
         String refreshToken = Jwts.builder()
                 .claim("email",email)
                 .claim("type","refresh")
@@ -66,6 +65,7 @@ public class JwtProvider {
         return refreshToken;
     }
 
+    //??
     public Boolean validateAccessToken(String accessToken) {
         log.info("access check");
         accessToken = accessToken.replace("Bearer ","");
@@ -78,35 +78,36 @@ public class JwtProvider {
         return "access".equals(type);
     }
 
-//    public Boolean validateRefreshToken(String refreshToken) {
-//        System.out.println("refresh check");
-//        refreshToken = refreshToken.replace("Bearer ","");
-//        Claims claims = Jwts.parserBuilder()
-//                .setSigningKey(SECRET_KEY)
-//                .build()
-//                .parseClaimsJws(refreshToken)
-//                .getBody();
-//        String type = (String)claims.get("type");
-//        if (type.equals("refresh")) {
-//            System.out.println("create refresh");
+    public Boolean validateRefreshToken(String refreshToken) {
+        log.info("refresh check");
+        refreshToken = refreshToken.replace("Bearer ","");
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(SECRET_KEY)
+                .build()
+                .parseClaimsJws(refreshToken)
+                .getBody();
+        String type = (String)claims.get("type");
+        if (type.equals("refresh")) {
+            log.info("create refresh");
 //           ValueOperations<String, String> stringValueOperations = redisTemplate.opsForValue();
 //            String redisValue = stringValueOperations.get(String.valueOf(claims.get("id")));
 //            if (redisValue != null) {
 //                return claims.getExpiration().after(new Date());
 //            }
-//        }
-//        System.out.println("failed");
-//        return false;
-//    }
+            return true;
+        }
+        log.info("failed");
+        return false;
+    }
 
-    public int getUserEmail(String jwt) {
+    public String getUserEmail(String jwt) {
         jwt = jwt.replace("Bearer ","");
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(SECRET_KEY)
                 .build()
                 .parseClaimsJws(jwt)
                 .getBody();
-        return (int)claims.get("email");
+        return (String)claims.get("email");
     }
 
     public List<String> getUserRole(String jwt) {
@@ -116,6 +117,7 @@ public class JwtProvider {
                 .build()
                 .parseClaimsJws(jwt)
                 .getBody();
+
         return (List<String>)claims.get("role");
     }
 
