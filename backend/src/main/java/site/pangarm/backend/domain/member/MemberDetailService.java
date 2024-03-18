@@ -17,14 +17,14 @@ public class MemberDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("MemberDetailService -> loadUserByUsername");
         //password는 스크링 시큐리티가 알아서 처리
         Member member = memberRepository.findByEmail(username);
         if (member == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new MemberDetails(member);
         //UserDetails에 담아서 return 하면 AuthenticationManager가 검증함
+        return new MemberDetails(member);
+
     }
 
 }

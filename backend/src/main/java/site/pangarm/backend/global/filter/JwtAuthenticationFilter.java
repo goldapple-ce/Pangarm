@@ -29,10 +29,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtProvider tokenProvider) {
         this.authenticationManager = authenticationManager;
         this.tokenProvider = tokenProvider;
-        setFilterProcessesUrl("/api/member/login");
+        setFilterProcessesUrl("/member/login");
+
     }
 
-    // login 요청을 하면 로그인 시도를 위해서 실행되는 함수
+    // login 요청을 하면 회원 정보 확인을 위해서 실행되는 함수
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         log.info("JwtAuthenticationFilter -> attemptAuthentication");
@@ -46,18 +47,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             log.info("password: " + password);
 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
+            // DetailService의 loadUserByUsername()이 실행됨.
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
-            System.out.println("authentication: " + authentication);
+            log.info("authentication: " + authentication);
             return authentication;
-
 
         }catch (Exception e) {
             e.printStackTrace();
         }
-        //세션에 담는다. -> 컨트롤러에서 받는다.
         return null;
-
-
     }
 
     @Override
@@ -70,7 +68,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String accessToken = tokenProvider.createAccessToken(memberDetails.getUsername(),memberDetails.getAuthorities());
 
         // Refresh Token 생성
-        String refreshToken = tokenProvider.createRefreshToken(memberDetails.getUsername(),memberDetails.getAuthorities());
+        String refreshToken = tokenProvider.createRefreshToken(memberDetails.getUsername(),memberDetails.getMember().getRoleList());
 
         JwtToken token = JwtToken.builder()
                 .grantType("Bearer ")
@@ -79,7 +77,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .build();
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(token));
-
     }
 
     @Override
