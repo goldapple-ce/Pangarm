@@ -1,1 +1,34 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  datasource:
+    driver-class-name: ${DATABASE_DRIVER}
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+jwt:
+  secret: ${JWT_SECRET_KEY}
+  accessExpTime: ${JWT_ACCESS_EXPIRATION}
+  refreshExpTime: ${JWT_REFRESH_EXPIRATION}
+
+logging:
+  level:
+    root: INFO
+
 
