@@ -1,10 +1,12 @@
-package site.pangarm.backend.domain.member;
+package site.pangarm.backend.domain.auth;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import site.pangarm.backend.domain.member.Member;
+
 import java.util.ArrayList;
 import java.util.Collection;
 

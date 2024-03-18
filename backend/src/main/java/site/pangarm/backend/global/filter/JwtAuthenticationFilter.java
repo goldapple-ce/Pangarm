@@ -12,10 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import site.pangarm.backend.domain.member.Member;
-import site.pangarm.backend.domain.member.MemberDetails;
+import site.pangarm.backend.domain.auth.MemberDetails;
 import site.pangarm.backend.global.jwt.JwtProvider;
 import site.pangarm.backend.global.jwt.JwtToken;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
