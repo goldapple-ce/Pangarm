@@ -1,17 +1,13 @@
 package site.pangarm.backend.domain.member;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CollectionId;
-import org.springframework.lang.NonNull;
+import lombok.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 @Builder
 @AllArgsConstructor @NoArgsConstructor
-@Entity
 @Getter
 public class Member {
 
@@ -34,4 +30,15 @@ public class Member {
     @Column(nullable = false)
     private String job;
 
+    private String role;
+
+    void setRole(String role) {
+        this.role = role;
+    }
+    public List<String> getRoleList(){
+        if(!this.role.isEmpty()){
+            return List.of(this.role);
+        }
+        return new ArrayList<>();
+    }
 }
