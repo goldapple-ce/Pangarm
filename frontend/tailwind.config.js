@@ -14,7 +14,7 @@ export default {
     fontFamily: {
       TitleBold: ['GmarketSansTTFBold'],
       TitleMedium: ['GmarketSansTTFMedium'],
-      TItleLight: ['GmarketSansTTFLight'],
+      TitleLight: ['GmarketSansTTFLight'],
       SubTitle: ['YoonGothic320'],
       Content: ['YoonGothic310'],
     }
