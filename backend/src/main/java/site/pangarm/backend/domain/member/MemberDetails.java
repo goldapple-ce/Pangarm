@@ -1,14 +1,14 @@
 package site.pangarm.backend.domain.member;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Getter
 @Slf4j
 public class MemberDetails implements UserDetails {
 
@@ -21,11 +21,8 @@ public class MemberDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        log.info("MemberDetails -> getAuthorities");
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        member.getRoleList().forEach(role -> {
-            authorities.add(() -> role);
-        });
+        authorities.add(()->member.getRole());
         return authorities;
 
     }
