@@ -38,7 +38,7 @@ public class MemberDetails implements UserDetails {
     @Override
     public String getUsername() {
         log.info("MemberDetails -> getUsername");
-        return member.getEmail();
+        return String.valueOf(member.getId());
     }
 
     @Override
