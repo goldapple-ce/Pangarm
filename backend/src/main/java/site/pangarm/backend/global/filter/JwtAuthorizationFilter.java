@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import site.pangarm.backend.domain.auth.MemberDetails;
+import site.pangarm.backend.domain.member.Member;
 import site.pangarm.backend.domain.member.MemberRepository;
 import site.pangarm.backend.global.jwt.JwtProvider;
 import site.pangarm.backend.global.jwt.JwtToken;
@@ -37,9 +38,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
             log.info("JwtAuthorizationFilter.doFilterInternal");
 
-
             String jwtToken = request.getHeader("Authorization");
-            System.out.println("jwtHeader : " + jwtToken);
 
             //header 있는지 확인
             if (jwtToken == null || !jwtToken.startsWith("Bearer")) {
@@ -48,11 +47,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             }
 
             if (jwtProvider.validateAccessToken(jwtToken)) {
-                //access라면
-                System.out.println("ACCESS TOKEN!!");
 
-                String userEmail = jwtProvider.getUserEmail(jwtToken);
-                MemberDetails memberDetails = new MemberDetails(memberRepository.findByEmail(userEmail));
+                log.info("ACCESS TOKEN!!");
+
+                Member member = memberRepository.findById(jwtProvider.getUserId(jwtToken)).orElse(null);
+                MemberDetails memberDetails = member != null ? new MemberDetails(member) : null;
 
                 //JWT 서명을 통해서 서명이 정상이면 Authentication 객체를 만들어준다.
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(memberDetails, null, memberDetails.getAuthorities());

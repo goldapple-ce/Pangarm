@@ -32,9 +32,9 @@ public class JwtProvider {
         this.SECRET_KEY = new SecretKeySpec(key.getBytes(), SignatureAlgorithm.HS512.getJcaName());
     }
 
-    public String createAccessToken(String email, Collection<? extends GrantedAuthority> role) {
+    public String createAccessToken(String userId, Collection<? extends GrantedAuthority> role) {
         String accessToken = Jwts.builder()
-                .claim("email",email)
+                .claim("userId", userId)
                 .claim("type","access")
                 .claim("role",role)
                 .setExpiration(new Date(System.currentTimeMillis() + refreshExpTime))
@@ -50,13 +50,13 @@ public class JwtProvider {
                 .parseClaimsJws(refreshToken)
                 .getBody();
 
-        String email = (String) claims.get("email");
-        return createAccessToken(email, (Collection<? extends GrantedAuthority>) claims.get("role"));
+        String userId = (String) claims.get("userId");
+        return createAccessToken(userId, (Collection<? extends GrantedAuthority>) claims.get("role"));
     }
 
-    public String createRefreshToken(String email, List<String> role) {
+    public String createRefreshToken(String userId, List<String> role) {
         String refreshToken = Jwts.builder()
-                .claim("email",email)
+                .claim("userId",userId)
                 .claim("type","refresh")
                 .claim("role",role)
                 .setExpiration(new Date(System.currentTimeMillis() + refreshExpTime))
@@ -100,14 +100,15 @@ public class JwtProvider {
         return false;
     }
 
-    public String getUserEmail(String jwt) {
+    public int getUserId(String jwt) {
         jwt = jwt.replace("Bearer ","");
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(SECRET_KEY)
                 .build()
                 .parseClaimsJws(jwt)
                 .getBody();
-        return (String)claims.get("email");
+        String userId = (String) claims.get("userId");
+        return Integer.parseInt(userId);
     }
 
     public List<String> getUserRole(String jwt) {
