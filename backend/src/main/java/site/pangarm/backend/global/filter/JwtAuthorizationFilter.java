@@ -1,5 +1,6 @@
 package site.pangarm.backend.global.filter;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -11,15 +12,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import site.pangarm.backend.domain.member.Member;
-import site.pangarm.backend.domain.member.MemberDetails;
+import site.pangarm.backend.domain.auth.MemberDetails;
 import site.pangarm.backend.domain.member.MemberRepository;
-import site.pangarm.backend.domain.member.MemberService;
 import site.pangarm.backend.global.jwt.JwtProvider;
 import site.pangarm.backend.global.jwt.JwtToken;
 
 import java.io.IOException;
-import java.util.List;
 
 @Slf4j
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
@@ -72,15 +70,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                 response.getWriter().write(new ObjectMapper().writeValueAsString(token));
             }
         }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (JWTVerificationException e){
+            throw new JWTVerificationException(e.getMessage());
         }
-//        catch (JWTVerificationException e){
-//            throw new JWTVerificationException(e.getMessage());
-//        }
-//        catch (ExpiredJwtException e){
-//            throw new ExpiredJwtException(null,null,e.getMessage());
-//        }
+        catch (ExpiredJwtException e){
+            throw new ExpiredJwtException(null,null,e.getMessage());
+        }
     }
 
 
