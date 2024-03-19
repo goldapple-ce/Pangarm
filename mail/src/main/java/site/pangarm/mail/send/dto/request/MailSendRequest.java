@@ -1,12 +1,20 @@
 package site.pangarm.mail.send.dto.request;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import site.pangarm.mail.exception.ErrorCode;
+import site.pangarm.mail.exception.MailException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Getter
+@AllArgsConstructor
 public class MailSendRequest {
     @NotBlank
+    @Email
     private String email;
 
     @NotBlank
@@ -15,20 +23,5 @@ public class MailSendRequest {
     @NotBlank
     private String body;
 
-    public MailSendRequest(String email, String title, String body) {
 
-        if(email == null || !isValidEmail(email)){
-            //TOD : Exception change
-            throw new RuntimeException("Email Valid Error");
-        }
-        this.email = email;
-        this.title = title;
-        this.body = body;
-    }
-    private boolean isValidEmail(String email){
-        String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(email);
-        return m.matches();
-    }
 }
