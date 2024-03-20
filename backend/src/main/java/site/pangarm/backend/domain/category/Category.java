@@ -10,7 +10,7 @@ import site.pangarm.backend.application.category.dto.request.CategoryUpdateReque
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
-
+    
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; //뉴스 카테고리 아이디
 
