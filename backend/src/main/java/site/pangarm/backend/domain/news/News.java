@@ -1,8 +1,12 @@
 package site.pangarm.backend.domain.news;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
-
+@Builder
+@AllArgsConstructor @NoArgsConstructor
 @Entity
 public class News {
 
