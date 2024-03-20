@@ -2,79 +2,69 @@ package site.pangarm.backend.global.filter;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import site.pangarm.backend.domain.auth.MemberDetails;
 import site.pangarm.backend.domain.member.Member;
-import site.pangarm.backend.domain.member.MemberRepository;
-import site.pangarm.backend.global.jwt.JwtProvider;
+import site.pangarm.backend.domain.member.MemberService;
+import site.pangarm.backend.global.jwt.TokenProvider;
 import site.pangarm.backend.global.jwt.JwtToken;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Collections;
 
 @Slf4j
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String BEARER_PREFIX = "Bearer ";
+    private final TokenProvider jwtProvider;
+    private final ObjectMapper objectMapper;
 
-    private final JwtProvider jwtProvider;
-    private final MemberRepository memberRepository;
-
-    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtProvider jwtProvider, MemberRepository memberRepository) {
+    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, TokenProvider jwtProvider, ObjectMapper objectMapper) {
         super(authenticationManager);
         this.jwtProvider = jwtProvider;
-        this.memberRepository = memberRepository;
+        this.objectMapper = objectMapper;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        try {
+        log.info("start AuthorizationFilter");
 
-            log.info("JwtAuthorizationFilter.doFilterInternal");
+        String token = request.getHeader(AUTHORIZATION_HEADER);
 
-            String jwtToken = request.getHeader("Authorization");
-
-            //header 있는지 확인
-            if (jwtToken == null || !jwtToken.startsWith("Bearer")) {
-                chain.doFilter(request, response);
-                return;
-            }
-
-            if (jwtProvider.validateAccessToken(jwtToken)) {
-
-                log.info("ACCESS TOKEN!!");
-
-                Member member = memberRepository.findById(jwtProvider.getUserId(jwtToken)).orElse(null);
-                MemberDetails memberDetails = member != null ? new MemberDetails(member) : null;
-
-                //JWT 서명을 통해서 서명이 정상이면 Authentication 객체를 만들어준다.
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(memberDetails, null, memberDetails.getAuthorities());
-
-                // 강제로 시큐리티의 세션에 접근하여 Authentication 객체 저장
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                chain.doFilter(request, response);
-
-            } else if (jwtProvider.validateRefreshToken(jwtToken)) {
-                //refresh라면
-                System.out.println("REFRESH TOKEN!!");
-                jwtToken = jwtToken.replace("Bearer ","");
-                String accessToken = jwtProvider.reCreateAccessToken(jwtToken);
-                JwtToken token = JwtToken.builder().grantType("Bearer ").accessToken(accessToken).refreshToken(jwtToken).build();
-                response.getWriter().write(new ObjectMapper().writeValueAsString(token));
-            }
+        //header 있는지 확인
+        if (token == null || !token.startsWith(BEARER_PREFIX)) {
+            chain.doFilter(request, response);
+            return;
         }
-        catch (JWTVerificationException e){
-            throw new JWTVerificationException(e.getMessage());
+
+        //Token 정상 여부 확인
+        Claims claims = jwtProvider.validationAndparesClaims(token);
+        Authentication authentication = jwtProvider.getAuthentication(claims);
+        //JWT 서명을 통해서 서명이 정상이면 Authentication 객체를 만들어준다.
+        if(jwtProvider.validateAccessToken(claims)){
+            // 강제로 시큐리티의 세션에 접근하여 Authentication 객체 저장
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            chain.doFilter(request, response);
+        }else if(jwtProvider.validateRefreshToken(claims)){
+            JwtToken newToken = jwtProvider.createToken(authentication);
+            response.addHeader(AUTHORIZATION_HEADER,objectMapper.writeValueAsString(newToken));
         }
-        catch (ExpiredJwtException e){
-            throw new ExpiredJwtException(null,null,e.getMessage());
-        }
+
     }
 
 

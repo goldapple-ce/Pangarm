@@ -1,11 +1,12 @@
 package site.pangarm.backend.domain.member;
 
-import site.pangarm.backend.application.member.dto.request.MemberSignUpRequest;
+import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
 
 public interface MemberService {
 
-    void signup(MemberSignUpRequest memberJoinDto);
+    Member save(Member member);
 
-    Member findMemberByEmail(String email);
+    Member findByEmail(String email);
 
+    Member findById(int userId);
 }

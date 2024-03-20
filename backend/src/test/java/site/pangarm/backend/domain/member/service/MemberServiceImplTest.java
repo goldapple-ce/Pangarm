@@ -8,9 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.domain.member.Member;
-import site.pangarm.backend.application.member.dto.request.MemberSignUpRequest;
+import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
+import site.pangarm.backend.domain.member.MemberException;
 import site.pangarm.backend.domain.member.MemberService;
-import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -28,18 +29,29 @@ class MemberServiceImplTest {
         @Test
         @DisplayName("성공")
         void whenSuccess() {
-            MemberSignUpRequest memberJoinDto =
-                    new MemberSignUpRequest("testemail@gmail.com",
-                            "testpassword",
-                            "Jane",
-                            1,
-                            "학생");
+            Member member = Member.of("testemail@gmail.com",
+                    "testpassword",
+                    "Jane",
+                    1,
+                    "학생");
+            assertDoesNotThrow(()->{
+                memberService.save(member);
+            });
+        }
 
-            memberService.signup(memberJoinDto);
+        @Test
+        @DisplayName("실패, 이미 존재하는 회원")
+        void whenFailByAlreadyExist() {
+            Member member = Member.of("testemail@gmail.com",
+                    "testpassword",
+                    "Jane",
+                    1,
+                    "학생");
+            memberService.save(member);
 
-            Member findMember = memberService.findMemberByEmail("testemail@gmail.com");
-
-            assertEquals("Jane", findMember.getName());
+            assertThrows(MemberException.class,()->{
+                memberService.save(member);
+            });
         }
     }
 

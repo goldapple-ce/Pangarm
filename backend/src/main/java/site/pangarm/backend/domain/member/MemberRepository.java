@@ -4,7 +4,11 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import site.pangarm.backend.domain.member.Member;
 
-public interface MemberRepository extends JpaRepository<Member, Integer> {
+import java.util.Optional;
 
-    Member findByEmail(String email);
+interface MemberRepository extends JpaRepository<Member, Integer> {
+
+    Optional<Member> findByEmail(String email);
+
+    boolean existsByEmail(String email);
 }

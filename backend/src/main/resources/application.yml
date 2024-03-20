@@ -12,7 +12,7 @@ spring:
     driver-class-name: ${DATABASE_DRIVER}
     url: ${DATABASE_URL}
     username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
+    password: ${DATABASE_PASSW:Q:wqORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -29,5 +29,3 @@ spring:
 logging:
   level:
     root: INFO
-
-
