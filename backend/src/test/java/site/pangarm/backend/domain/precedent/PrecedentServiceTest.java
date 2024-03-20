@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.domain.caseType.CaseType;
 import site.pangarm.backend.domain.caseType.CaseTypeService;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 @Transactional
 @SpringBootTest
 class PrecedentServiceTest {
