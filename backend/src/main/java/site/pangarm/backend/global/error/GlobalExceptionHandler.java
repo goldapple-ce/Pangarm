@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import site.pangarm.backend.domain.auth.AuthException;
 import site.pangarm.backend.global.error.exception.BusinessException;
 
 import static site.pangarm.backend.global.error.ErrorCode.API_ERROR_INPUT_INVALID_VALUE;
