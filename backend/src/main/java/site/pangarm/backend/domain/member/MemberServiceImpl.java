@@ -1,42 +1,41 @@
 package site.pangarm.backend.domain.member;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.pangarm.backend.application.member.dto.request.MemberLoginRequest;
-import site.pangarm.backend.application.member.dto.request.MemberSignUpRequest;
+import site.pangarm.backend.global.error.ErrorCode;
 
-@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
 
     private final MemberRepository memberRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
 
     @Transactional
     @Override
-    public void signup(MemberSignUpRequest memberDto) {
-        Member foundMember= findMemberByEmail(memberDto.getEmail());
-        if(foundMember != null) {
-            throw new IllegalArgumentException("이미 존재하는 회원입니다.");
-        }
-        memberDto.setEncodedPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
-        Member joinMember = memberDto.toMemberEntity();
-        joinMember.setRole("ROLE_USER");
-        memberRepository.save(joinMember);
+    public Member save(Member member) {
+        validation(member.getEmail());
+        return memberRepository.save(member);
     }
 
     @Override
-    public Member findMemberByEmail(String email) {
-        return memberRepository.findByEmail(email);
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email).orElseThrow(()->
+                new MemberException(ErrorCode.API_ERROR_NOT_FOUND));
+    }
+
+    @Override
+    public Member findById(int id) {
+        return memberRepository.findById(id).orElseThrow(()->
+                new MemberException(ErrorCode.API_ERROR_NOT_FOUND));
+    }
+
+    private void validation(String email){
+        if(memberRepository.existsByEmail(email)){
+            throw new MemberException(ErrorCode.API_ERROR_ALREADY_EXIST);
+        }
     }
 
 }

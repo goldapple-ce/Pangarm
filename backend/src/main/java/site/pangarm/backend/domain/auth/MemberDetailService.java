@@ -1,29 +1,33 @@
 package site.pangarm.backend.domain.auth;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import site.pangarm.backend.domain.member.Member;
-import site.pangarm.backend.domain.member.MemberRepository;
+import site.pangarm.backend.domain.member.MemberService;
+
+import java.util.Collections;
 
 @RequiredArgsConstructor
 @Service
 public class MemberDetailService implements UserDetailsService {
 
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //password는 스크링 시큐리티가 알아서 처리
-        Member member = memberRepository.findByEmail(username);
-        if (member == null) {
-            throw new UsernameNotFoundException(username);
-        }
-        //UserDetails에 담아서 return 하면 AuthenticationManager가 검증함
-        return new MemberDetails(member);
+    public UserDetails loadUserByUsername(String email){
+        Member member = memberService.findByEmail(email);
+        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(member.getRole().getValue());
 
+        //UserDetails에 담아서 return 하면 AuthenticationManager가 검증함
+        return new User(
+                String.valueOf(member.getId()),
+                member.getPassword(),
+                Collections.singleton(grantedAuthority)
+        );
     }
 
 }

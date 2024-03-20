@@ -5,11 +5,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import site.pangarm.backend.domain.auth.AuthException;
+import site.pangarm.backend.global.error.ErrorCode;
+import site.pangarm.backend.global.error.exception.BusinessException;
 
 import java.io.IOException;
 
@@ -17,11 +22,23 @@ import java.io.IOException;
 @Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
+    private final HandlerExceptionResolver resolver;
+
+    public CustomAuthenticationEntryPoint(
+            @Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver) {
+        this.resolver = resolver;
+    }
+
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
-        log.info("CustomAuthenticationEntryPoint.commence");
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.getWriter().write(new ObjectMapper().writeValueAsString("로그인이 필요합니다."));
+    public void commence(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            AuthenticationException authException) {
+        log.error("entryPoint: {}",authException.getMessage());
+        resolver.resolveException(
+                request,
+                response,
+                null,
+                AuthException.of(ErrorCode.API_ERROR_AUTH_BY_AUTHORIZATION_IS_NECESSARY));
     }
 }

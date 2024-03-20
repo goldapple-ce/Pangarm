@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
-@AllArgsConstructor @NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Member {
 
@@ -25,20 +24,25 @@ public class Member {
     private String name;
 
     @Column(nullable = false)
-    private Integer gender;
+    private int gender;
 
     @Column(nullable = false)
     private String job;
 
-    private String role;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    void setRole(String role) {
+    private Member(String email,String password, String name,int gender,String job,Role role){
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.job = job;
         this.role = role;
     }
-    public List<String> getRoleList(){
-        if(!this.role.isEmpty()){
-            return List.of(this.role);
-        }
-        return new ArrayList<>();
+
+    public static Member of(String email,String password, String name,int gender,String job){
+        return new Member(email,password,name,gender,job,Role.USER);
     }
 }
