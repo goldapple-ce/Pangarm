@@ -7,7 +7,9 @@ export default function HeaderRight() {
       <Link to={"/signup"}>
         <Box>회원가입</Box>
       </Link>
-      <Box>로그인</Box>
+      <Link to={"/signin"}>
+        <Box>로그인</Box>
+      </Link>
     </Flex>
   );
 }

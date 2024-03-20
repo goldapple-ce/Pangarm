@@ -74,7 +74,7 @@ export const memberHandlers = [
   }),
 
   // 로그인
-  http.post<never, LoginRequestBody>("member/login", async ({ request }) => {
+  http.post<never, LoginRequestBody>("member/signin", async ({ request }) => {
     const reqData = await request.json();
     const { email, password } = reqData;
 
