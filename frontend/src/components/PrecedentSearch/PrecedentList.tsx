@@ -1,13 +1,7 @@
 import React from "react";
 import PrecedentListItem from "./PrecedentListItem";
 import { PrecedentItem } from "../../types";
-import * as Select from "@radix-ui/react-select";
 import { SelectPivot, SelectOrder } from "../../constant";
-import {
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@radix-ui/react-icons";
 import PrecedentListItemOrderSelect from "./PrecedentListItemOrderSelect";
 
 interface PrecedentListProps {
@@ -24,8 +18,16 @@ export default function PrecedentList({ precedentList }: PrecedentListProps) {
         </div>
 
         <div>
-          <PrecedentListItemOrderSelect placeholder={SelectPivot.placeholder} value={SelectPivot.value} label={SelectPivot.label}/>
-          <PrecedentListItemOrderSelect placeholder={SelectOrder.placeholder} value={SelectOrder.value} label={SelectOrder.label}/>
+          <PrecedentListItemOrderSelect
+            placeholder={SelectPivot.placeholder}
+            value={SelectPivot.value}
+            label={SelectPivot.label}
+          />
+          <PrecedentListItemOrderSelect
+            placeholder={SelectOrder.placeholder}
+            value={SelectOrder.value}
+            label={SelectOrder.label}
+          />
         </div>
       </div>
       <div>
