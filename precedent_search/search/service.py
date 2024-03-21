@@ -5,7 +5,6 @@ from langchain.vectorstores import Chroma
 import json
 import re
 from hdfs import InsecureClient
-:
 import os
 HDFS_URL = os.environ["HDFS_URL"]
 HDFS_USER = os.environ["HDFS_USER"]
