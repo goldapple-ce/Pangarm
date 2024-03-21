@@ -1,8 +1,10 @@
 package site.pangarm.backend.domain.membercategory;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -15,16 +17,13 @@ import site.pangarm.backend.domain.member.MemberService;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
-@Rollback(value = false)
+//@Rollback(value = false)
 @SpringBootTest
 @ActiveProfiles("test")
 class MemberCategoryServiceTest {
 
     @Autowired
     private MemberCategoryService memberCategoryService;
-    
-    @Autowired
-    private MemberCategoryRepository memberCategoryRepository;
 
     @Autowired
     private MemberService memberService;
@@ -32,37 +31,36 @@ class MemberCategoryServiceTest {
     @Autowired
     private CategoryService categoryService;
 
+
     @Nested
-    @DisplayName("회원 카테고리 테스트")
+    @DisplayName("회원 카테고리 저장 테스트")
     class SaveTest{
         
         @Test
         @DisplayName("성공")
         void whenSuccess() {
 
-            //GIVEN
-            Member joinMember = memberService.save(
-                    Member.builder()
-                        .email("12345")
-                        .password("12345")
-                        .name("123")
-                        .gender(1)
-                        .job("학생")
-                        .build());
+            Member joinMember = memberService.save(Member.of("12345", "12345", "123", 1, "학생"));
+            Category savedCategory = categoryService.save(Category.of("name"));
 
-            Category savedCategory = categoryService.save(
-                    Category.builder()
-                            .name("test")
-                            .build());
-
-            //WHEN,THEN
             assertDoesNotThrow(()->{
-                memberCategoryService.save(joinMember.getId(), savedCategory.getId());
+                memberCategoryService.save(joinMember, savedCategory);
             });
         }
 
+        @Test
+        @DisplayName("실패_이미 존재하는 경우")
+        void whenFail(){
+
+            Member joinMember = memberService.save(Member.of("12345", "12345", "123", 1, "학생"));
+            Category savedCategory = categoryService.save(Category.of("name"));
+            memberCategoryService.save(joinMember, savedCategory);
+
+            assertThrows(MemberCategoryException.class, ()->{
+                memberCategoryService.save(joinMember, savedCategory);
+            });
+        }
     }
-    
 
     @Nested
     @DisplayName("회원 카테고리 삭제 테스트")
@@ -71,26 +69,43 @@ class MemberCategoryServiceTest {
         @Test
         @DisplayName("성공")
         void whenSuccess() {
-            //GIVEN
-            Member joinMember = memberService.save(
-                    Member.builder()
-                            .email("12345")
-                            .password("12345")
-                            .name("123")
-                            .gender(1)
-                            .job("학생")
-                            .build());
 
-            Category savedCategory = categoryService.save(
-                    Category.builder()
-                            .name("test")
-                            .build());
+            Member joinMember = memberService.save(Member.of("12345", "12345", "123", 1, "학생"));
+            Category savedCategory = categoryService.save(Category.of("name"));
+            memberCategoryService.save(joinMember, savedCategory);
 
-            memberCategoryService.save(joinMember.getId(), savedCategory.getId());
-
-            //WHEN, THEN
             assertDoesNotThrow(()->{
                     memberCategoryService.delete(joinMember.getId(), savedCategory.getId());
+            });
+        }
+    }
+
+    @Nested
+    @DisplayName("회원 아이디와 회원 카테고리 아이디로 조회")
+    class findByMemberIdAndCategoryIdTest {
+
+        @Test
+        @DisplayName("성공_존재할 경우")
+        void whenSuccessAndResultsExist() {
+            //GIVEN
+            Member joinMember = memberService.save(Member.of("12345", "12345", "123", 1, "학생"));
+
+            Category savedCategory = categoryService.save(Category.of("name"));
+
+            memberCategoryService.save(joinMember, savedCategory);
+
+            assertDoesNotThrow(() -> {
+                MemberCategory memberCategory = memberCategoryService.findByMemberIdAndCategoryId(joinMember.getId(), savedCategory.getId());
+                assertNotNull(memberCategory);
+            });
+        }
+
+        @Test
+        @DisplayName("성공_존재하지 않을 경우")
+        void whenSuccessAndResultsNotExist() {
+            assertDoesNotThrow(() -> {
+                MemberCategory memberCategory = memberCategoryService.findByMemberIdAndCategoryId(999, 999);
+                assertNull(memberCategory);
             });
         }
     }
