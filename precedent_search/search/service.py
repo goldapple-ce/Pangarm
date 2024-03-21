@@ -3,8 +3,14 @@ from rest_framework import status
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
 import json
-
 import re
+from hdfs import InsecureClient
+:
+import os
+HDFS_URL = os.environ["HDFS_URL"]
+HDFS_USER = os.environ["HDFS_USER"]
+client = InsecureClient(HDFS_URL, user=HDFS_USER)
+
 
 
 model_name = "jhgan/ko-sroberta-multitask"  # (KorNLU 데이터셋에 학습시킨 한국어 임베딩 모델)
@@ -31,7 +37,7 @@ def search(search_request):
 
     for fileName,score in fileList:
         json_data = {"score":score}
-        with open(f"data/{fileName}", "r", encoding="utf8") as f:
+        with client.read(f"/data/json/{fileName}",encoding="utf8") as f:
             t = json.load(f)
 
             for key in keys:
