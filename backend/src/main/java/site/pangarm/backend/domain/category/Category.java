@@ -31,14 +31,13 @@ public class Category {
         this.name = name;
     }
 
+    public static Category of(String name){
+        return new Category(name);
+    }
+
     public Category update(Category category) {
         this.name = category.getName();
         return this;
     }
 
-    public static Category of(String name) {
-        return Category.builder()
-                .name(name)
-                .build();
-    }
 }

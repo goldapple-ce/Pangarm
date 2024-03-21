@@ -47,17 +47,8 @@ public class Member {
         this.role = role;
     }
 
-    public static Member of(String email,String password, String name,int gender,String job){
+    public static Member of(String email, String password, String name, int gender, String job){
         return new Member(email,password,name,gender,job,Role.USER);
     }
 
-    @Builder
-    public Member(String email, String password, String name, int gender, String job){
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.gender = gender;
-        this.job = job;
-        this.role = Role.USER;
-    }
 }
