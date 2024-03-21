@@ -2,6 +2,8 @@ package site.pangarm.backend.domain.member;
 
 import jakarta.persistence.*;
 import lombok.*;
+import site.pangarm.backend.domain.membercategory.MemberCategory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "member")
+    private List<MemberCategory> memberCategoryList = new ArrayList<>();
+
     private Member(String email,String password, String name,int gender,String job,Role role){
         this.email = email;
         this.password = password;
@@ -44,5 +49,15 @@ public class Member {
 
     public static Member of(String email,String password, String name,int gender,String job){
         return new Member(email,password,name,gender,job,Role.USER);
+    }
+
+    @Builder
+    public Member(String email, String password, String name, int gender, String job){
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.job = job;
+        this.role = Role.USER;
     }
 }

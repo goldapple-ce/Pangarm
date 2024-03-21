@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import site.pangarm.backend.application.category.dto.request.CategoryRegisterRequest;
 import site.pangarm.backend.application.category.dto.request.CategoryUpdateRequest;
+import site.pangarm.backend.domain.membercategory.MemberCategory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -18,6 +22,9 @@ public class Category {
 
     @Column(nullable = false, unique = true)
     private String name; //카테고리 이름
+
+    @OneToMany(mappedBy = "category")
+    private List<MemberCategory> memberCategoryList = new ArrayList<>();
 
     @Builder
     public Category(String name) {
