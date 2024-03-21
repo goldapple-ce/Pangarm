@@ -3,10 +3,12 @@ package site.pangarm.backend.domain.category;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import site.pangarm.backend.application.category.dto.request.CategoryRegisterRequest;
 import site.pangarm.backend.application.category.dto.request.CategoryUpdateRequest;
 
-
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
@@ -22,7 +24,14 @@ public class Category {
         this.name = name;
     }
 
-    public void update(CategoryUpdateRequest request) {
-        this.name = request.name();
+    public Category update(Category category) {
+        this.name = category.getName();
+        return this;
+    }
+
+    public static Category of(String name) {
+        return Category.builder()
+                .name(name)
+                .build();
     }
 }
