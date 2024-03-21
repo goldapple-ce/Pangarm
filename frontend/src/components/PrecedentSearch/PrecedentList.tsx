@@ -23,11 +23,6 @@ export default function PrecedentList({ precedentList }: PrecedentListProps) {
             value={SelectPivot.value}
             label={SelectPivot.label}
           />
-          <PrecedentListItemOrderSelect
-            placeholder={SelectOrder.placeholder}
-            value={SelectOrder.value}
-            label={SelectOrder.label}
-          />
         </div>
       </div>
       <div>

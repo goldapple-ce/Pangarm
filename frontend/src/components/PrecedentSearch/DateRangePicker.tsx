@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-
 export default function DateRangePicker({ setDate, date, label }) {
-  const [endDate, setEndDate] = useState<string>();
   return (
     <div className="flex flex-col space-y-4">
       <input

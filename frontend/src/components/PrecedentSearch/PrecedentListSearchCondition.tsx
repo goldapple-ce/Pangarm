@@ -11,6 +11,17 @@ import SimilaritySlider from "./SimilaritySlider";
 export default function PrecedentListSearchCondition() {
   const { filters, setFilters } = useSearch();
 
+  // const handleClick = () => {
+  //   setFilters({
+  //     keywords: [],
+  //     startDate: "",
+  //     endDate: "",
+  //     isViewed: false,
+  //     isBookmarked: false,
+  //     minSimilarity: 50,
+  //   });
+  // };
+
   const setDate = (date: string, value: string) => {
     setFilters((t) => {
       t[date] = value;
@@ -42,7 +53,7 @@ export default function PrecedentListSearchCondition() {
       </div>
       <hr className="my-4" />
       <div className="px-1">
-        <p className="font-Content text-lg">기간</p>
+        <p className="font-Content text-lg">선고 기간</p>
       </div>
       <div className="flex items-center justify-between">
         <DateRangePicker
@@ -68,7 +79,7 @@ export default function PrecedentListSearchCondition() {
       <hr className="my-4" />
       <div className="flex items-center font-Content text-lg">
         최소 유사도 &nbsp;
-        <p className="font-yellow">{filters.minSimilarity} </p> %
+        <p className="font-yellow">{filters.minSimilarity} </p> % 이상
       </div>
       <div className="mt-1">
         <SimilaritySlider setSimilarity={setSimilarity} />

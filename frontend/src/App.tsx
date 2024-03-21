@@ -5,7 +5,6 @@ export default function App() {
   return (
     <>
       <Header></Header>
-      <PrecedentSearch></PrecedentSearch>
     </>
   );
 }

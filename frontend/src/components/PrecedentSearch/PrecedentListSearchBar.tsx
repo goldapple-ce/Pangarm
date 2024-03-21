@@ -1,5 +1,4 @@
-import { TextArea } from "@radix-ui/themes";
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 // interface PrecedentListSearchBarProps {
 //   content: string;

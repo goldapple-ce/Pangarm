@@ -1,12 +1,12 @@
 export const SelectPivot = {
   placeholder: "정렬기준",
-  value: ["similarity", "date"],
-  label: ["유사도", "선고날짜"],
-};
-export const SelectOrder = {
-  placeholder: "정렬순서",
-  value: ["ascendent", "decendent"],
-  label: ["오름차순", "내림차순"],
+  value: ["sim_asc", "sim_dec", "date_asc", "date_dec"],
+  label: [
+    "유사도 높은 순",
+    "유사도 낮은 순",
+    "선고날짜 최신 순",
+    "선고날짜 오래된 순",
+  ],
 };
 export const SearchKeywordExampleList = [
   "로동",
