@@ -1,8 +1,8 @@
 import React from "react";
 
-interface PrecedentListSearchBarProps {
-  content: string;
-}
+// interface PrecedentListSearchBarProps {
+//   content: string;
+// }
 
 // export default function PrecedentListSearchBar({ content }: PrecedentListSearchBarProps) {
 export default function PrecedentListSearchBar() {
