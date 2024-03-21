@@ -6,10 +6,22 @@ import json
 import re
 from hdfs import InsecureClient
 import os
+
+
+
 HDFS_URL = os.environ["HDFS_URL"]
 HDFS_USER = os.environ["HDFS_USER"]
 client = InsecureClient(HDFS_URL, user=HDFS_USER)
 
+
+with open("data/idToCaseNumber.json","r",encoding="utf8") as f:
+    caseTable = json.load(f)
+
+PRECEDENT_NOT_EXISTS_ERROR = Response(
+    {"code": "P004",
+     "message": "해당 판례는 존재하지 않습니다."
+     },
+    status=status.HTTP_400_BAD_REQUEST)
 
 
 model_name = "jhgan/ko-sroberta-multitask"  # (KorNLU 데이터셋에 학습시킨 한국어 임베딩 모델)
@@ -52,3 +64,14 @@ def search(search_request):
     return Response(response, status=status.HTTP_200_OK)
 
     # content 로 검색 진행
+
+
+def findSummaryByCaseNumber(caseNumber):
+    if not caseNumber in caseTable:
+        return PRECEDENT_NOT_EXISTS_ERROR
+
+    caseId = caseTable[caseNumber]
+    with client.read(f"/data/json/{caseId}.json",encoding="utf8") as f:
+        response = json.load(f)
+        return Response(response, status=status.HTTP_200_OK)
+    assert False #Exception 핸들러가 처리
