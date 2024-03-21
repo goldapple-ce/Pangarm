@@ -64,8 +64,34 @@ class MemberCategoryServiceTest {
     }
     
 
-    @Test
-    void delete() {
-        
+    @Nested
+    @DisplayName("회원 카테고리 삭제 테스트")
+    class DeleteTest{
+
+        @Test
+        @DisplayName("성공")
+        void whenSuccess() {
+            //GIVEN
+            Member joinMember = memberService.save(
+                    Member.builder()
+                            .email("12345")
+                            .password("12345")
+                            .name("123")
+                            .gender(1)
+                            .job("학생")
+                            .build());
+
+            Category savedCategory = categoryService.save(
+                    Category.builder()
+                            .name("test")
+                            .build());
+
+            memberCategoryService.save(joinMember.getId(), savedCategory.getId());
+
+            //WHEN, THEN
+            assertDoesNotThrow(()->{
+                    memberCategoryService.delete(joinMember.getId(), savedCategory.getId());
+            });
+        }
     }
 }
