@@ -1,4 +1,3 @@
-import React from "react";
 import { GrRefresh } from "react-icons/gr";
 
 import { SearchKeywordExampleList } from "../../constant";
@@ -7,6 +6,12 @@ import DateRangePicker from "./DateRangePicker";
 import { useSearch } from "./SearchContext";
 import ToggleButtonBig from "./ToggleButtonBig";
 import SimilaritySlider from "./SimilaritySlider";
+
+// import { FiltersType } from "../../types";
+
+// function isKeyOfFiltersType(key: string, obj: FiltersType): key is keyof FiltersType {
+//   return key in obj;
+// }
 
 export default function PrecedentListSearchCondition() {
   const { filters, setFilters } = useSearch();
@@ -24,14 +29,16 @@ export default function PrecedentListSearchCondition() {
 
   const setDate = (date: string, value: string) => {
     setFilters((t) => {
-      t[date] = value;
-      return { ...t };
+      return {
+        ...t,
+        [date]: value,
+      };
     });
   };
 
-  const setSimilarity = (value: number) => {
+  const setSimilarity = (value: number[]) => {
     setFilters((t) => {
-      t["minSimilarity"] = value;
+      t["minSimilarity"] = value[0];
       return { ...t };
     });
   };
@@ -43,7 +50,8 @@ export default function PrecedentListSearchCondition() {
         <GrRefresh />
       </div>
       <hr className="my-2" />
-      <div className="p-1">
+
+      <div className="">
         <p className="font-Content text-lg">키워드</p>
       </div>
       <div>
@@ -51,11 +59,12 @@ export default function PrecedentListSearchCondition() {
           <ToggleButton key={value} content={value}></ToggleButton>
         ))}
       </div>
-      <hr className="my-4" />
-      <div className="px-1">
+      <hr className="mb-2 mt-4" />
+
+      <div className="">
         <p className="font-Content text-lg">선고 기간</p>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between px-1">
         <DateRangePicker
           setDate={setDate}
           date={filters.startDate}
@@ -69,19 +78,21 @@ export default function PrecedentListSearchCondition() {
         />
       </div>
       <hr className="my-4" />
-      <div>
+
+      <div className="">
         <p className="font-Content text-lg">제외하고 보기</p>
       </div>
-      <div className="mt-2 flex justify-center">
+      <div className="mt-2 flex justify-center px-1">
         <ToggleButtonBig content="이미 본 판례"></ToggleButtonBig>
         <ToggleButtonBig content="북마크 판례"></ToggleButtonBig>
       </div>
       <hr className="my-4" />
+
       <div className="flex items-center font-Content text-lg">
         최소 유사도 &nbsp;
         <p className="font-yellow">{filters.minSimilarity} </p> % 이상
       </div>
-      <div className="mt-1">
+      <div className="mt-1 px-1 ">
         <SimilaritySlider setSimilarity={setSimilarity} />
       </div>
     </div>

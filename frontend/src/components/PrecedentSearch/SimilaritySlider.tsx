@@ -1,7 +1,12 @@
-import React from "react";
 import * as Slider from "@radix-ui/react-slider";
 
-export default function SimilaritySlider({ setSimilarity }) {
+type SimilaritySliderProps = {
+  setSimilarity: (value: number[]) => void;
+};
+
+export default function SimilaritySlider({
+  setSimilarity,
+}: SimilaritySliderProps) {
   return (
     <>
       <Slider.Root

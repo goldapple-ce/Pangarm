@@ -1,11 +1,35 @@
-import React, { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
+import { FiltersType } from "../../types";
 
-const SearchContext = createContext(null);
+type SearchProviderProps = {
+  children: JSX.Element;
+};
+// `filters` 객체의 구조에 대한 타입을 정의합니다.
 
-export const useSearch = () => useContext(SearchContext);
+const SearchContext = createContext<SearchContextType | null>(null);
 
-export const SearchProvider = ({ children }) => {
-  const [filters, setFilters] = useState({
+// `SearchContext`에 전달될 `value` 객체의 타입을 정의합니다.
+type SearchContextType = {
+  filters: FiltersType;
+  setFilters: Dispatch<SetStateAction<FiltersType>>;
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useSearch = () => {
+  const context = useContext(SearchContext);
+  if (context === null) {
+    throw new Error("useSearch must be used within a SerachProvider");
+  }
+  return context;
+};
+export const SearchProvider = ({ children }: SearchProviderProps) => {
+  const [filters, setFilters] = useState<FiltersType>({
     keywords: [],
     startDate: "",
     endDate: "",
