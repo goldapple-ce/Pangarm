@@ -1,6 +1,6 @@
-import { Box, Flex } from "@radix-ui/themes";
-import Logo from "../../assets/Logo.svg?react";
 import { Link } from "react-router-dom";
+import { Box, Flex } from "@radix-ui/themes";
+import Logo from "@/assets/imgs/Logo.svg?react"
 
 export default function HeaderLogo() {
   return (
