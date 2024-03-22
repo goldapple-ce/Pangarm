@@ -24,6 +24,7 @@ export default function MainPage() {
   return (
     <div className="mx-[300px] flex flex-col items-center gap-6">
       <Logo />
+      <div className="font-TitleMedium text-3xl text-yellow">판가름</div>
       <div className="flex flex-col items-center font-TitleBold text-xl">
         <div>법에 익숙하지 않은 모두를 위해</div>
         <div>상황에 딱 맞는 판례를 찾아드려요</div>
@@ -35,15 +36,15 @@ export default function MainPage() {
             {...register("content", { required: "내용을 입력해주세요." })}
             cols={100}
             rows={12}
-            className="w-full resize-none rounded-lg border border-lightgray bg-lightblue p-3 pr-12"
+            className="w-full resize-none rounded-lg border border-lightgray bg-lightblue p-12"
             placeholder="상황을 자세히 입력해주세요."
           />
           <div
-            className="absolute right-3 top-3.5 flex cursor-pointer flex-col items-center"
+            className="absolute right-3 top-3.5 flex cursor-pointer flex-col items-center text-gray hover:text-black"
             onClick={() => reset()}
           >
-            <GrRefresh size={25} />
-            <p className="text-[10px]">다시쓰기</p>
+            <GrRefresh size={15} />
+            <p className="text-[8px]">다시쓰기</p>
           </div>
         </div>
         <input
