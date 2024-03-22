@@ -1,15 +1,19 @@
 import React from "react";
 import PrecedentListItem from "@/components/Precedent/PrecedentListItem";
 import { PrecedentItem } from "@/types";
-import { SelectPivot } from "@/constant";
+import { SelectPivot } from "@/constants";
 import PrecedentListItemOrderSelect from "@/components/Precedent/PrecedentListItemOrderSelect";
 
 interface PrecedentListProps {
   precedentList: PrecedentItem[];
+  showDetail: (caseNo: string) => void;
 }
 
 // export default function PrecedentList({ precedentList }: PrecedentListProps) {
-export default function PrecedentList({ precedentList }: PrecedentListProps) {
+export default function PrecedentList({
+  precedentList,
+  showDetail,
+}: PrecedentListProps) {
   return (
     <>
       <div className="mb-3 flex justify-between">
@@ -35,7 +39,8 @@ export default function PrecedentList({ precedentList }: PrecedentListProps) {
                 content={content}
                 isBookmarked={isBookmarked}
                 isViewed={isViewed}
-              ></PrecedentListItem>
+                showDetail={showDetail}
+              />
               <hr className="opacity-30" />
             </React.Fragment>
           ))}

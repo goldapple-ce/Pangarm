@@ -3,19 +3,30 @@ import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import { PiEyeClosedDuotone } from "react-icons/pi";
 import { PiEye } from "react-icons/pi";
 
-import { PrecedentItem } from "@/types";
 import animationData from "@/assets/BookmarkAnimation-2.json";
+import { DATE_REGEX } from "@/constants";
+
+type PrecedentListItemProps = {
+  title: string;
+  content: string;
+  isBookmarked: boolean;
+  isViewed: boolean;
+  showDetail: (caseNo: string) => void;
+};
 
 export default function PrecedentListItem({
   title,
   content,
   isBookmarked,
   isViewed,
-}: PrecedentItem) {
-  const regex = /\d{4}\.\s\d{1,2}\.\s\d{1,2}/g;
-  const date = title.match(regex);
+  showDetail,
+}: PrecedentListItemProps) {
+  const date = title.match(DATE_REGEX);
+
   const lottieRef = useRef<LottieRefCurrentProps>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const isBookmarkedRef = useRef<boolean>(isBookmarked);
+  
   useEffect(() => {
     if (isBookmarkedRef.current && lottieRef.current) {
       lottieRef.current.goToAndStop(119, true);
@@ -23,7 +34,7 @@ export default function PrecedentListItem({
   }, []);
 
   // TODO axios 요청 send
-  const handleClick = () => {
+  const handleBookmarkClick = () => {
     if (lottieRef.current) {
       if (isBookmarkedRef.current) {
         lottieRef.current.setDirection(-1);
@@ -35,16 +46,19 @@ export default function PrecedentListItem({
       isBookmarkedRef.current = !isBookmarkedRef.current;
     }
   };
-  /**
-   * 1. 아무것도 없음
-   * 2. 북마크가 눌려있음 ->
-   * 3. 눌렀을때 애니메이션 정 재생
-   * 4. 눌렀을 때 애니메이션 초기상태로 돌아가기 (1. 역재생 2. 그냥 깜빡 )
-   */
+
   return (
-    <div className=" font-lighthover:text-clip my-3 w-[900px] font-Content text-xl">
+    <div
+      className=" font-lighthover:text-clip my-3 w-[900px] font-Content text-xl"
+      ref={rootRef}
+    >
       <div className="flex justify-between ">
-        <div className="w-3/4 min-w-0 flex-shrink truncate ">
+        <div
+          className="w-3/4 min-w-0 flex-shrink truncate"
+          onClick={() => {
+            showDetail(title);
+          }}
+        >
           <p className="text-ellipsis text-xl">{title}</p>
         </div>
 
@@ -55,7 +69,7 @@ export default function PrecedentListItem({
             loop={false}
             autoplay={false}
             lottieRef={lottieRef}
-            onClick={handleClick}
+            onClick={handleBookmarkClick}
           />
           <PiEye className={isViewed ? "" : "hidden"} />
           <PiEyeClosedDuotone className={isViewed ? "hidden" : ""} />
@@ -64,7 +78,12 @@ export default function PrecedentListItem({
       <div>
         <p className="text-lg">{date}. 선고</p>
       </div>
-      <p className="me-3 mt-1 text-clip text-sm text-gray  hover:text-clip ">
+      <p
+        onClick={() => {
+          showDetail(title);
+        }}
+        className="me-3 mt-1 text-clip text-sm text-gray  hover:text-clip "
+      >
         {content}
       </p>
       <div></div>

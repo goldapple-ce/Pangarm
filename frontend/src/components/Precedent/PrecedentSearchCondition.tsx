@@ -1,6 +1,6 @@
 import { GrRefresh } from "react-icons/gr";
 
-import { SearchKeywordExampleList } from "@/constant";
+import { SearchKeywordExampleList } from "@/constants";
 import PrecedentSearchKeywordToggleButton from "@/components/Precedent/PrecedentSearchKeywordToggleButton";
 import PrecedentSearchDateRangePicker from "@/components/Precedent/PrecedentSearchDateRangePicker";
 import { useSearch } from "@/components/Precedent/SearchContext";
