@@ -5,6 +5,10 @@ type PrecedentSearchRequestBody = {
   content: string;
 };
 
+type PrecedentDetailRequestBody = {
+  content: string;
+};
+
 export const precedentHandlers = [
   // 판례 검색
   http.post<never, PrecedentSearchRequestBody>(
@@ -92,4 +96,28 @@ export const precedentHandlers = [
       });
     },
   ),
+
+  http.get("/precedent", async ({ request }) => {
+    // Header에서 AuthToken 가져오기
+    // const authToken = request.headers.get("Authorization");
+
+    // URL 에서 PARAMS 가져오기
+    const url = new URL(request.url);
+    const caseNumber = url.searchParams.get("caseNumber");
+
+    if (!caseNumber) {
+      HttpResponse.json({
+        Header: {
+          status: 409,
+        },
+        Body: {
+          code: "G002",
+          message: ERR_MSG.G002,
+        },
+      });
+    }
+
+    return HttpResponse.json
+      ();
+  }),
 ];
