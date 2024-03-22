@@ -44,7 +44,7 @@ def search(search_request):
     # print(j[0].metadata)
     fileList = [ (re.sub(r'[^0-9]', '', i[0].metadata['source']) + ".json",i[1]) for i in vectorstore.similarity_search_with_score(content,k=count)]
     data = []
-    keys = ["info","summary","judgement","conclusion"]
+    keys = ["info","summary","judgement","conclusion","keywords"]
 
     for fileName,score in fileList:
         json_data = {"score":score}
@@ -56,6 +56,9 @@ def search(search_request):
                     json_data[key] = t[key]
                 except:
                     json_data[key] = None
+
+            if(json_data["keywords"] == None):
+                json_data["keywords"] = []
             data.append(json_data)
     response = {
         "data": data
