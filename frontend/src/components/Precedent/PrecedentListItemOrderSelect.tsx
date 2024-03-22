@@ -1,6 +1,6 @@
 import * as Select from "@radix-ui/react-select";
-
 import { IoChevronDown, IoChevronUp, IoCheckmark } from "react-icons/io5";
+
 interface PrecedentListItemOrderSelectProps {
   placeholder: string;
   value: string[];

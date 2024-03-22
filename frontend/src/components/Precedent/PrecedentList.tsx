@@ -1,8 +1,8 @@
 import React from "react";
-import PrecedentListItem from "./PrecedentListItem";
-import { PrecedentItem } from "../../types";
-import { SelectPivot } from "../../constant";
-import PrecedentListItemOrderSelect from "./PrecedentListItemOrderSelect";
+import PrecedentListItem from "@/components/Precedent/PrecedentListItem";
+import { PrecedentItem } from "@/types";
+import { SelectPivot } from "@/constant";
+import PrecedentListItemOrderSelect from "@/components/Precedent/PrecedentListItemOrderSelect";
 
 interface PrecedentListProps {
   precedentList: PrecedentItem[];

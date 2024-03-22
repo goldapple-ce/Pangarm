@@ -1,9 +1,11 @@
 import { useRef, useEffect } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import { PrecedentItem } from "../../types";
-import animationData from "../../assets/BookmarkAnimation-2.json";
 import { PiEyeClosedDuotone } from "react-icons/pi";
 import { PiEye } from "react-icons/pi";
+
+import { PrecedentItem } from "@/types";
+import animationData from "@/assets/BookmarkAnimation-2.json";
+
 export default function PrecedentListItem({
   title,
   content,

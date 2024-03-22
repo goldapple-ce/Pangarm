@@ -4,7 +4,7 @@ type SimilaritySliderProps = {
   setSimilarity: (value: number[]) => void;
 };
 
-export default function SimilaritySlider({
+export default function PrecedentSearchSimilaritySlider({
   setSimilarity,
 }: SimilaritySliderProps) {
   return (
