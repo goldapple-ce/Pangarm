@@ -1,7 +1,5 @@
-import React from 'react'
+// type PrecedentDetailRawProps = {};
 
 export default function PrecedentDetailRaw() {
-  return (
-    <div>PrecedentDetailRaw</div>
-  )
+  return <div>PrecedentDetailRaw</div>;
 }

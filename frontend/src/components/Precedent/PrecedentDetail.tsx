@@ -83,8 +83,8 @@ export default function PrecedentDetail({
           <hr />
         </div>
         <div>
-          {tab && <PrecedentDetailSummary />}
-          {!tab && <PrecedentDetailRaw />}
+          {tab && <PrecedentDetailRaw />}
+          {!tab && <PrecedentDetailSummary />}
         </div>
       </div>
     </div>
