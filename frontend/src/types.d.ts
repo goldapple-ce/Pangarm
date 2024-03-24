@@ -15,3 +15,8 @@ export type FiltersType = {
   isBookmarked: boolean;
   minSimilarity: number;
 };
+
+export type SignInFormInput = {
+  email: string;
+  password: string;
+};

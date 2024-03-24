@@ -1,9 +1,20 @@
 import { Flex } from "@radix-ui/themes";
+
 import HeaderLogo from "./HeaderLogo";
 import HeaderLeft from "./HeaderLeft";
 import HeaderRight from "./HeaderRight";
+import { useAuthStore } from "@/stores/authStore";
 
 export default function Header() {
+  const isSignedIn = useAuthStore((state) => state.isSignedIn);
+  const setSignedOut = useAuthStore((state) => state.setSignedOut);
+
+  const handleSignOut = () => {
+    setSignedOut();
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+  }
+
   return (
     <Flex
       gap="3"
@@ -13,7 +24,7 @@ export default function Header() {
     >
       <HeaderLogo />
       <HeaderLeft />
-      <HeaderRight />
+      <HeaderRight onSignOut={handleSignOut} isSignedIn={isSignedIn} />
     </Flex>
   );
 }
