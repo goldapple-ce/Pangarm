@@ -1,18 +1,40 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
 
-interface FormInput {
-  email: string;
-  password: string;
-}
+import { SignInFormInput } from "@/types";
+import { useAuthStore } from "@/stores/authStore";
+import { signIn } from "@/services/authService";
 
 export default function SignInForm() {
-  const { register, handleSubmit } = useForm<FormInput>();
+  const { register, handleSubmit } = useForm<SignInFormInput>();
+  const setSignedIn = useAuthStore((state) => state.setSignedIn);
+  const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<FormInput> = async (data: unknown) => {
-    console.log(data);
+  const { mutate } = useMutation({
+    mutationFn: signIn,
+    onSuccess: (response) => {
+      const { data, message } = response.data;
+      const { accessToken, refreshToken } = data;
+      const status = response.status;
 
-    // TODO: 로그인 성공, 실패시에 할 일 추가
+      if (status === 200) {
+        setSignedIn();
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        console.info(message);
+        navigate("/");
+      } else {
+        console.error(message);
+      }
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
+  const onSubmit: SubmitHandler<SignInFormInput> = (data: SignInFormInput) => {
+    mutate(data);
   };
 
   return (
@@ -35,6 +57,7 @@ export default function SignInForm() {
             type="password"
             placeholder="비밀번호을 입력해주세요"
             className="w-full rounded-md bg-lightblue p-3"
+            autoComplete="off"
             required
           />
         </div>
@@ -45,7 +68,7 @@ export default function SignInForm() {
           로그인
         </button>
         <Link to={"/signup"}>
-          <div className="mt-2 w-full text-end text-lightgray">
+          <div className="mt-2 w-full text-end text-lightgray transition duration-300 ease-in-out hover:text-gray">
             아직 회원이 아니신가요?
           </div>
         </Link>
