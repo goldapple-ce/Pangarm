@@ -15,7 +15,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Transactional
     @Override
     public Category save(Category category) {
-        if(isExistName(category.getName())){
+        if(existsByName(category.getName())){
             throw new CategoryException(ErrorCode.API_ERROR_ALREADY_EXIST);
         }
         return categoryRepository.save(category);
@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService{
     public Category update(int id, Category category) {
 
         // 네임 중복 여부 확인
-        if(isExistName(category.getName())){
+        if(existsByName(category.getName())){
             throw new CategoryException(ErrorCode.API_ERROR_ALREADY_EXIST);
         }
 
@@ -47,8 +47,14 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public boolean isExistName(String name) {
+    public boolean existsByName(String name) {
         return categoryRepository.existsByName(name);
+    }
+
+    @Override
+    public Category findById(Integer categoryId) throws CategoryException {
+        return categoryRepository.findById(categoryId)
+                .orElseThrow(()->new CategoryException(ErrorCode.API_ERROR_NOT_FOUND));
     }
 
 }

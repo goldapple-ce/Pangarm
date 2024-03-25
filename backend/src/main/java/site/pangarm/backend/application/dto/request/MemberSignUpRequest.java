@@ -23,10 +23,13 @@ public class MemberSignUpRequest {
     @NotNull
     private int gender; // 1 = 남성, 2 = 여성, 3 = 기타
 
+    @NotNull
+    private int age;
+
     @NotBlank
     private String job;
 
     public Member toEntity(BCryptPasswordEncoder encoder){
-        return Member.of(this.email,encoder.encode(this.password),this.name,this.gender,this.job);
+        return Member.of(this.email,encoder.encode(this.password),this.name,this.gender,this.age, this.job);
     }
 }

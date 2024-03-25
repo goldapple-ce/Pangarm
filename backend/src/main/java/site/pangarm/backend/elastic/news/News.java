@@ -1,22 +1,19 @@
-package site.pangarm.backend.domain.news;
+package site.pangarm.backend.elastic.news;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.springframework.data.elasticsearch.annotations.Document;
 
-@Builder
-@AllArgsConstructor @NoArgsConstructor
-@Entity
+@Document(indexName = "news")
 public class News {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Integer id; //뉴스아이디
 
-    @Column(nullable = false)
     private String newsLink; //뉴스링크
 
-    @Column(nullable = false)
     private String title; //제목
 
     private String content; //내용
