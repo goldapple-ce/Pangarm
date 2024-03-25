@@ -3,7 +3,7 @@ import instance from "../utils/http-commons";
 
 // const QUERY_KEY = "precedent";
 
-export const getPrecedent = async (
+export const postPrecedentSearch = async (
   content: string,
   page: number,
   size: number,
@@ -13,5 +13,7 @@ export const getPrecedent = async (
   };
   const res = await instance.post(`/precedent?page=${page}&size=${size}`, body);
 
-  return res.data;
+  return res;
 };
+
+export const 
