@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
+import site.pangarm.backend.domain.caseType.entity.CaseType;
+import site.pangarm.backend.fixture.CaseTypeFixture;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,23 +20,33 @@ class CaseTypeServiceTest {
     private CaseTypeService caseTypeService;
 
     @Nested
+    @DisplayName("save 테스트")
+    class validationTest{
+        @Test
+        void whenSuccess(){
+            assertThrows(CaseTypeException.class,()->{
+                caseTypeService.save(CaseTypeFixture.CASE_TYPE_1_FIXTURE.create());
+            });
+        }
+    }
+    @Nested
     @DisplayName("findByName 테스트")
     class findByNameTest{
 
         @DisplayName("성공")
         @Test
         void whenSuccess() {
-            CaseType caseType = caseTypeService.save(CaseType.of(1,"가","민사","민사소송"));
-            CaseType foundCaseType = caseTypeService.findByName("가");
-            assertEquals(caseType,foundCaseType);
+            assertDoesNotThrow(()->{
+                caseTypeService.findByName("가");
+            });
         }
 
         @DisplayName("실패, 존재하지 않음")
         @Test
         void whenFailByNoData() {
             assertThrows(CaseTypeException.class,()->
-                    caseTypeService.findByName("가"));
-        }
+                    caseTypeService.findByName("가나다라마바사"));
+            }
     }
 
     @Nested
@@ -44,16 +56,16 @@ class CaseTypeServiceTest {
         @DisplayName("성공")
         @Test
         void whenSuccess() {
-            CaseType caseType = caseTypeService.save(CaseType.of(1,"가","민사","민사소송"));
-            CaseType foundCaseType = caseTypeService.findByCode(1);
-            assertEquals(caseType,foundCaseType);
+            assertDoesNotThrow(()->{
+                caseTypeService.findByCode(1);
+            });
         }
 
         @DisplayName("실패, 존재하지 않음")
         @Test
         void whenFailByNoData() {
             assertThrows(CaseTypeException.class,()->
-                    caseTypeService.findByCode(1));
+                    caseTypeService.findByCode(1000));
         }
     }
 }

@@ -1,6 +1,6 @@
 package site.pangarm.backend.domain.member;
 
-import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
+import site.pangarm.backend.domain.member.entity.Member;
 
 public interface MemberService {
 

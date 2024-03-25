@@ -1,10 +1,10 @@
-package site.pangarm.backend.domain.precedentType;
+package site.pangarm.backend.domain.precedentType.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import site.pangarm.backend.domain.precedent.Precedent;
+import site.pangarm.backend.domain.caseType.entity.CaseType;
 
 import java.util.Objects;
 
@@ -16,23 +16,24 @@ public class PrecedentType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
-    private String incident;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private CaseType caseType;
 
     @Column(nullable = false)
     private String courtName;
 
     @Column(nullable = false)
-    private int instance;
+    private String verdict;
 
-    private PrecedentType(String incident, String courtName, int instance){
-        this.incident = incident;
+    private PrecedentType(CaseType caseType, String courtName, String verdict){
+        this.caseType = caseType;
         this.courtName = courtName;
-        this.instance = instance;
+        this.verdict = verdict;
     }
 
-    public static PrecedentType of(String incident, String courtName, int instance){
-        return new PrecedentType(incident,courtName,instance);
+    public static PrecedentType of(CaseType caseType, String courtName, String verdict){
+        return new PrecedentType(caseType,courtName,verdict);
     }
 
     @Override
