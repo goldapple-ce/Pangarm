@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import site.pangarm.backend.domain.member.Member;
+import site.pangarm.backend.domain.member.entity.Member;
 
 @Getter
 @AllArgsConstructor

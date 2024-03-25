@@ -1,8 +1,8 @@
-package site.pangarm.backend.domain.member;
+package site.pangarm.backend.domain.member.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import site.pangarm.backend.domain.membercategory.MemberCategory;
+import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
 
 import java.util.ArrayList;
 import java.util.List;
