@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { TfiClose } from "react-icons/tfi";
 import PrecedentDetailSummary from "./PrecedentDetailSummary";
 import PrecedentDetailRaw from "./PrecedentDetailRaw";
+import axios from "axios";
+import { Data } from "@/types";
 type PrecedentDetailProps = {
   detailCaseNo: string;
   closeDetail: () => void;
@@ -14,24 +16,29 @@ export default function PrecedentDetail({
 }: PrecedentDetailProps) {
   const [animate, setAnimate] = useState<boolean>(false);
   const [tab, setTab] = useState<boolean>(false);
+  const [data, setData] = useState<Data>();
   useEffect(() => {
-    console.log(detailCaseNo);
     setAnimate(true);
-
-    // return setAnimate(false);
-    // axios.get(`/precedent&caseNumber=${detailCaseNo}`).then(() => { })
+    axios.get(`/precedent?caseNumber=${detailCaseNo}`).then((res) => {
+      setData(res.data.data);
+      console.log(res.data.data);
+    });
   }, []);
+
+  const handleClose = () => {
+    setAnimate(false);
+    setTimeout(() => {
+      closeDetail();
+    }, 200);
+  };
 
   return (
     <div
-      className="fixed left-0 top-0 z-10 h-screen w-screen bg-black bg-opacity-10"
-      onClick={() => {
-        setAnimate(false);
-        closeDetail();
-      }}
+      className="fixed left-0 top-0 z-10 h-screen w-screen bg-black bg-opacity-20"
+      onClick={handleClose}
     >
       <div
-        className={`z-11 druation-500 fixed right-0 top-0 h-screen w-[1000px] bg-white p-9 transition-transform ease-in-out
+        className={`z-11 druation-500 fixed right-0 top-0 h-[100vh] w-[1000px] overflow-y-hidden bg-white p-9 shadow-md shadow-gray transition-transform ease-in-out
         ${animate ? " translate-x-0" : " translate-x-full"}`}
         onClick={(e) => {
           e.stopPropagation();
@@ -44,7 +51,7 @@ export default function PrecedentDetail({
               이것은 제목일까 아닐까 그것이 문제로다
               {/* {PrecedentDetailExample.title} */}
             </p>
-            <TfiClose className="h-9 w-9" onClick={closeDetail} />
+            <TfiClose className="h-9 w-9" onClick={handleClose} />
           </div>
           <p className="font-TitleMedium text-4xl">
             2077. 09. 21. 선고
@@ -83,7 +90,7 @@ export default function PrecedentDetail({
           <hr />
         </div>
         <div>
-          {tab && <PrecedentDetailRaw />}
+          {tab && data && <PrecedentDetailRaw detail={data.detail} />}
           {!tab && <PrecedentDetailSummary />}
         </div>
       </div>

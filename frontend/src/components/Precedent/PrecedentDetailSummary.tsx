@@ -1,4 +1,4 @@
-import React from "react";
+import PrecedentDetailSummaryElement from "./PrecedentDetailSummaryElement";
 
 // type PrecedentDetailSummaryProps = {
 //   1: {
@@ -28,51 +28,39 @@ const summary = {
 
 export default function PrecedentDetailSummary() {
   return (
-    <div className=" m-10 font-Content text-[15px] marker:flex">
+    <div className=" m-10 flex h-[70vh] overflow-y-auto font-TitleLight text-lg ">
       <div>
-        <p className="mt-7">1. 어떤 상황에 대한 것인가요?</p>
-        <div className="mx-4 mt-7">
-          a. 언제 그랬나요?
-          <div className="mx-4 mt-3 flex h-12 items-center rounded-md border border-lightgray bg-lightblue p-5">
-            {summary[1][1]}
-          </div>
+        <p className="mt-5">1. 어떤 상황에 대한 것인가요?</p>
+        <div className="px-6 text-[15px]">
+          <PrecedentDetailSummaryElement
+            question="a. 언제 그랬나요?"
+            content={summary[1][1]}
+          />
+          <PrecedentDetailSummaryElement
+            question="b. 어떤 상황이었나요?"
+            content={summary[1][2]}
+          />
         </div>
-        <div className="mx-4 mt-7">
-          b. 어떤 상황이었나요?
-          <div className="mx-4 mt-3 flex h-12 items-center rounded-md border border-lightgray bg-lightblue p-5">
-            {summary[1][2]}
-          </div>
-        </div>
-      </div>
-      <div className="mt-7">
-        <p>2. 원고는 누구인가요?</p>
-        <div className="mx-4 mt-3 flex h-12 items-center rounded-md border border-lightgray bg-lightblue p-5">
-          {summary[2]}
-        </div>
-      </div>
-      <div className="mt-7">
-        <p>3. 피고는 누구인가요?</p>
-        <div className="mx-4 mt-3 flex h-12 items-center rounded-md border border-lightgray bg-lightblue p-5">
-          {summary[3]}
-        </div>
-      </div>
-      <div className="mt-7">
-        <p>4. 왜 그랬나요?</p>
-        <div className="mx-4 mt-3 flex h-12 items-center rounded-md border border-lightgray bg-lightblue p-5">
-          {summary[4]}
-        </div>
-      </div>
-      <div className="mt-7">
-        <p>5. 어떤 행동을 취했나요?</p>
-        <div className="mx-4 mt-3 flex h-12 items-center rounded-md border border-lightgray bg-lightblue p-5">
-          {summary[5]}
-        </div>
-      </div>
-      <div className="mt-7">
-        <p>6. 원고는 누구인가요?</p>
-        <div className="mx-4 mt-3 flex h-12 items-center rounded-md border border-lightgray bg-lightblue p-5">
-          {summary[6]}
-        </div>
+        <PrecedentDetailSummaryElement
+          question="2. 원고는 누구인가요?"
+          content={summary[2]}
+        />
+        <PrecedentDetailSummaryElement
+          question="3. 피고는 누구인가요?"
+          content={summary[3]}
+        />
+        <PrecedentDetailSummaryElement
+          question="4. 왜 그랬나요?"
+          content={summary[4]}
+        />
+        <PrecedentDetailSummaryElement
+          question="5. 어떤 행동을 취했나요?"
+          content={summary[5]}
+        />
+        <PrecedentDetailSummaryElement
+          question="6. 어떤 결과가 있었나요?"
+          content={summary[6]}
+        />
       </div>
     </div>
   );
