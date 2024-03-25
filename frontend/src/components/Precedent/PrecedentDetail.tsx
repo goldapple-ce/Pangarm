@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 // import axios from "axios";
 import { TfiClose } from "react-icons/tfi";
-import PrecedentDetailSummary from "./PrecedentDetailSummary";
-import PrecedentDetailRaw from "./PrecedentDetailRaw";
-import axios from "axios";
+import PrecedentDetailSummary from "@/components/Precedent/PrecedentDetailSummary";
+import PrecedentDetailRaw from "@/components/Precedent/PrecedentDetailRaw";
 import { Data } from "@/types";
+import instance from "@/utils/http-commons";
 type PrecedentDetailProps = {
   detailCaseNo: string;
   closeDetail: () => void;
@@ -17,13 +17,14 @@ export default function PrecedentDetail({
   const [animate, setAnimate] = useState<boolean>(false);
   const [tab, setTab] = useState<boolean>(false);
   const [data, setData] = useState<Data>();
+
   useEffect(() => {
     setAnimate(true);
-    axios.get(`/precedent?caseNumber=${detailCaseNo}`).then((res) => {
+    instance.get(`/precedent?caseNumber=${detailCaseNo}`).then((res) => {
       setData(res.data.data);
       console.log(res.data.data);
     });
-  }, []);
+  }, [detailCaseNo]);
 
   const handleClose = () => {
     setAnimate(false);

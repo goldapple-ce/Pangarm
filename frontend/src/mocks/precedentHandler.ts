@@ -5,10 +5,6 @@ type PrecedentSearchRequestBody = {
   content: string;
 };
 
-type PrecedentDetailRequestBody = {
-  content: string;
-};
-
 export const precedentHandlers = [
   // 판례 검색
   http.post<never, PrecedentSearchRequestBody>(

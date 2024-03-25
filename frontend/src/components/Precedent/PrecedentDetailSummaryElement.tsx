@@ -1,4 +1,3 @@
-
 type PrecedentDetailSummaryElementProps = {
   question: string;
   content: string;

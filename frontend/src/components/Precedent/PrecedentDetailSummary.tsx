@@ -1,4 +1,4 @@
-import PrecedentDetailSummaryElement from "./PrecedentDetailSummaryElement";
+import PrecedentDetailSummaryElement from "@/components/Precedent/PrecedentDetailSummaryElement";
 
 // type PrecedentDetailSummaryProps = {
 //   1: {
