@@ -1,7 +1,6 @@
 import { useRef, useEffect } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import { PiEyeClosedDuotone } from "react-icons/pi";
-import { PiEye } from "react-icons/pi";
+import { PiEyeClosedDuotone, PiEye } from "react-icons/pi";
 
 import animationData from "@/assets/BookmarkAnimation-2.json";
 import { DATE_REGEX } from "@/constants";

@@ -37,14 +37,16 @@ export default function PrecedentSearchPage() {
 
   return (
     <SearchProvider>
-      <>
+      <div>
         {detailVisible && (
           <PrecedentDetail
             closeDetail={closeDetail}
             detailCaseNo={detailCaseNo}
           />
         )}
-        <div className="mx-3 mt-3 w-full flex-row items-center justify-center gap-6 px-72 pt-12 ">
+        <div
+          className={`mx-3 mt-3 w-full flex-row items-center justify-center gap-6 px-72 ${detailVisible ? " overflow-hidden " : ""}`}
+        >
           <div className="mx-5 flex-row">
             <p className="font-SubTitle text-3xl">다시 검색하기</p>
             <PrecedentSearchBar></PrecedentSearchBar>
@@ -62,7 +64,7 @@ export default function PrecedentSearchPage() {
             </div>
           </div>
         </div>
-      </>
+      </div>
     </SearchProvider>
   );
 }
