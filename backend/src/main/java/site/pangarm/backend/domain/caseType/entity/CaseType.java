@@ -1,4 +1,4 @@
-package site.pangarm.backend.domain.caseType;
+package site.pangarm.backend.domain.caseType.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Objects;
-import java.util.StringTokenizer;
 
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

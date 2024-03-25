@@ -4,13 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import site.pangarm.backend.application.runner.CaseTypeListVo;
-import site.pangarm.backend.domain.caseType.CaseType;
+import org.springframework.transaction.annotation.Transactional;
+import site.pangarm.backend.domain.caseType.entity.CaseType;
 import site.pangarm.backend.domain.caseType.CaseTypeService;
 
 import java.io.IOException;
 import java.util.List;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class InitialFacade {

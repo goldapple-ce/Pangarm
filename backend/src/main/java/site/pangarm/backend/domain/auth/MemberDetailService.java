@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import site.pangarm.backend.domain.member.Member;
+import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.member.MemberService;
 
 import java.util.Collections;

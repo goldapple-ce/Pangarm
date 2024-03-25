@@ -1,30 +1,20 @@
 package site.pangarm.backend.global.filter;
 
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import site.pangarm.backend.domain.member.Member;
-import site.pangarm.backend.domain.member.MemberService;
 import site.pangarm.backend.global.jwt.TokenProvider;
 import site.pangarm.backend.global.jwt.JwtToken;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Collections;
 
 @Slf4j
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {

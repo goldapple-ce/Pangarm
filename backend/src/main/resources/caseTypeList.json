@@ -1,0 +1,1954 @@
+{
+  "caseTypeList": [
+    {
+      "code": 1,
+      "name": "가단",
+      "classification": "민사",
+      "content": "민사1심단독사건"
+    },
+    {
+      "code": 2,
+      "name": "가합",
+      "classification": "민사",
+      "content": "민사1심합의사건"
+    },
+    {
+      "code": 3,
+      "name": "가소",
+      "classification": "민사",
+      "content": "민사소액사건"
+    },
+    {
+      "code": 4,
+      "name": "나",
+      "classification": "민사",
+      "content": "민사항소사건"
+    },
+    {
+      "code": 5,
+      "name": "다",
+      "classification": "민사",
+      "content": "민사상고사건"
+    },
+    {
+      "code": 7,
+      "name": "라",
+      "classification": "민사",
+      "content": "민사항고사건"
+    },
+    {
+      "code": 8,
+      "name": "카",
+      "classification": "신청",
+      "content": "민사가압류,가처분등사건"
+    },
+    {
+      "code": 9,
+      "name": "마",
+      "classification": "민사",
+      "content": "민사재항고사건"
+    },
+    {
+      "code": 10,
+      "name": "바",
+      "classification": "민사",
+      "content": "민사준항고사건"
+    },
+    {
+      "code": 11,
+      "name": "자",
+      "classification": "민사",
+      "content": "화해사건"
+    },
+    {
+      "code": 12,
+      "name": "차",
+      "classification": "민사",
+      "content": "독촉사건"
+    },
+    {
+      "code": 13,
+      "name": "타경",
+      "classification": "집행",
+      "content": "부동산등경매사건"
+    },
+    {
+      "code": 14,
+      "name": "타기",
+      "classification": "집행",
+      "content": "기타집행사건"
+    },
+    {
+      "code": 15,
+      "name": "파",
+      "classification": "비송도산",
+      "content": "비송사건"
+    },
+    {
+      "code": 16,
+      "name": "호파",
+      "classification": "가족관계등록공탁",
+      "content": "가족관계등록사건"
+    },
+    {
+      "code": 17,
+      "name": "하",
+      "classification": "비송도산",
+      "content": "파산사건"
+    },
+    {
+      "code": 18,
+      "name": "거",
+      "classification": "비송도산",
+      "content": "도산화의사건"
+    },
+    {
+      "code": 20,
+      "name": "러",
+      "classification": "민사",
+      "content": "민사공조사건"
+    },
+    {
+      "code": 21,
+      "name": "머",
+      "classification": "민사",
+      "content": "민사조정사건"
+    },
+    {
+      "code": 22,
+      "name": "느",
+      "classification": "가사",
+      "content": "가사비송사건"
+    },
+    {
+      "code": 23,
+      "name": "드",
+      "classification": "가사",
+      "content": "가사1심사건"
+    },
+    {
+      "code": 24,
+      "name": "르",
+      "classification": "가사",
+      "content": "가사항소사건"
+    },
+    {
+      "code": 25,
+      "name": "므",
+      "classification": "가사",
+      "content": "가사상고사건"
+    },
+    {
+      "code": 26,
+      "name": "브",
+      "classification": "가사",
+      "content": "가사항고사건"
+    },
+    {
+      "code": 27,
+      "name": "스",
+      "classification": "가사",
+      "content": "가사재항고사건"
+    },
+    {
+      "code": 28,
+      "name": "즈",
+      "classification": "가사",
+      "content": "가사가압류,가처분등사건"
+    },
+    {
+      "code": 29,
+      "name": "너",
+      "classification": "가사",
+      "content": "가사조정사건"
+    },
+    {
+      "code": 30,
+      "name": "츠",
+      "classification": "가사",
+      "content": "가사공조사건"
+    },
+    {
+      "code": 32,
+      "name": "흐",
+      "classification": "특허",
+      "content": "특허재항고사건"
+    },
+    {
+      "code": 33,
+      "name": "구",
+      "classification": "행정",
+      "content": "행정1심사건"
+    },
+    {
+      "code": 34,
+      "name": "누",
+      "classification": "행정",
+      "content": "행정항소사건"
+    },
+    {
+      "code": 35,
+      "name": "두",
+      "classification": "행정",
+      "content": "행정상고사건"
+    },
+    {
+      "code": 36,
+      "name": "루",
+      "classification": "행정",
+      "content": "행정항고사건"
+    },
+    {
+      "code": 37,
+      "name": "부",
+      "classification": "행정",
+      "content": "행정특별항고사건"
+    },
+    {
+      "code": 38,
+      "name": "수",
+      "classification": "선거특별",
+      "content": "선거소송사건"
+    },
+    {
+      "code": 40,
+      "name": "재수",
+      "classification": "선거특별",
+      "content": "선거소송사건재심"
+    },
+    {
+      "code": 41,
+      "name": "주",
+      "classification": "선거특별",
+      "content": "선거신청사건"
+    },
+    {
+      "code": 43,
+      "name": "추",
+      "classification": "선거특별",
+      "content": "특수소송사건"
+    },
+    {
+      "code": 44,
+      "name": "쿠",
+      "classification": "선거특별",
+      "content": "특수신청사건"
+    },
+    {
+      "code": 45,
+      "name": "재추",
+      "classification": "선거특별",
+      "content": "특수소송사건재심"
+    },
+    {
+      "code": 46,
+      "name": "후",
+      "classification": "특허",
+      "content": "특허상고사건"
+    },
+    {
+      "code": 47,
+      "name": "재후",
+      "classification": "특허",
+      "content": "특허상고사건재심"
+    },
+    {
+      "code": 48,
+      "name": "그",
+      "classification": "민사",
+      "content": "민사특별항고사건"
+    },
+    {
+      "code": 50,
+      "name": "재가단",
+      "classification": "민사",
+      "content": "민사1심단독사건재심"
+    },
+    {
+      "code": 51,
+      "name": "재가합",
+      "classification": "민사",
+      "content": "민사1심합의사건재심"
+    },
+    {
+      "code": 52,
+      "name": "재가소",
+      "classification": "민사",
+      "content": "민사소액사건재심"
+    },
+    {
+      "code": 53,
+      "name": "재나",
+      "classification": "민사",
+      "content": "민사항소사건재심"
+    },
+    {
+      "code": 54,
+      "name": "재다",
+      "classification": "민사",
+      "content": "민사상고사건재심"
+    },
+    {
+      "code": 56,
+      "name": "재구",
+      "classification": "행정",
+      "content": "행정1심사건재심"
+    },
+    {
+      "code": 57,
+      "name": "재누",
+      "classification": "행정",
+      "content": "행정항소사건재심"
+    },
+    {
+      "code": 58,
+      "name": "재차",
+      "classification": "민사",
+      "content": "독촉사건재심"
+    },
+    {
+      "code": 59,
+      "name": "재드",
+      "classification": "가사",
+      "content": "가사1심사건재심"
+    },
+    {
+      "code": 60,
+      "name": "재르",
+      "classification": "가사",
+      "content": "가사항소사건재심"
+    },
+    {
+      "code": 61,
+      "name": "재므",
+      "classification": "가사",
+      "content": "가사상고사건재심"
+    },
+    {
+      "code": 62,
+      "name": "우",
+      "classification": "선거특별",
+      "content": "선거상고사건"
+    },
+    {
+      "code": 63,
+      "name": "재우",
+      "classification": "선거특별",
+      "content": "선거상고사건재심"
+    },
+    {
+      "code": 64,
+      "name": "재머",
+      "classification": "민사",
+      "content": "민사조정사건재심"
+    },
+    {
+      "code": 66,
+      "name": "준재가단",
+      "classification": "민사",
+      "content": "민사1심단독사건준재심"
+    },
+    {
+      "code": 67,
+      "name": "준재가합",
+      "classification": "민사",
+      "content": "민사1심합의사건준재심"
+    },
+    {
+      "code": 68,
+      "name": "준재가소",
+      "classification": "민사",
+      "content": "민사소액사건준재심"
+    },
+    {
+      "code": 69,
+      "name": "카공",
+      "classification": "신청",
+      "content": "공시최고사건"
+    },
+    {
+      "code": 71,
+      "name": "카합",
+      "classification": "신청",
+      "content": "민사가압류,가처분등합의사건"
+    },
+    {
+      "code": 72,
+      "name": "카단",
+      "classification": "신청",
+      "content": "민사가압류,가처분등단독사건"
+    },
+    {
+      "code": 73,
+      "name": "카담",
+      "classification": "신청",
+      "content": "담보취소등사건"
+    },
+    {
+      "code": 74,
+      "name": "카기",
+      "classification": "신청",
+      "content": "기타민사신청사건"
+    },
+    {
+      "code": 75,
+      "name": "고합",
+      "classification": "형사",
+      "content": "형사1심합의사건"
+    },
+    {
+      "code": 76,
+      "name": "감고",
+      "classification": "형사",
+      "content": "치료감호1심사건"
+    },
+    {
+      "code": 77,
+      "name": "고단",
+      "classification": "형사",
+      "content": "형사1심단독사건"
+    },
+    {
+      "code": 78,
+      "name": "고약",
+      "classification": "형사",
+      "content": "약식사건"
+    },
+    {
+      "code": 79,
+      "name": "노",
+      "classification": "형사",
+      "content": "형사항소사건"
+    },
+    {
+      "code": 80,
+      "name": "감노",
+      "classification": "형사",
+      "content": "치료감호항소사건"
+    },
+    {
+      "code": 81,
+      "name": "도",
+      "classification": "형사",
+      "content": "형사상고사건"
+    },
+    {
+      "code": 82,
+      "name": "감도",
+      "classification": "형사",
+      "content": "치료감호상고사건"
+    },
+    {
+      "code": 83,
+      "name": "로",
+      "classification": "형사",
+      "content": "형사항고사건"
+    },
+    {
+      "code": 84,
+      "name": "감로",
+      "classification": "형사",
+      "content": "치료감호항고사건"
+    },
+    {
+      "code": 85,
+      "name": "모",
+      "classification": "형사",
+      "content": "형사재항고사건"
+    },
+    {
+      "code": 86,
+      "name": "감모",
+      "classification": "형사",
+      "content": "치료감호재항고사건"
+    },
+    {
+      "code": 87,
+      "name": "보",
+      "classification": "형사",
+      "content": "형사준항고사건"
+    },
+    {
+      "code": 88,
+      "name": "오",
+      "classification": "형사",
+      "content": "비상상고사건"
+    },
+    {
+      "code": 89,
+      "name": "감오",
+      "classification": "형사",
+      "content": "치료감호비상상고사건"
+    },
+    {
+      "code": 90,
+      "name": "조",
+      "classification": "형사",
+      "content": "즉결심판사건"
+    },
+    {
+      "code": 91,
+      "name": "초",
+      "classification": "형사",
+      "content": "형사신청사건"
+    },
+    {
+      "code": 92,
+      "name": "감초",
+      "classification": "형사",
+      "content": "치료감호신청사건"
+    },
+    {
+      "code": 93,
+      "name": "코",
+      "classification": "형사",
+      "content": "형사보상청구사건"
+    },
+    {
+      "code": 94,
+      "name": "토",
+      "classification": "형사",
+      "content": "형사공조사건"
+    },
+    {
+      "code": 95,
+      "name": "감토",
+      "classification": "형사",
+      "content": "치료감호공조사건"
+    },
+    {
+      "code": 98,
+      "name": "푸",
+      "classification": "보호",
+      "content": "소년보호사건"
+    },
+    {
+      "code": 99,
+      "name": "크",
+      "classification": "보호",
+      "content": "소년보호항고사건"
+    },
+    {
+      "code": 100,
+      "name": "정",
+      "classification": "감치",
+      "content": "감치,과태료"
+    },
+    {
+      "code": 101,
+      "name": "정로",
+      "classification": "감치",
+      "content": "법정질서위반감치등항고사건"
+    },
+    {
+      "code": 103,
+      "name": "정모",
+      "classification": "감치",
+      "content": "법정질서위반감치등재항고사건"
+    },
+    {
+      "code": 105,
+      "name": "준재나",
+      "classification": "민사",
+      "content": "민사항소사건준재심"
+    },
+    {
+      "code": 106,
+      "name": "준재머",
+      "classification": "민사",
+      "content": "민사조정사건준재심"
+    },
+    {
+      "code": 107,
+      "name": "호",
+      "classification": "가족관계등록공탁",
+      "content": "협의이혼사건"
+    },
+    {
+      "code": 109,
+      "name": "수흐",
+      "classification": "선거특별",
+      "content": "선거항고(재항고,준항고,특별항고)사건"
+    },
+    {
+      "code": 110,
+      "name": "으",
+      "classification": "가사",
+      "content": "가사특별항고사건"
+    },
+    {
+      "code": 111,
+      "name": "트",
+      "classification": "보호",
+      "content": "소년보호재항고사건"
+    },
+    {
+      "code": 112,
+      "name": "재고합",
+      "classification": "형사",
+      "content": "형사1심합의사건재심"
+    },
+    {
+      "code": 113,
+      "name": "재고단",
+      "classification": "형사",
+      "content": "형사1심단독사건재심"
+    },
+    {
+      "code": 114,
+      "name": "재고약",
+      "classification": "형사",
+      "content": "약식사건재심"
+    },
+    {
+      "code": 115,
+      "name": "재노",
+      "classification": "형사",
+      "content": "형사항소사건재심"
+    },
+    {
+      "code": 116,
+      "name": "재도",
+      "classification": "형사",
+      "content": "형사상고사건재심"
+    },
+    {
+      "code": 117,
+      "name": "재감고",
+      "classification": "형사",
+      "content": "치료감호1심사건재심"
+    },
+    {
+      "code": 118,
+      "name": "재감노",
+      "classification": "형사",
+      "content": "치료감호항소사건재심"
+    },
+    {
+      "code": 119,
+      "name": "재감도",
+      "classification": "형사",
+      "content": "치료감호상고사건재심"
+    },
+    {
+      "code": 120,
+      "name": "타",
+      "classification": "집행",
+      "content": "집행사건"
+    },
+    {
+      "code": 122,
+      "name": "재타경",
+      "classification": "집행",
+      "content": "부동산등경매사건재심"
+    },
+    {
+      "code": 123,
+      "name": "재마",
+      "classification": "민사",
+      "content": "민사재항고사건재심"
+    },
+    {
+      "code": 124,
+      "name": "재그",
+      "classification": "민사",
+      "content": "민사특별항고사건재심"
+    },
+    {
+      "code": 125,
+      "name": "준재자",
+      "classification": "민사",
+      "content": "화해사건준재심"
+    },
+    {
+      "code": 126,
+      "name": "사",
+      "classification": "행정",
+      "content": "행정준항고사건"
+    },
+    {
+      "code": 127,
+      "name": "아",
+      "classification": "행정",
+      "content": "행정신청사건"
+    },
+    {
+      "code": 128,
+      "name": "재두",
+      "classification": "행정",
+      "content": "행정상고사건재심"
+    },
+    {
+      "code": 129,
+      "name": "허",
+      "classification": "특허",
+      "content": "특허1심사건"
+    },
+    {
+      "code": 130,
+      "name": "히",
+      "classification": "특허",
+      "content": "특허특별(준)항고사건"
+    },
+    {
+      "code": 131,
+      "name": "카허",
+      "classification": "특허",
+      "content": "특허신청사건"
+    },
+    {
+      "code": 132,
+      "name": "재허",
+      "classification": "특허",
+      "content": "특허1심사건재심"
+    },
+    {
+      "code": 133,
+      "name": "무",
+      "classification": "행정",
+      "content": "행정재항고사건"
+    },
+    {
+      "code": 134,
+      "name": "재자",
+      "classification": "민사",
+      "content": "화해사건재심"
+    },
+    {
+      "code": 135,
+      "name": "버",
+      "classification": "보호",
+      "content": "가정보호사건"
+    },
+    {
+      "code": 136,
+      "name": "서",
+      "classification": "보호",
+      "content": "가정보호항고사건"
+    },
+    {
+      "code": 137,
+      "name": "어",
+      "classification": "보호",
+      "content": "가정보호재항고사건"
+    },
+    {
+      "code": 138,
+      "name": "저",
+      "classification": "보호",
+      "content": "가정보호신청사건"
+    },
+    {
+      "code": 139,
+      "name": "재아",
+      "classification": "행정",
+      "content": "행정신청사건재심"
+    },
+    {
+      "code": 140,
+      "name": "준재구",
+      "classification": "행정",
+      "content": "행정1심사건준재심"
+    },
+    {
+      "code": 141,
+      "name": "준재누",
+      "classification": "행정",
+      "content": "행정항소사건준재심"
+    },
+    {
+      "code": 142,
+      "name": "준재아",
+      "classification": "행정",
+      "content": "행정신청사건준재심"
+    },
+    {
+      "code": 143,
+      "name": "준재드",
+      "classification": "가사",
+      "content": "가사1심사건준재심"
+    },
+    {
+      "code": 144,
+      "name": "준재르",
+      "classification": "가사",
+      "content": "가사항소사건준재심"
+    },
+    {
+      "code": 145,
+      "name": "준재므",
+      "classification": "가사",
+      "content": "가사상고사건준재심"
+    },
+    {
+      "code": 146,
+      "name": "재브",
+      "classification": "가사",
+      "content": "가사항고사건재심"
+    },
+    {
+      "code": 147,
+      "name": "재스",
+      "classification": "가사",
+      "content": "가사재항고사건재심"
+    },
+    {
+      "code": 148,
+      "name": "준재브",
+      "classification": "가사",
+      "content": "가사항고사건준재심"
+    },
+    {
+      "code": 149,
+      "name": "준재스",
+      "classification": "가사",
+      "content": "가사재항고사건준재심"
+    },
+    {
+      "code": 150,
+      "name": "드단",
+      "classification": "가사",
+      "content": "가사1심단독사건"
+    },
+    {
+      "code": 151,
+      "name": "드합",
+      "classification": "가사",
+      "content": "가사1심합의사건"
+    },
+    {
+      "code": 152,
+      "name": "재드단",
+      "classification": "가사",
+      "content": "가사1심단독사건재심"
+    },
+    {
+      "code": 153,
+      "name": "재드합",
+      "classification": "가사",
+      "content": "가사1심합의사건재심"
+    },
+    {
+      "code": 154,
+      "name": "준재드단",
+      "classification": "가사",
+      "content": "가사1심단독사건준재심"
+    },
+    {
+      "code": 155,
+      "name": "준재드합",
+      "classification": "가사",
+      "content": "가사1심합의사건준재심"
+    },
+    {
+      "code": 160,
+      "name": "준재너단",
+      "classification": "가사",
+      "content": "조정 단독 사건 준재심"
+    },
+    {
+      "code": 161,
+      "name": "준재너합",
+      "classification": "가사",
+      "content": "조정 합의 사건 준재심"
+    },
+    {
+      "code": 162,
+      "name": "느단",
+      "classification": "가사",
+      "content": "가사비송단독사건"
+    },
+    {
+      "code": 163,
+      "name": "느합",
+      "classification": "가사",
+      "content": "가사비송합의사건"
+    },
+    {
+      "code": 164,
+      "name": "재느단",
+      "classification": "가사",
+      "content": "가사비송단독사건재심"
+    },
+    {
+      "code": 165,
+      "name": "재느합",
+      "classification": "가사",
+      "content": "가사비송합의사건재심"
+    },
+    {
+      "code": 166,
+      "name": "준재느단",
+      "classification": "가사",
+      "content": "가사비송단독사건준재심"
+    },
+    {
+      "code": 167,
+      "name": "준재느합",
+      "classification": "가사",
+      "content": "가사비송합의사건준재심"
+    },
+    {
+      "code": 168,
+      "name": "재라",
+      "classification": "민사",
+      "content": "민사항고사건재심"
+    },
+    {
+      "code": 169,
+      "name": "준재두",
+      "classification": "행정",
+      "content": "행정상고사건준재심"
+    },
+    {
+      "code": 170,
+      "name": "준재다",
+      "classification": "민사",
+      "content": "민사상고사건준재심"
+    },
+    {
+      "code": 171,
+      "name": "금",
+      "classification": "가족관계등록공탁",
+      "content": "공탁사건(금전)"
+    },
+    {
+      "code": 172,
+      "name": "증",
+      "classification": "가족관계등록공탁",
+      "content": "공탁사건(증권)"
+    },
+    {
+      "code": 173,
+      "name": "물",
+      "classification": "가족관계등록공탁",
+      "content": "공탁사건(물품)"
+    },
+    {
+      "code": 174,
+      "name": "준재라",
+      "classification": "민사",
+      "content": "민사항고사건준재심"
+    },
+    {
+      "code": 175,
+      "name": "재하",
+      "classification": "비송도산",
+      "content": "파산사건재심"
+    },
+    {
+      "code": 176,
+      "name": "준재하",
+      "classification": "비송도산",
+      "content": "파산사건준재심"
+    },
+    {
+      "code": 177,
+      "name": "즈단",
+      "classification": "가사",
+      "content": "가사가압류,가처분등단독사건"
+    },
+    {
+      "code": 178,
+      "name": "즈합",
+      "classification": "가사",
+      "content": "가사가압류,가처분등합의사건"
+    },
+    {
+      "code": 179,
+      "name": "과",
+      "classification": "비송도산",
+      "content": "과태료사건"
+    },
+    {
+      "code": 180,
+      "name": "회",
+      "classification": "비송도산",
+      "content": "회사정리사건"
+    },
+    {
+      "code": 181,
+      "name": "선",
+      "classification": "비송도산",
+      "content": "선박소유자등의책임제한사건"
+    },
+    {
+      "code": 182,
+      "name": "유",
+      "classification": "비송도산",
+      "content": "유류오염손해배상책임제한사건"
+    },
+    {
+      "code": 183,
+      "name": "재너",
+      "classification": "가사",
+      "content": "가사조정사건재심"
+    },
+    {
+      "code": 184,
+      "name": "재무",
+      "classification": "행정",
+      "content": "행정재항고사건재심"
+    },
+    {
+      "code": 185,
+      "name": "준재타경",
+      "classification": "집행",
+      "content": "부동산등경매사건준재심"
+    },
+    {
+      "code": 186,
+      "name": "준재루",
+      "classification": "행정",
+      "content": "행정신청항고사건준재심"
+    },
+    {
+      "code": 187,
+      "name": "푸초",
+      "classification": "보호",
+      "content": "소년보호신청사건"
+    },
+    {
+      "code": 188,
+      "name": "재루",
+      "classification": "행정",
+      "content": "행정신청항고사건재심"
+    },
+    {
+      "code": 189,
+      "name": "재카합",
+      "classification": "신청",
+      "content": "민사가압류,가처분등합의사건재심"
+    },
+    {
+      "code": 190,
+      "name": "재카단",
+      "classification": "신청",
+      "content": "민사가압류,가처분등단독사건재심"
+    },
+    {
+      "code": 191,
+      "name": "재카담",
+      "classification": "신청",
+      "content": "담보취소등사건재심"
+    },
+    {
+      "code": 192,
+      "name": "재카기",
+      "classification": "신청",
+      "content": "기타민사신청사건재심"
+    },
+    {
+      "code": 193,
+      "name": "영장",
+      "classification": "기타",
+      "content": "영장"
+    },
+    {
+      "code": 194,
+      "name": "구단",
+      "classification": "행정",
+      "content": "행정1심재정단독사건"
+    },
+    {
+      "code": 195,
+      "name": "구합",
+      "classification": "행정",
+      "content": "행정1심사건"
+    },
+    {
+      "code": 196,
+      "name": "재구단",
+      "classification": "행정",
+      "content": "행정1심재정단독사건재심"
+    },
+    {
+      "code": 197,
+      "name": "재구합",
+      "classification": "행정",
+      "content": "행정1심사건재심"
+    },
+    {
+      "code": 198,
+      "name": "준재구단",
+      "classification": "행정",
+      "content": "행정1심재정단독사건준재심"
+    },
+    {
+      "code": 199,
+      "name": "준재구합",
+      "classification": "행정",
+      "content": "행정1심사건준재심"
+    },
+    {
+      "code": 200,
+      "name": "타채",
+      "classification": "집행",
+      "content": "채권등집행사건"
+    },
+    {
+      "code": 201,
+      "name": "카명",
+      "classification": "신청",
+      "content": "재산명시등사건"
+    },
+    {
+      "code": 202,
+      "name": "화",
+      "classification": "비송도산",
+      "content": "도산화의사건"
+    },
+    {
+      "code": 203,
+      "name": "책",
+      "classification": "비송도산",
+      "content": "선박,유류등책임제한사건"
+    },
+    {
+      "code": 204,
+      "name": "초적",
+      "classification": "형사",
+      "content": "체포,구속적부심사건"
+    },
+    {
+      "code": 205,
+      "name": "초보",
+      "classification": "형사",
+      "content": "보석사건"
+    },
+    {
+      "code": 206,
+      "name": "초기",
+      "classification": "형사",
+      "content": "기타형사신청사건"
+    },
+    {
+      "code": 207,
+      "name": "파합",
+      "classification": "비송도산",
+      "content": "비송합의사건"
+    },
+    {
+      "code": 208,
+      "name": "파단",
+      "classification": "비송도산",
+      "content": "비송단독사건"
+    },
+    {
+      "code": 209,
+      "name": "하합",
+      "classification": "비송도산",
+      "content": "파산합의사건"
+    },
+    {
+      "code": 210,
+      "name": "하단",
+      "classification": "비송도산",
+      "content": "파산단독사건"
+    },
+    {
+      "code": 211,
+      "name": "즈기",
+      "classification": "가사",
+      "content": "기타가사신청사건"
+    },
+    {
+      "code": 212,
+      "name": "카조",
+      "classification": "신청",
+      "content": "재산조회사건"
+    },
+    {
+      "code": 213,
+      "name": "카구",
+      "classification": "신청",
+      "content": "소송구조등사건"
+    },
+    {
+      "code": 214,
+      "name": "하면",
+      "classification": "비송도산",
+      "content": "면책사건"
+    },
+    {
+      "code": 215,
+      "name": "비합",
+      "classification": "비송도산",
+      "content": "비송합의사건"
+    },
+    {
+      "code": 216,
+      "name": "비단",
+      "classification": "비송도산",
+      "content": "비송단독사건"
+    },
+    {
+      "code": 217,
+      "name": "재카구",
+      "classification": "신청",
+      "content": "소송구조등사건재심"
+    },
+    {
+      "code": 218,
+      "name": "재과",
+      "classification": "비송도산",
+      "content": "과태료사건재심"
+    },
+    {
+      "code": 219,
+      "name": "준재카합",
+      "classification": "신청",
+      "content": "민사가압류,가처분등합의사건준재심"
+    },
+    {
+      "code": 220,
+      "name": "준재카단",
+      "classification": "신청",
+      "content": "민사가압류,가처분등단독사건준재심"
+    },
+    {
+      "code": 221,
+      "name": "준재카담",
+      "classification": "신청",
+      "content": "담보취소등사건준재심"
+    },
+    {
+      "code": 222,
+      "name": "준재카기",
+      "classification": "신청",
+      "content": "기타민사신청사건준재심"
+    },
+    {
+      "code": 223,
+      "name": "준재과",
+      "classification": "비송도산",
+      "content": "과태료사건준재심"
+    },
+    {
+      "code": 224,
+      "name": "재타기",
+      "classification": "집행",
+      "content": "기타집행사건재심"
+    },
+    {
+      "code": 225,
+      "name": "재즈단",
+      "classification": "가사",
+      "content": "가사가압류,가처분등단독사건재심"
+    },
+    {
+      "code": 226,
+      "name": "재즈합",
+      "classification": "가사",
+      "content": "가사가압류,가처분등합의사건재심"
+    },
+    {
+      "code": 230,
+      "name": "고정",
+      "classification": "형사",
+      "content": "약식정재청구1심단독사건"
+    },
+    {
+      "code": 231,
+      "name": "재고정",
+      "classification": "형사",
+      "content": "약식정재청구1심단독사건(재심)"
+    },
+    {
+      "code": 234,
+      "name": "고약전",
+      "classification": "전자약식",
+      "content": "전자약식사건"
+    },
+    {
+      "code": 235,
+      "name": "초사",
+      "classification": "형사",
+      "content": "사회봉사허가청구사건/사회봉사허가취소청구사건"
+    },
+    {
+      "code": 236,
+      "name": "카불",
+      "classification": "신청",
+      "content": "채무불이행자명부등재사건"
+    },
+    {
+      "code": 240,
+      "name": "정가",
+      "classification": "감치",
+      "content": "증인감치사건"
+    },
+    {
+      "code": 241,
+      "name": "정명",
+      "classification": "감치",
+      "content": "채무자감치사건"
+    },
+    {
+      "code": 242,
+      "name": "정라",
+      "classification": "감치",
+      "content": "증인·채무자감치항고사건"
+    },
+    {
+      "code": 243,
+      "name": "정마",
+      "classification": "감치",
+      "content": "증인·채무자감치재항고사건"
+    },
+    {
+      "code": 244,
+      "name": "정고",
+      "classification": "감치",
+      "content": "법정질서위반감치등사건"
+    },
+    {
+      "code": 245,
+      "name": "정드",
+      "classification": "감치",
+      "content": "의무불이행자감치등사건"
+    },
+    {
+      "code": 246,
+      "name": "정브",
+      "classification": "감치",
+      "content": "의무불이행자감치등항고사건"
+    },
+    {
+      "code": 247,
+      "name": "정스",
+      "classification": "감치",
+      "content": "의무불이행자감치등재항고사건"
+    },
+    {
+      "code": 248,
+      "name": "정기",
+      "classification": "감치",
+      "content": "기타감치신청사건"
+    },
+    {
+      "code": 251,
+      "name": "재즈기",
+      "classification": "가사",
+      "content": "기타가사신청사건재심"
+    },
+    {
+      "code": 252,
+      "name": "준재즈기",
+      "classification": "가사",
+      "content": "기타가사신청사건준재심"
+    },
+    {
+      "code": 253,
+      "name": "개회",
+      "classification": "비송도산",
+      "content": "개인회생사건"
+    },
+    {
+      "code": 254,
+      "name": "개확",
+      "classification": "비송도산",
+      "content": "개인회생채권조사확정사건"
+    },
+    {
+      "code": 255,
+      "name": "개보",
+      "classification": "비송도산",
+      "content": "개인회생보전처분사건"
+    },
+    {
+      "code": 256,
+      "name": "하보",
+      "classification": "비송도산",
+      "content": "파산보전처분사건"
+    },
+    {
+      "code": 257,
+      "name": "화보",
+      "classification": "비송도산",
+      "content": "도산화의보전처분사건"
+    },
+    {
+      "code": 258,
+      "name": "회보",
+      "classification": "비송도산",
+      "content": "회사정리보전처분사건"
+    },
+    {
+      "code": 259,
+      "name": "버집",
+      "classification": "보호",
+      "content": "가정보호집행감독사건"
+    },
+    {
+      "code": 260,
+      "name": "성",
+      "classification": "보호",
+      "content": "성매매관련보호사건"
+    },
+    {
+      "code": 261,
+      "name": "성로",
+      "classification": "보호",
+      "content": "성매매관련보호항고사건"
+    },
+    {
+      "code": 262,
+      "name": "성모",
+      "classification": "보호",
+      "content": "성매매관련보호재항고사건"
+    },
+    {
+      "code": 263,
+      "name": "성초",
+      "classification": "보호",
+      "content": "성매매관련보호신청사건"
+    },
+    {
+      "code": 264,
+      "name": "전로",
+      "classification": "형사",
+      "content": "부착명령항고사건"
+    },
+    {
+      "code": 265,
+      "name": "전고",
+      "classification": "형사",
+      "content": "부착명령청구1심사건"
+    },
+    {
+      "code": 266,
+      "name": "전노",
+      "classification": "형사",
+      "content": "부착명령청구사건 항소"
+    },
+    {
+      "code": 267,
+      "name": "전도",
+      "classification": "형사",
+      "content": "부착명령청구사건 상고"
+    },
+    {
+      "code": 268,
+      "name": "전오",
+      "classification": "형사",
+      "content": "부착명령청구사건 비상상고"
+    },
+    {
+      "code": 269,
+      "name": "전초",
+      "classification": "형사",
+      "content": "부착명령신청사건"
+    },
+    {
+      "code": 270,
+      "name": "전모",
+      "classification": "형사",
+      "content": "부착명령재항고사건"
+    },
+    {
+      "code": 271,
+      "name": "재비합",
+      "classification": "비송도산",
+      "content": "비송합의사건재심"
+    },
+    {
+      "code": 272,
+      "name": "재비단",
+      "classification": "비송도산",
+      "content": "비송단독사건재심"
+    },
+    {
+      "code": 275,
+      "name": "재흐",
+      "classification": "특허",
+      "content": "특허재항고사건재심"
+    },
+    {
+      "code": 280,
+      "name": "재정가",
+      "classification": "감치",
+      "content": "증인감치사건재심"
+    },
+    {
+      "code": 281,
+      "name": "재정명",
+      "classification": "감치",
+      "content": "채무자감치사건재심"
+    },
+    {
+      "code": 282,
+      "name": "재정라",
+      "classification": "감치",
+      "content": "증인·채무자감치항고사건재심"
+    },
+    {
+      "code": 283,
+      "name": "재정마",
+      "classification": "감치",
+      "content": "증인·채무자감치재항고사건재심"
+    },
+    {
+      "code": 284,
+      "name": "재정고",
+      "classification": "감치",
+      "content": "법정질서위반감치등사건재심"
+    },
+    {
+      "code": 285,
+      "name": "재정드",
+      "classification": "감치",
+      "content": "의무불이행자감치등사건재심"
+    },
+    {
+      "code": 286,
+      "name": "재정브",
+      "classification": "감치",
+      "content": "의무불이행자감치등항고사건재심"
+    },
+    {
+      "code": 287,
+      "name": "재정스",
+      "classification": "감치",
+      "content": "의무불이행자감치등재항고사건재심"
+    },
+    {
+      "code": 288,
+      "name": "재정기",
+      "classification": "감치",
+      "content": "기타감치신청사건재심"
+    },
+    {
+      "code": 290,
+      "name": "개기",
+      "classification": "비송도산",
+      "content": "기타개인회생관련신청사건"
+    },
+    {
+      "code": 291,
+      "name": "회단",
+      "classification": "비송도산",
+      "content": "회생단독사건"
+    },
+    {
+      "code": 292,
+      "name": "회합",
+      "classification": "비송도산",
+      "content": "회생합의사건"
+    },
+    {
+      "code": 293,
+      "name": "회확",
+      "classification": "비송도산",
+      "content": "회생채권ㆍ회생담보권조사확정사건"
+    },
+    {
+      "code": 294,
+      "name": "회기",
+      "classification": "비송도산",
+      "content": "기타회생관련신청사건"
+    },
+    {
+      "code": 295,
+      "name": "하확",
+      "classification": "비송도산",
+      "content": "파산채권조사확정사건"
+    },
+    {
+      "code": 296,
+      "name": "하기",
+      "classification": "비송도산",
+      "content": "기타파산ㆍ면책관련신청사건"
+    },
+    {
+      "code": 297,
+      "name": "국승",
+      "classification": "비송도산",
+      "content": "국제도산승인사건"
+    },
+    {
+      "code": 298,
+      "name": "국지",
+      "classification": "비송도산",
+      "content": "국제도산지원사건"
+    },
+    {
+      "code": 300,
+      "name": "타인",
+      "classification": "집행",
+      "content": "부동산인도명령사건"
+    },
+    {
+      "code": 301,
+      "name": "타배",
+      "classification": "집행",
+      "content": "채권배당사건"
+    },
+    {
+      "code": 302,
+      "name": "간회단",
+      "classification": "비송도산",
+      "content": "간이회생단독사건"
+    },
+    {
+      "code": 303,
+      "name": "간회합",
+      "classification": "비송도산",
+      "content": "간이회생합의사건"
+    },
+    {
+      "code": 310,
+      "name": "재으",
+      "classification": "가사",
+      "content": "가사특별항고사건"
+    },
+    {
+      "code": 311,
+      "name": "재부",
+      "classification": "행정",
+      "content": "행정특별항고사건"
+    },
+    {
+      "code": 320,
+      "name": "행심",
+      "classification": "기타",
+      "content": "행정심판사건"
+    },
+    {
+      "code": 360,
+      "name": "치고",
+      "classification": "형사",
+      "content": "치료명령1심사건"
+    },
+    {
+      "code": 361,
+      "name": "치노",
+      "classification": "형사",
+      "content": "치료명령항소사건"
+    },
+    {
+      "code": 362,
+      "name": "치도",
+      "classification": "형사",
+      "content": "치료명령상고사건"
+    },
+    {
+      "code": 363,
+      "name": "치오",
+      "classification": "형사",
+      "content": "치료명령비상상고사건"
+    },
+    {
+      "code": 364,
+      "name": "치초",
+      "classification": "형사",
+      "content": "치료명령신청(치료기간연장, 준수사항추가·변경·삭제청구)사건"
+    },
+    {
+      "code": 365,
+      "name": "초치",
+      "classification": "형사",
+      "content": "성폭력수형자치료명령1심사건"
+    },
+    {
+      "code": 366,
+      "name": "치로",
+      "classification": "형사",
+      "content": "치료명령항고사건"
+    },
+    {
+      "code": 367,
+      "name": "치모",
+      "classification": "형사",
+      "content": "치료명령재항고사건"
+    },
+    {
+      "code": 374,
+      "name": "재버",
+      "classification": "보호",
+      "content": "가정보호사건재심"
+    },
+    {
+      "code": 380,
+      "name": "보고",
+      "classification": "형사",
+      "content": "보호관찰명령1심사건"
+    },
+    {
+      "code": 381,
+      "name": "보노",
+      "classification": "형사",
+      "content": "보호관찰명령항소사건"
+    },
+    {
+      "code": 382,
+      "name": "보도",
+      "classification": "형사",
+      "content": "보호관찰명령상고사건"
+    },
+    {
+      "code": 383,
+      "name": "보오",
+      "classification": "형사",
+      "content": "보호관찰명령비상상고사건"
+    },
+    {
+      "code": 384,
+      "name": "보초",
+      "classification": "형사",
+      "content": "보호관찰명령신청사건"
+    },
+    {
+      "code": 385,
+      "name": "보로",
+      "classification": "형사",
+      "content": "보호관찰명령항고사건"
+    },
+    {
+      "code": 386,
+      "name": "보모",
+      "classification": "형사",
+      "content": "보호관찰명령재항고사건"
+    },
+    {
+      "code": 400,
+      "name": "차전",
+      "classification": "기타",
+      "content": "전자독촉사건"
+    },
+    {
+      "code": 401,
+      "name": "카기전",
+      "classification": "신청",
+      "content": "전자독촉사건 경정신청사건"
+    },
+    {
+      "code": 411,
+      "name": "카확",
+      "classification": "신청",
+      "content": "소송비용 확정을 위한 신청사건"
+    },
+    {
+      "code": 421,
+      "name": "카열",
+      "classification": "신청",
+      "content": "확정된 소송기록에 대한 열람신청사건"
+    },
+    {
+      "code": 422,
+      "name": "초재",
+      "classification": "형사",
+      "content": "재정신청사건/재정신청 비용지급신청사건"
+    },
+    {
+      "code": 423,
+      "name": "호기",
+      "classification": "가족관계등록공탁",
+      "content": "가족관계등록(제적)비송사건"
+    },
+    {
+      "code": 424,
+      "name": "호명",
+      "classification": "가족관계등록공탁",
+      "content": "개명사건"
+    },
+    {
+      "code": 425,
+      "name": "호협",
+      "classification": "가족관계등록공탁",
+      "content": "협의이혼사건"
+    },
+    {
+      "code": 430,
+      "name": "인",
+      "classification": "보호",
+      "content": "인신보호사건"
+    },
+    {
+      "code": 431,
+      "name": "인라",
+      "classification": "보호",
+      "content": "인신보호항고사건"
+    },
+    {
+      "code": 432,
+      "name": "인마",
+      "classification": "보호",
+      "content": "인신보호재항고사건"
+    },
+    {
+      "code": 433,
+      "name": "인카",
+      "classification": "보호",
+      "content": "인신보호신청사건"
+    },
+    {
+      "code": 436,
+      "name": "처",
+      "classification": "보호",
+      "content": "피해자보호명령사건"
+    },
+    {
+      "code": 437,
+      "name": "커",
+      "classification": "보호",
+      "content": "자보호명령항고사건"
+    },
+    {
+      "code": 438,
+      "name": "터",
+      "classification": "보호",
+      "content": "자보호명령재항고사건"
+    },
+    {
+      "code": 439,
+      "name": "처집",
+      "classification": "보호",
+      "content": "피해자보호명령집행감독사건"
+    },
+    {
+      "code": 440,
+      "name": "동버",
+      "classification": "보호",
+      "content": "아동보호사건"
+    },
+    {
+      "code": 441,
+      "name": "동서",
+      "classification": "보호",
+      "content": "아동보호항고사건"
+    },
+    {
+      "code": 442,
+      "name": "동어",
+      "classification": "보호",
+      "content": "아동보호재항고사건"
+    },
+    {
+      "code": 443,
+      "name": "동저",
+      "classification": "보호",
+      "content": "아동보호신청사건"
+    },
+    {
+      "code": 444,
+      "name": "동버집",
+      "classification": "보호",
+      "content": "아동보호집행사건"
+    },
+    {
+      "code": 445,
+      "name": "재동버",
+      "classification": "보호",
+      "content": "아동보호사건재심"
+    },
+    {
+      "code": 446,
+      "name": "재동서",
+      "classification": "보호",
+      "content": "아동보호항고사건재심"
+    },
+    {
+      "code": 447,
+      "name": "재동어",
+      "classification": "보호",
+      "content": "아동보호재항고사건재심"
+    },
+    {
+      "code": 451,
+      "name": "카임",
+      "classification": "신청",
+      "content": "임차권등기명령등사건"
+    },
+    {
+      "code": 452,
+      "name": "카정",
+      "classification": "신청",
+      "content": "강제집행정지사건"
+    },
+    {
+      "code": 453,
+      "name": "카경",
+      "classification": "신청",
+      "content": "판결(결정)경정사건"
+    },
+    {
+      "code": 454,
+      "name": "카소",
+      "classification": "신청",
+      "content": "제소명령사건"
+    },
+    {
+      "code": 455,
+      "name": "재카경",
+      "classification": "신청",
+      "content": "판결(결정)경정사건재심"
+    },
+    {
+      "code": 461,
+      "name": "후개",
+      "classification": "가사",
+      "content": "후견개시사건"
+    },
+    {
+      "code": 462,
+      "name": "후감",
+      "classification": "가사",
+      "content": "후견감독사건"
+    },
+    {
+      "code": 463,
+      "name": "후기",
+      "classification": "가사",
+      "content": "기타후견사건"
+    },
+    {
+      "code": 501,
+      "name": "동처",
+      "classification": "보호",
+      "content": "피해아동보호명령사"
+    },
+    {
+      "code": 502,
+      "name": "동커",
+      "classification": "보호",
+      "content": "피해아동보호명령항고사건"
+    },
+    {
+      "code": 503,
+      "name": "동터",
+      "classification": "보호",
+      "content": "피해아동보호명령재항고사건"
+    },
+    {
+      "code": 504,
+      "name": "동처집",
+      "classification": "보호",
+      "content": "피해아동보호명령집행감독사건"
+    },
+    {
+      "code": 510,
+      "name": "푸집",
+      "classification": "보호",
+      "content": "소년보호집행감독사건"
+    },
+    {
+      "code": 601,
+      "name": "본",
+      "classification": "집행",
+      "content": "동산경매, 부동산인도명도철거 등"
+    },
+    {
+      "code": 602,
+      "name": "가",
+      "classification": "집행",
+      "content": "동산가압류, 동산가처분, 부동산가처분"
+    },
+    {
+      "code": 603,
+      "name": "징",
+      "classification": "집행",
+      "content": "징수"
+    }
+  ]
+}

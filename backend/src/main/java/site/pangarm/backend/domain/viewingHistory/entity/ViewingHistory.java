@@ -1,13 +1,12 @@
-package site.pangarm.backend.domain.viewingHistory;
+package site.pangarm.backend.domain.viewingHistory.entity;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import site.pangarm.backend.domain.member.Member;
-import site.pangarm.backend.domain.precedent.Precedent;
-import site.pangarm.backend.domain.precedentBookmark.PrecedentBookmarkId;
+import site.pangarm.backend.domain.member.entity.Member;
+import site.pangarm.backend.domain.precedent.entity.Precedent;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter

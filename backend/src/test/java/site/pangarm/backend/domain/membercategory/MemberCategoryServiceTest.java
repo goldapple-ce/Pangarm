@@ -12,8 +12,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.domain.category.Category;
 import site.pangarm.backend.domain.category.CategoryService;
+import site.pangarm.backend.domain.member.MemberService;
+import site.pangarm.backend.domain.member.entity.Member;
+import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
 import site.pangarm.backend.domain.member.Member;
 import site.pangarm.backend.domain.member.MemberService;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
