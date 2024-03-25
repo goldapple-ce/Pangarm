@@ -35,12 +35,17 @@ class MemberCategoryServiceTest {
     @Nested
     @DisplayName("회원 카테고리 저장 테스트")
     class SaveTest{
+        private Member joinMember;
+
+        @BeforeEach
+        void setUp(){
+            joinMember = memberService.save(Member.of("12345", "12345", "123", 1, 17, "학생"));
+        }
         
         @Test
         @DisplayName("성공")
         void whenSuccess() {
 
-            Member joinMember = memberService.save(Member.of("12345", "12345", "123", 1, "학생"));
             Category savedCategory = categoryService.save(Category.of("name"));
 
             assertDoesNotThrow(()->{
@@ -52,7 +57,6 @@ class MemberCategoryServiceTest {
         @DisplayName("실패_이미 존재하는 경우")
         void whenFail(){
 
-            Member joinMember = memberService.save(Member.of("12345", "12345", "123", 1, "학생"));
             Category savedCategory = categoryService.save(Category.of("name"));
             memberCategoryService.save(joinMember, savedCategory);
 
@@ -70,7 +74,7 @@ class MemberCategoryServiceTest {
         @DisplayName("성공")
         void whenSuccess() {
 
-            Member joinMember = memberService.save(Member.of("12345", "12345", "123", 1, "학생"));
+            Member joinMember = memberService.save(Member.of("12345", "12345", "123", 1, 17,"학생"));
             Category savedCategory = categoryService.save(Category.of("name"));
             memberCategoryService.save(joinMember, savedCategory);
 
@@ -88,7 +92,7 @@ class MemberCategoryServiceTest {
         @DisplayName("성공_존재할 경우")
         void whenSuccessAndResultsExist() {
             //GIVEN
-            Member joinMember = memberService.save(Member.of("12345", "12345", "123", 1, "학생"));
+            Member joinMember = memberService.save(Member.of("12345", "12345", "123", 1, 17, "학생"));
 
             Category savedCategory = categoryService.save(Category.of("name"));
 

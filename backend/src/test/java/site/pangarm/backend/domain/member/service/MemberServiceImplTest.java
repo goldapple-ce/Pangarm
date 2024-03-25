@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.domain.member.Member;
@@ -33,6 +34,7 @@ class MemberServiceImplTest {
                     "testpassword",
                     "Jane",
                     1,
+                    17,
                     "학생");
             assertDoesNotThrow(()->{
                 memberService.save(member);
@@ -46,6 +48,7 @@ class MemberServiceImplTest {
                     "testpassword",
                     "Jane",
                     1,
+                    17,
                     "학생");
             memberService.save(member);
 
