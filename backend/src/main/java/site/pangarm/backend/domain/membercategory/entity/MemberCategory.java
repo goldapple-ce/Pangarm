@@ -1,8 +1,10 @@
 package site.pangarm.backend.domain.membercategory.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import site.pangarm.backend.domain.category.Category;
 import site.pangarm.backend.domain.member.entity.Member;
 
@@ -15,11 +17,11 @@ public class MemberCategory {
     private Integer id; //멤버 카테고리 아이디
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id",nullable = false)
+    @JoinColumn(name = "member_id")
     private Member member; //회원 아이디
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id",nullable = false)
+    @JoinColumn(name = "category_id")
     private Category category; //카테고리 아이디
 
     @Builder
