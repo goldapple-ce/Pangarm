@@ -6,14 +6,8 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-//@Builder
-//@AllArgsConstructor @NoArgsConstructor
-//@Entity
 @Document(indexName = "news")
 public class News {
-
-//    @Id
-//    private String id;
 
     @Id
     private Integer id; //뉴스아이디
