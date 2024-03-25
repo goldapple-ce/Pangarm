@@ -117,7 +117,77 @@ export const precedentHandlers = [
       });
     }
 
-    return HttpResponse.json
-      ();
+    return HttpResponse.json(
+      {
+        data: {
+          title: "string",
+          summary: {
+            1: {
+              1: "string",
+              2: "string",
+            },
+            2: "string",
+            3: "string",
+            4: "string",
+            5: "string",
+            6: "string",
+          },
+          detail: {
+            basicInformation: {
+              graph: {
+                category: {
+                  incident: "string",
+                  detail: "string",
+                },
+                caseNumber: "string",
+                caseName: "string",
+                courthouse: "string",
+                judgementDate: "date",
+                instanceType: "string",
+              },
+              relatedLawList: [
+                {
+                  law: "string",
+                  link: "string",
+                },
+                //..
+              ],
+              citedPrecedent: [
+                {
+                  precedent: "string",
+                  link: "string",
+                },
+                //..
+              ],
+            },
+            part: {
+              plaintiff: "string",
+              defendant: "string",
+            },
+            originalJudgment: {
+              caseNumber: "string",
+              courthouse: "string",
+              judgementDate: "string",
+            },
+            disposal: {
+              type: "string",
+              content: "string",
+            },
+            purport: "string",
+            opinion: {
+              plaintiff: "string",
+              defendant: "string",
+            },
+            fact: "string",
+            judgement: "string",
+            result: "string",
+          },
+        },
+        message: "판례를 정상적으로 불러왔습니다.",
+      },
+      {
+        status: 200,
+      },
+    );
   }),
 ];
