@@ -1,8 +1,7 @@
 package site.pangarm.backend.domain.member;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.jpa.repository.JpaRepository;
-import site.pangarm.backend.domain.member.Member;
+import site.pangarm.backend.domain.member.entity.Member;
 
 import java.util.Optional;
 

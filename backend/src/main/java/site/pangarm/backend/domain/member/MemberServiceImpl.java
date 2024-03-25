@@ -1,9 +1,9 @@
 package site.pangarm.backend.domain.member;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.global.error.ErrorCode;
 
 @Service

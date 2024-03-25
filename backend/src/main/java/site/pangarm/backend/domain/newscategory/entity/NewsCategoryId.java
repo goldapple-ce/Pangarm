@@ -1,4 +1,4 @@
-package site.pangarm.backend.domain.newscategory;
+package site.pangarm.backend.domain.newscategory.entity;
 
 import lombok.EqualsAndHashCode;
 
