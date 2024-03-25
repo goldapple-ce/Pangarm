@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import App from "../App";
-import SignUpPage from "../pages/SignUpPage";
-import MainPage from "../pages/MainPage";
-import SignInPage from "../pages/SignInPage";
+import App from "@/App";
+import SignUpPage from "@/pages/SignUpPage";
+import MainPage from "@/pages/MainPage";
+import SignInPage from "@/pages/SignInPage";
+import PrecedentSearchPage from "@/pages/PrecedentSearchPage";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "main",
         element: <MainPage />,
+      },
+      {
+        path: "search-precedent",
+        element: <PrecedentSearchPage />,
       },
     ],
   },

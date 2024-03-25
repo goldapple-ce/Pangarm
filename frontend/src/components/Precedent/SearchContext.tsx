@@ -5,7 +5,7 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import { FiltersType } from "../../types";
+import { FiltersType } from "@/types";
 
 type SearchProviderProps = {
   children: JSX.Element;

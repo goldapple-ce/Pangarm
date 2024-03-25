@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
-// interface PrecedentListSearchBarProps {
-//   content: string;
-// }
 
-// export default function PrecedentListSearchBar({ content }: PrecedentListSearchBarProps) {
-
-export default function PrecedentListSearchBar() {
+export default function PrecedentSearchBar() {
   const [isFocused, setIsFocused] = useState(false);
   const [text, setText] = useState(""); // textarea의 내용을 관리하는 state
 

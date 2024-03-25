@@ -4,7 +4,9 @@ type ToggleButtonProps = {
   content: string;
 };
 
-export default function ToggleButtonBig({ content }: ToggleButtonProps) {
+export default function PrecedentSearchToggleSlider({
+  content,
+}: ToggleButtonProps) {
   const [isToggled, setIsToggled] = useState(false);
 
   const toggleButton = () => {

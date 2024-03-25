@@ -4,7 +4,7 @@ type DateRangePickerProps = {
   label: string;
 };
 
-export default function DateRangePicker({
+export default function PrecedentSearchDateRangePicker({
   setDate,
   date,
   label,

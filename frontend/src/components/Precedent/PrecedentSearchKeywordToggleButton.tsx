@@ -4,7 +4,9 @@ type ToggleButton = {
   content: string;
 };
 
-export default function ToggleButton({ content }: ToggleButton) {
+export default function PrecedentSearchKeywordToggleButton({
+  content,
+}: ToggleButton) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {

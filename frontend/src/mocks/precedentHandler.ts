@@ -92,4 +92,98 @@ export const precedentHandlers = [
       });
     },
   ),
+
+  http.get("/precedent", async ({ request }) => {
+    // Header에서 AuthToken 가져오기
+    // const authToken = request.headers.get("Authorization");
+
+    // URL 에서 PARAMS 가져오기
+    const url = new URL(request.url);
+    const caseNumber = url.searchParams.get("caseNumber");
+
+    if (!caseNumber) {
+      HttpResponse.json({
+        Header: {
+          status: 409,
+        },
+        Body: {
+          code: "G002",
+          message: ERR_MSG.G002,
+        },
+      });
+    }
+
+    return HttpResponse.json(
+      {
+        data: {
+          title: "string",
+          summary: {
+            1: {
+              1: "string",
+              2: "string",
+            },
+            2: "string",
+            3: "string",
+            4: "string",
+            5: "string",
+            6: "string",
+          },
+          detail: {
+            basicInformation: {
+              graph: {
+                category: {
+                  incident: "string",
+                  detail: "string",
+                },
+                caseNumber: "string",
+                caseName: "string",
+                courthouse: "string",
+                judgementDate: "date",
+                instanceType: "string",
+              },
+              relatedLawList: [
+                {
+                  law: "string",
+                  link: "string",
+                },
+                //..
+              ],
+              citedPrecedent: [
+                {
+                  precedent: "string",
+                  link: "string",
+                },
+                //..
+              ],
+            },
+            part: {
+              plaintiff: "string",
+              defendant: "string",
+            },
+            originalJudgment: {
+              caseNumber: "string",
+              courthouse: "string",
+              judgementDate: "string",
+            },
+            disposal: {
+              type: "string",
+              content: "string",
+            },
+            purport: "string",
+            opinion: {
+              plaintiff: "string",
+              defendant: "string",
+            },
+            fact: "string",
+            judgement: "string",
+            result: "string",
+          },
+        },
+        message: "판례를 정상적으로 불러왔습니다.",
+      },
+      {
+        status: 200,
+      },
+    );
+  }),
 ];

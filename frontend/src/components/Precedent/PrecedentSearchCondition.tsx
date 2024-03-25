@@ -1,11 +1,11 @@
 import { GrRefresh } from "react-icons/gr";
 
-import { SearchKeywordExampleList } from "../../constant";
-import ToggleButton from "./ToggleButton";
-import DateRangePicker from "./DateRangePicker";
-import { useSearch } from "./SearchContext";
-import ToggleButtonBig from "./ToggleButtonBig";
-import SimilaritySlider from "./SimilaritySlider";
+import { SearchKeywordExampleList } from "@/constants";
+import PrecedentSearchKeywordToggleButton from "@/components/Precedent/PrecedentSearchKeywordToggleButton";
+import PrecedentSearchDateRangePicker from "@/components/Precedent/PrecedentSearchDateRangePicker";
+import { useSearch } from "@/components/Precedent/SearchContext";
+import PrecedentSearchToggleSlider from "@/components/Precedent/PrecedentSearchToggleSlider";
+import PrecedentSearchSimilaritySlider from "@/components/Precedent/PrecedentSearchSimilaritySlider";
 
 // import { FiltersType } from "../../types";
 
@@ -13,7 +13,7 @@ import SimilaritySlider from "./SimilaritySlider";
 //   return key in obj;
 // }
 
-export default function PrecedentListSearchCondition() {
+export default function PrecedentSearchCondition() {
   const { filters, setFilters } = useSearch();
 
   // const handleClick = () => {
@@ -56,7 +56,10 @@ export default function PrecedentListSearchCondition() {
       </div>
       <div>
         {SearchKeywordExampleList.map((value) => (
-          <ToggleButton key={value} content={value}></ToggleButton>
+          <PrecedentSearchKeywordToggleButton
+            key={value}
+            content={value}
+          ></PrecedentSearchKeywordToggleButton>
         ))}
       </div>
       <hr className="mb-2 mt-4" />
@@ -65,13 +68,13 @@ export default function PrecedentListSearchCondition() {
         <p className="font-Content text-lg">선고 기간</p>
       </div>
       <div className="flex items-center justify-between px-1">
-        <DateRangePicker
+        <PrecedentSearchDateRangePicker
           setDate={setDate}
           date={filters.startDate}
           label="startDate"
         />{" "}
         ~{" "}
-        <DateRangePicker
+        <PrecedentSearchDateRangePicker
           setDate={setDate}
           date={filters.endDate}
           label="endDate"
@@ -83,8 +86,8 @@ export default function PrecedentListSearchCondition() {
         <p className="font-Content text-lg">제외하고 보기</p>
       </div>
       <div className="mt-2 flex justify-center px-1">
-        <ToggleButtonBig content="이미 본 판례"></ToggleButtonBig>
-        <ToggleButtonBig content="북마크 판례"></ToggleButtonBig>
+        <PrecedentSearchToggleSlider content="이미 본 판례"></PrecedentSearchToggleSlider>
+        <PrecedentSearchToggleSlider content="북마크 판례"></PrecedentSearchToggleSlider>
       </div>
       <hr className="my-4" />
 
@@ -93,7 +96,7 @@ export default function PrecedentListSearchCondition() {
         <p className="font-yellow">{filters.minSimilarity} </p> % 이상
       </div>
       <div className="mt-1 px-1 ">
-        <SimilaritySlider setSimilarity={setSimilarity} />
+        <PrecedentSearchSimilaritySlider setSimilarity={setSimilarity} />
       </div>
     </div>
   );
