@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.domain.category.Category;
 import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
-import site.pangarm.backend.domain.category.CategoryException;
 import site.pangarm.backend.global.error.ErrorCode;
 
 @Service
