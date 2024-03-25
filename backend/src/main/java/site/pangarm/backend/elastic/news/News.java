@@ -1,9 +1,6 @@
 package site.pangarm.backend.elastic.news;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 @Document(indexName = "news")

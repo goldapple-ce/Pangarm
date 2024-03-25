@@ -6,9 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
-import site.pangarm.backend.application.category.dto.request.CategoryRegisterRequest;
-import site.pangarm.backend.application.category.dto.request.CategoryUpdateRequest;
-import site.pangarm.backend.domain.membercategory.MemberCategory;
 
 import java.util.ArrayList;
 import java.util.List;
