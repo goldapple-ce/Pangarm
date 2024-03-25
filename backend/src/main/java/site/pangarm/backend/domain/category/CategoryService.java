@@ -1,7 +1,5 @@
 package site.pangarm.backend.domain.category;
 
-import site.pangarm.backend.application.category.dto.request.CategoryUpdateRequest;
-
 public interface CategoryService {
 
     Category save(Category category);
@@ -10,5 +8,7 @@ public interface CategoryService {
 
     Category update(int id, Category category);
 
-    boolean isExistName(String name);
+    boolean existsByName(String name);
+
+    Category findById(Integer categoryId) throws CategoryException;
 }

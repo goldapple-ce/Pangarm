@@ -2,7 +2,9 @@ package site.pangarm.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@EnableJpaRepositories("site.pangarm.backend.domain")
 @SpringBootApplication
 public class BackendApplication {
 

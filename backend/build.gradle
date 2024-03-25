@@ -39,7 +39,6 @@ dependencies {
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2'
 
-
 	// === security ===
 	implementation "org.springframework.boot:spring-boot-starter-security"
 	testImplementation 'org.springframework.security:spring-security-test'
@@ -53,6 +52,9 @@ dependencies {
 	// === jpa ===
  	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+
+	// === elastic search ===
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 
 	// === QueryDsl ===
 //	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
