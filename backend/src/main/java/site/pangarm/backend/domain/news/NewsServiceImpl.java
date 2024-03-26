@@ -1,10 +1,12 @@
 package site.pangarm.backend.domain.news;
 
-import lombok.AllArgsConstructor;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class NewsServiceImpl implements NewsService{
 
     private final NewsRepository newsRepository;
@@ -14,8 +16,8 @@ public class NewsServiceImpl implements NewsService{
     }
 
     @Override
-    public Iterable<News> findAll() {
-        return newsRepository.findAll();
+    public Iterable<News> findAll(Pageable pageable) {
+        return newsRepository.findAll(pageable);
     }
 
     @Override
