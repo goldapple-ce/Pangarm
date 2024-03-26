@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
+type PrecedentSearchBarProps = {
+  content: string;
+};
 
-export default function PrecedentSearchBar() {
-  const [isFocused, setIsFocused] = useState(false);
-  const [text, setText] = useState(""); // textarea의 내용을 관리하는 state
+export default function PrecedentSearchBar({
+  content,
+}: PrecedentSearchBarProps) {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [text, setText] = useState<string>(""); // textarea의 내용을 관리하는 state
+
+  const handleSearch = () => {
+    console.log(text);
+  };
+
+  useEffect(() => {
+    setText(content);
+  }, []);
 
   return (
     <form
@@ -21,8 +34,9 @@ export default function PrecedentSearchBar() {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         onChange={(e) => setText(e.target.value)}
+        value={text}
       />
-      <IoSearchOutline />
+      <IoSearchOutline onClick={handleSearch} />
     </form>
   );
 }
