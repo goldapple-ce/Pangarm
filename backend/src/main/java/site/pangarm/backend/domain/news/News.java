@@ -1,6 +1,7 @@
 package site.pangarm.backend.domain.news;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -36,4 +37,15 @@ public class News {
     @Field(type = FieldType.Keyword) //keyword는
     private List<String> categoryList; //뉴스 카테고리
 
+    @Builder
+    public News(String id, String newsLink, String title, String content, String imageUrl, String author, String createdAt, List<String> categoryList) {
+        this.id = id;
+        this.newsLink = newsLink;
+        this.title = title;
+        this.content = content;
+        this.imageUrl = imageUrl;
+        this.author = author;
+        this.createdAt = createdAt;
+        this.categoryList = categoryList;
+    }
 }
