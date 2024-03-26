@@ -6,15 +6,13 @@ import json
 import re
 from hdfs import InsecureClient
 import os
-
-
+from bs4 import BeautifulSoup
 
 HDFS_URL = os.environ["HDFS_URL"]
 HDFS_USER = os.environ["HDFS_USER"]
 client = InsecureClient(HDFS_URL, user=HDFS_USER)
 
-
-with open("data/idToCaseNumber.json","r",encoding="utf8") as f:
+with open("data/idToCaseNumber.json", "r", encoding="utf8") as f:
     caseTable = json.load(f)
 
 PRECEDENT_NOT_EXISTS_ERROR = Response(
@@ -22,7 +20,6 @@ PRECEDENT_NOT_EXISTS_ERROR = Response(
      "message": "해당 판례는 존재하지 않습니다."
      },
     status=status.HTTP_400_BAD_REQUEST)
-
 
 model_name = "jhgan/ko-sroberta-multitask"  # (KorNLU 데이터셋에 학습시킨 한국어 임베딩 모델)
 model_kwargs = {'device': 'cpu'}
@@ -41,14 +38,19 @@ def search(search_request):
     content = search_request['content'].value
     count = search_request['count'].value
 
-    # print(j[0].metadata)
-    fileList = [ (re.sub(r'[^0-9]', '', i[0].metadata['source']) + ".json",i[1]) for i in vectorstore.similarity_search_with_score(content,k=count)]
-    data = []
-    keys = ["info","summary","judgement","conclusion","keywords"]
+    fileList = [(re.sub(r'[^0-9]', '', i[0].metadata['source']) + ".html") for i in
+                vectorstore.similarity_search_with_score(content, k=count)]
+    #return Response({"data":fileList}, status=status.HTTP_200_OK)
 
-    for fileName,score in fileList:
-        json_data = {"score":score}
-        with client.read(f"/data/json/{fileName}",encoding="utf8") as f:
+    # print(j[0].metadata)
+    fileList = [(re.sub(r'[^0-9]', '', i[0].metadata['source']) + ".json", i[1]) for i in
+                vectorstore.similarity_search_with_score(content, k=count)]
+    data = []
+    keys = ["info", "summary", "judgement", "conclusion", "keywords"]
+
+    for fileName, score in fileList:
+        json_data = {"score": score}
+        with client.read(f"/data/json/{fileName}", encoding="utf8") as f:
             t = json.load(f)
 
             for key in keys:
@@ -57,9 +59,10 @@ def search(search_request):
                 except:
                     json_data[key] = None
 
-            if(json_data["keywords"] == None):
+            if (json_data["keywords"] == None):
                 json_data["keywords"] = []
-            data.append(json_data)
+
+            data.append(json_data["info"]["caseNumber"])
     response = {
         "data": data
     }
@@ -74,7 +77,28 @@ def findSummaryByCaseNumber(caseNumber):
         return PRECEDENT_NOT_EXISTS_ERROR
 
     caseId = caseTable[caseNumber]
-    with client.read(f"/data/json/{caseId}.json",encoding="utf8") as f:
+    with client.read(f"/data/json/{caseId}.json", encoding="utf8") as f:
         response = json.load(f)
         return Response(response, status=status.HTTP_200_OK)
-    assert False #Exception 핸들러가 처리
+    assert False  # Exception 핸들러가 처리
+
+
+def findDetailByCaseNumber(caseNumber):
+    if not caseNumber in caseTable:
+        return PRECEDENT_NOT_EXISTS_ERROR
+
+    caseId = caseTable[caseNumber]
+    with client.read(f"/data/json/{caseId}.json", encoding="utf8") as f:
+        j = json.load(f)
+        info = j['info']
+        relate = j['relate']
+
+    with client.read(f"/data/html/{caseId}.html", encoding="utf8") as f:
+        html = f.read()
+        soup = BeautifulSoup(html)
+        text = soup.get_text('\n')
+        text = re.sub(r'\n{2,}', '\n', text)
+        text = re.sub(r'\s{2,}', ' ', text)
+        response = {"info": info, "relate" : relate, "data": text, "html": html}
+        return Response(response, status=status.HTTP_200_OK)
+    assert False  # Exception 핸들러가 처리

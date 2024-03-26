@@ -4,4 +4,5 @@ from search import views
 urlpatterns = [
     path('', views.search),
     path('/summary', views.findSummaryByCaseNumber),
+    path('/detail',views.findDetailByCaseNumber)
 ]

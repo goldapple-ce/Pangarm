@@ -29,3 +29,13 @@ def findSummaryByCaseNumber(request):
     response = service.findSummaryByCaseNumber(detail_request['caseNumber'].value)
 
     return response
+
+
+@api_view(['GET'])
+def findDetailByCaseNumber(request):
+    detail_request = DetailRequest(data=request.query_params)
+    if not detail_request.is_valid():
+        return INPUT_ERROR_RESPONSE
+    response = service.findDetailByCaseNumber(detail_request['caseNumber'].value)
+
+    return response
