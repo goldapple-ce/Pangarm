@@ -1,7 +1,8 @@
 import Logo from "@/assets/imgs/Logo.svg?react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GrRefresh } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
 
 type Input = {
   content: string;
@@ -15,9 +16,12 @@ export default function MainPage() {
     formState: { isValid },
   } = useForm<Input>({ mode: "onChange" });
 
+  const navigate = useNavigate();
+
+
   const onSubmit: SubmitHandler<Input> = (data) => {
     console.log(data);
-
+    navigate('/search-precedent', {state: data});
     // TODO: 상황을 제출했을 때 할 일
   };
 

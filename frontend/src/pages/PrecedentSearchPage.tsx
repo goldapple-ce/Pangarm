@@ -6,11 +6,14 @@ import PrecedentSearchCondition from "../components/Precedent/PrecedentSearchCon
 import PrecedentList from "../components/Precedent/PrecedentList";
 import { SearchProvider } from "../components/Precedent/SearchContext";
 import PrecedentDetail from "@/components/Precedent/PrecedentDetail";
+import { useLocation } from "react-router-dom";
 
 export default function PrecedentSearchPage() {
   const [precedentList, setPrecedentList] = useState<PrecedentItem[]>([]);
   const [detailVisible, setDetailVisible] = useState<boolean>(false);
   const [detailCaseNo, setDetailCaseNo] = useState<string>("");
+  const location = useLocation();
+
   const showDetail = (caseNo: string) => {
     setDetailVisible(true);
     setDetailCaseNo(caseNo);
@@ -23,7 +26,8 @@ export default function PrecedentSearchPage() {
   useEffect(() => {
     const fetchPrecedents = async () => {
       try {
-        const res = await getPrecedent("something", 1, 10);
+        console.log(location.state.content);
+        const res = await getPrecedent(location.state.content, 1, 10);
         if (res && res.data) {
           setPrecedentList(res.data);
         }
@@ -45,11 +49,11 @@ export default function PrecedentSearchPage() {
           />
         )}
         <div
-          className={`mx-3 mt-3 w-full flex-row items-center justify-center gap-6 px-72 ${detailVisible ? " overflow-hidden " : ""}`}
+          className={`mx-[300px] mt-3 w-full flex-row items-center justify-center gap-6 ${detailVisible ? " overflow-hidden " : ""}`}
         >
           <div className="mx-5 flex-row">
             <p className="font-SubTitle text-3xl">다시 검색하기</p>
-            <PrecedentSearchBar></PrecedentSearchBar>
+            <PrecedentSearchBar content={location.state.content} />
           </div>
           <div className="mx-5 mt-12 flex">
             <div>
@@ -60,7 +64,7 @@ export default function PrecedentSearchPage() {
             </div>
             <div className=" border-lightGray/60 mx-7 my-[1%] w-[0.1%] border-[1px]"></div>
             <div>
-              <PrecedentSearchCondition></PrecedentSearchCondition>
+              <PrecedentSearchCondition />
             </div>
           </div>
         </div>
