@@ -15,5 +15,3 @@ export const postPrecedentSearch = async (
 
   return res;
 };
-
-export const 
