@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -31,14 +32,14 @@ public class News {
     @Field(type = FieldType.Text)
     private String author; //기자
 
-    @Field(type = FieldType.Text)
-    private String createdAt; //작성일
+    @Field(type = FieldType.Date)
+    private Date createdAt; //작성일
 
     @Field(type = FieldType.Keyword) //keyword는
     private List<String> categoryList; //뉴스 카테고리
 
     @Builder
-    public News(String id, String newsLink, String title, String content, String imageUrl, String author, String createdAt, List<String> categoryList) {
+    public News(String id, String newsLink, String title, String content, String imageUrl, String author, Date createdAt, List<String> categoryList) {
         this.id = id;
         this.newsLink = newsLink;
         this.title = title;
