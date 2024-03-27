@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { getPrecedent } from "../services/precedent";
-import { PrecedentItem } from "../types";
-import PrecedentSearchBar from "../components/Precedent/PrecedentSearchBar";
-import PrecedentSearchCondition from "../components/Precedent/PrecedentSearchCondition";
-import PrecedentList from "../components/Precedent/PrecedentList";
-import { SearchProvider } from "../components/Precedent/SearchContext";
+import { postPrecedentSearch } from "@/services/precedentService";
+import { PrecedentItem } from "@/types";
+import PrecedentSearchBar from "@/components/Precedent/PrecedentSearchBar";
+import PrecedentSearchCondition from "@/components/Precedent/PrecedentSearchCondition";
+import PrecedentList from "@/components/Precedent/PrecedentList";
+import { SearchProvider } from "@/components/Precedent/SearchContext";
 import PrecedentDetail from "@/components/Precedent/PrecedentDetail";
 
 export default function PrecedentSearchPage() {
@@ -23,9 +23,9 @@ export default function PrecedentSearchPage() {
   useEffect(() => {
     const fetchPrecedents = async () => {
       try {
-        const res = await getPrecedent("something", 1, 10);
-        if (res && res.data) {
-          setPrecedentList(res.data);
+        const res = await postPrecedentSearch("something", 1, 10);
+        if (res && res.data && res.data.data) {
+          setPrecedentList(res.data.data);
         }
       } catch (error) {
         console.error("Error fetching precedents:", error);
