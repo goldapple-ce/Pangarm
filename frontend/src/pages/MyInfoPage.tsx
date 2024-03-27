@@ -23,7 +23,7 @@ export default function MyInfoPage() {
         // style={customStyles}
         className="flex h-screen items-center justify-center"
       >
-        <div>asdf</div>
+        <MyPageEditProfile />
       </Modal>
       <div className="flex font-TitleLight text-6xl">
         <div className="pt-2">

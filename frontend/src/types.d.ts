@@ -30,16 +30,24 @@ export type SignUpFormInput = {
   job: string;
 };
 
+export type EditFormInput = {
+  currentPassword: string;
+  nextPassword: string;
+  name: string;
+  age: number;
+  gender: number;
+  job: string;
+};
 
 export type GetPrecedentBody = {
   data: Data;
   message: string;
-}
+};
 export type Data = {
   title: string;
   summary: Summary;
   detail: Detail;
-}
+};
 
 export type Detail = {
   basicInformation: BasicInformation;

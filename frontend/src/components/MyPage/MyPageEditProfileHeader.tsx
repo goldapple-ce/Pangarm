@@ -7,7 +7,7 @@ export default function MyPageEditProfileHeader({
 }: MyPageEditProfileHeaderProps) {
   return (
     <div className="mb-4 font-TitleLight text-4xl">
-      회원가입 <span className="mx-3 text-2xl">{email}</span>
+      <span></span>정보수정 <span className="mx-3 text-2xl">{email}</span>
     </div>
   );
 }

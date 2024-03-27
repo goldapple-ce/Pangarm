@@ -2,24 +2,24 @@ import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 
-import { SignUpFormInput } from "@/types";
+import { EditFormInput } from "@/types";
 import { signUp } from "@/services/authService";
 
-import SignUpFormFooter from "@/components/SignUp/SignUpFormFooter";
-import SignUpFormMain from "@/components/SignUp/SignUpFormMain";
 import MyPageEditProfileHeader from "./MyPageEditProfileHeader";
+import MyPageEditProfileFooter from "./MyPageEditProfileFooter";
+import MyPageEditProfileBody from "./MyPageEditProfileBody";
 
 export default function SignUpForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpFormInput>();
+  } = useForm<EditFormInput>();
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
     mutationFn: signUp,
-    onSuccess: (response) => {
+    onSuccess: (response: { data: { message: any }; status: any }) => {
       const { message } = response.data;
       const status = response.status;
 
@@ -28,23 +28,23 @@ export default function SignUpForm() {
         navigate("/");
       }
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error(error);
     },
   });
 
-  const onSubmit: SubmitHandler<SignUpFormInput> = (data: SignUpFormInput) => {
+  const onSubmit: SubmitHandler<EditFormInput> = (data: EditFormInput) => {
     mutate(data);
   };
   // TODO email
   return (
     <form
-      className="h-full w-1/2 border border-lightgray p-20 pb-10 shadow-md"
+      className="h-1/2 w-1/2 border bg-white border-lightgray p-20 pb-10 shadow-md"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <MyPageEditProfileHeader email={""} />
-      <SignUpFormMain register={register} errors={errors} />
-      <SignUpFormFooter />
+      <MyPageEditProfileHeader email={"devkwanwoo@gmail.com"} />
+      <MyPageEditProfileBody register={register} errors={errors} />
+      <MyPageEditProfileFooter />
     </form>
   );
 }
