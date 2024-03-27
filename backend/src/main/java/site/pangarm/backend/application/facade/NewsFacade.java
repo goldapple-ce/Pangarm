@@ -9,6 +9,8 @@ import site.pangarm.backend.domain.category.CategoryService;
 import site.pangarm.backend.domain.news.entity.News;
 import site.pangarm.backend.domain.news.NewsService;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
@@ -26,8 +28,12 @@ public class NewsFacade {
         newsService.save(news);
     }
 
-    public Iterable<News> findAllNews(Pageable pageable) {
+    public List<News> findAllNews(Pageable pageable) {
         return newsService.findAll(pageable);
+    }
+
+    public List<News> findAllNewsByCategory(String category, Pageable pageable) {
+        return newsService.findAllByCategory(category, pageable);
     }
 
     public News findNewsById(String id) {
