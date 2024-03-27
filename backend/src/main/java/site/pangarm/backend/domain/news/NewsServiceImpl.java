@@ -4,6 +4,7 @@ package site.pangarm.backend.domain.news;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import site.pangarm.backend.domain.news.entity.News;
 
 @Service
 @RequiredArgsConstructor

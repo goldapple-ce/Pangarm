@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.application.dto.request.CategoryRegisterRequest;
 import site.pangarm.backend.domain.category.CategoryService;
-import site.pangarm.backend.domain.news.News;
+import site.pangarm.backend.domain.news.entity.News;
 import site.pangarm.backend.domain.news.NewsService;
 
 @RequiredArgsConstructor

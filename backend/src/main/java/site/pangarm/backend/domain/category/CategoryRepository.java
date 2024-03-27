@@ -1,6 +1,7 @@
 package site.pangarm.backend.domain.category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import site.pangarm.backend.domain.category.entity.Category;
 
 import java.util.Optional;
 
