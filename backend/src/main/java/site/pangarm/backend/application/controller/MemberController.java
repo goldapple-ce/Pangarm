@@ -6,8 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
 import site.pangarm.backend.application.facade.MemberFacade;
+import site.pangarm.backend.application.runner.InitialFacade;
 import site.pangarm.backend.global.response.api.ApiResponse;
 import site.pangarm.backend.global.response.api.ResponseCode;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/member")
@@ -28,6 +31,5 @@ public class MemberController {
     public String test() {
         return "접근 성공";
     }
-
 
 }

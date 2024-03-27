@@ -1,8 +1,10 @@
 package site.pangarm.backend.domain.caseType;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.pangarm.backend.domain.caseType.entity.CaseType;
 import site.pangarm.backend.global.error.ErrorCode;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
+@Slf4j
 public class CaseTypeService {
     private final CaseTypeRepository caseTypeRepository;
 
@@ -23,10 +26,12 @@ public class CaseTypeService {
                 new CaseTypeException(ErrorCode.API_ERROR_NOT_FOUND));
     }
 
+    @Transactional
     public CaseType save(CaseType caseType){
         return caseTypeRepository.save(validation(caseType));
     }
 
+    @Transactional
     public void saveAll(List<CaseType> caseTypeList){
         caseTypeRepository.saveAll(caseTypeList);
     }

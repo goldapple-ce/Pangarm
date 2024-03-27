@@ -4,16 +4,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.domain.category.Category;
 import site.pangarm.backend.domain.category.CategoryService;
-import site.pangarm.backend.domain.member.Member;
 import site.pangarm.backend.domain.member.MemberService;
+import site.pangarm.backend.domain.member.entity.Member;
+import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional

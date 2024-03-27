@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import site.pangarm.backend.domain.membercategory.MemberCategory;
+import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
 
 import java.util.ArrayList;
 import java.util.List;
