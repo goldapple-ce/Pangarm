@@ -1,5 +1,7 @@
 package site.pangarm.backend.domain.category;
 
+import site.pangarm.backend.domain.category.entity.Category;
+
 public interface CategoryService {
 
     Category save(Category category);

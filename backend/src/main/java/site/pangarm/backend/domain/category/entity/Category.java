@@ -1,4 +1,4 @@
-package site.pangarm.backend.domain.category;
+package site.pangarm.backend.domain.category.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

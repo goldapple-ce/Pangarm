@@ -3,6 +3,7 @@ package site.pangarm.backend.domain.category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.pangarm.backend.domain.category.entity.Category;
 import site.pangarm.backend.global.error.ErrorCode;
 
 @Transactional(readOnly = true)

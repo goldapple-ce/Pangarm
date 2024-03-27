@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
-import site.pangarm.backend.domain.category.Category;
+import site.pangarm.backend.domain.category.entity.Category;
 import site.pangarm.backend.domain.category.CategoryService;
 import site.pangarm.backend.domain.member.MemberService;
 import site.pangarm.backend.domain.member.entity.Member;
