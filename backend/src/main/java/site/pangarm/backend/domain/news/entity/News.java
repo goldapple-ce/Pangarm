@@ -1,4 +1,4 @@
-package site.pangarm.backend.domain.news;
+package site.pangarm.backend.domain.news.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;

@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import site.pangarm.backend.domain.category.Category;
+import site.pangarm.backend.domain.category.entity.Category;
 import site.pangarm.backend.domain.member.entity.Member;
 
 @Getter

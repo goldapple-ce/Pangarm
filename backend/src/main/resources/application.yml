@@ -25,9 +25,10 @@ spring:
     refreshExpTime: ${SPRING_JWT_REFRESH-EXPTIME} # ex)100000000
 
   data:
+
     elasticsearch:
-      cluster-name: ${ELASTICSEARCH_CLUSTER-NAME} # ex)docker-cluster
-      cluster-nodes: ${ELASTICSEARCH_CLUSTER-NODES} # ex)localhost:9200
+      host: ${ELASTIC_SEARCH_HOST} # ex)localhost
+      port: ${ELASTIC_SEARCH_PORT} # ex)9200
 
   precedent-client:
     url: ${PRECEDENT_CLIENT_URL} # ex)https://precedent-cherrypick.wookoo.shop

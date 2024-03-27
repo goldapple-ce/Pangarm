@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import site.pangarm.backend.application.facade.NewsFacade;
-import site.pangarm.backend.domain.news.News;
+import site.pangarm.backend.domain.news.entity.News;
 import site.pangarm.backend.global.response.api.ApiResponse;
 import site.pangarm.backend.global.response.api.ResponseCode;
 
