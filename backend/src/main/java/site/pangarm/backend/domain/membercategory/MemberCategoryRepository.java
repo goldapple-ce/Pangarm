@@ -2,8 +2,7 @@ package site.pangarm.backend.domain.membercategory;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.Optional;
+import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
 
 public interface MemberCategoryRepository extends JpaRepository<MemberCategory,Integer> {
 

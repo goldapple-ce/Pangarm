@@ -1,10 +1,12 @@
-package site.pangarm.backend.domain.membercategory;
+package site.pangarm.backend.domain.membercategory.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import site.pangarm.backend.domain.category.Category;
-import site.pangarm.backend.domain.member.Member;
+import site.pangarm.backend.domain.member.entity.Member;
 
 @Getter
 @Entity

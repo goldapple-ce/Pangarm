@@ -1,4 +1,4 @@
-package site.pangarm.backend.domain.member;
+package site.pangarm.backend.domain.member.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;

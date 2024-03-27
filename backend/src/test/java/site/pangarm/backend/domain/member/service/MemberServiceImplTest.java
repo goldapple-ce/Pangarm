@@ -8,8 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
-import site.pangarm.backend.domain.member.Member;
-import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
+import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.member.MemberException;
 import site.pangarm.backend.domain.member.MemberService;
 
