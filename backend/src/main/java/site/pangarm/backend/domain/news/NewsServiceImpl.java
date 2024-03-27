@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import site.pangarm.backend.domain.news.entity.News;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class NewsServiceImpl implements NewsService{
@@ -17,8 +19,13 @@ public class NewsServiceImpl implements NewsService{
     }
 
     @Override
-    public Iterable<News> findAll(Pageable pageable) {
-        return newsRepository.findAll(pageable);
+    public List<News> findAll(Pageable pageable) {
+        return newsRepository.findAllByOrderByCreatedAtDesc(pageable);
+    }
+
+    @Override
+    public List<News> findAllByCategory(String category, Pageable pageable) {
+        return newsRepository.findByCategoryListInOrderByCreatedAtDesc(category, pageable);
     }
 
     @Override
