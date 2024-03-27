@@ -14,6 +14,7 @@ public enum ResponseCode {
     API_SUCCESS_MEMBER_SIGNIN(200,"M002","정상적으로 로그인했습니다."),
     //NEWS
     API_SUCCESS_NEWS_FIND_ALL(200, "N001", "모든 뉴스를 조회했습니다."),
+    API_SUCCESS_NEWS_FIND_ALL_BY_CATEGORY(200, "N001", "해당 카테고리의 뉴스를 조회했습니다."),
     API_SUCCESS_NEWS_FIND_BY_ID(200, "N002", "해당 뉴스를 조회했습니다."),
     API_SUCCESS_NEWS_DELETE_BY_ID(200, "N003", "해당 뉴스를 삭제했습니다."),
     API_SUCCESS_NEWS_DELETE_ALL(200, "N004", "모든 뉴스를 삭제했습니다."),
