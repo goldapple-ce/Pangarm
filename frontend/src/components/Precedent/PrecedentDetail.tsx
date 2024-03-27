@@ -39,7 +39,11 @@ export default function PrecedentDetail({
       onClick={handleClose}
     >
       <div
-        className={`z-11 druation-500 fixed right-0 top-0 h-[100vh] w-[1000px] overflow-y-hidden bg-white p-9 shadow-md shadow-gray transition-transform ease-in-out
+        className={`fixed right-[1000px] top-20 z-10 h-8 w-12 bg-navy p-9 shadow-md shadow-gray transition-transform ease-in-out
+        ${animate ? " -translate-x-0" : "translate-x-[1000px]"}`}
+      ></div>
+      <div
+        className={`z-11 druation-500 fixed right-0 top-0 h-[100vh] w-[1000px] overflow-y-hidden bg-white p-9 shadow-md shadow-gray transition-all first-line:ease-in-out
         ${animate ? " translate-x-0" : " translate-x-full"}`}
         onClick={(e) => {
           e.stopPropagation();
@@ -52,7 +56,10 @@ export default function PrecedentDetail({
               이것은 제목일까 아닐까 그것이 문제로다
               {/* {PrecedentDetailExample.title} */}
             </p>
-            <TfiClose className="h-9 w-9" onClick={handleClose} />
+            <TfiClose
+              className="h-9 w-9 cursor-pointer"
+              onClick={handleClose}
+            />
           </div>
           <p className="font-TitleMedium text-4xl">
             2077. 09. 21. 선고
