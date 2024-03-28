@@ -21,6 +21,9 @@ public enum ResponseCode {
     API_SUCCESS_NEWS_DELETE_BY_ID(200, "N003", "해당 뉴스를 삭제했습니다."),
     API_SUCCESS_NEWS_DELETE_ALL(200, "N004", "모든 뉴스를 삭제했습니다."),
 
+    //NEWS_CATEGORY
+    API_SUCCESS_MEMBER_SUBSCRIBE(200,"NC001","해당 카테고리를 구독했습니다."),
+
     //PRECEDENT
     API_SUCCESS_PRECEDENT_SEARCH(200,"P001","검색을 정상적으로 실행했습니다.")
 
