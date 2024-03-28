@@ -34,10 +34,17 @@ public class MemberController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<Member>> getById(@AuthenticationPrincipal User user) {
+    public ResponseEntity<ApiResponse<Member>> getMemberById(@AuthenticationPrincipal User user) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_GET_BY_ID, memberFacade.getById(Integer.parseInt(user.getUsername()))));
+    }
+
+    @GetMapping("/category")
+    public ResponseEntity<ApiResponse<List<String>>> getCategoryList(@AuthenticationPrincipal User user) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_CATEGORYLIST, memberFacade.getCategoryList(Integer.parseInt(user.getUsername()))));
     }
 
     @PostMapping("/category-subscribe")
@@ -49,11 +56,15 @@ public class MemberController {
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_SUBSCRIBE));
     }
 
-    @GetMapping("/category")
-    public ResponseEntity<ApiResponse<List<String>>> getCategoryList(@AuthenticationPrincipal User user) {
+    @PostMapping("/category-unsubscribe")
+    public ResponseEntity<ApiResponse<Void>> unsubscribe(@AuthenticationPrincipal User user, @RequestBody int categoryId) {
+        memberFacade.unsubscribe(Integer.parseInt(user.getUsername()), categoryId);
+
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_CATEGORYLIST, memberFacade.getCategoryList(Integer.parseInt(user.getUsername()))));
+                .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_UNSUBSCRIBE));
     }
+
+
 
 }
