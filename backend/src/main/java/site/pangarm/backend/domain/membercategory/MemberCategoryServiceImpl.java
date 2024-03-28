@@ -26,6 +26,7 @@ public class MemberCategoryServiceImpl implements MemberCategoryService{
         memberCategoryRepository.save(new MemberCategory(member, category));
     }
 
+    @Transactional
     @Override
     public void delete(int memberId, int categoryId) {
         memberCategoryRepository.deleteByMemberIdAndCategoryId(memberId, categoryId);
