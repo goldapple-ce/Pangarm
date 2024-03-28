@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         element: <PrecedentSearchPage />,
       },
       {
-        path: "my-page",
+        path: "mypage",
         element: <MyInfoPage />,
       },
     ],
