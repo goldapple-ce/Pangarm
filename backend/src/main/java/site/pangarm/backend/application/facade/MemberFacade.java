@@ -10,6 +10,7 @@ import site.pangarm.backend.domain.category.entity.Category;
 import site.pangarm.backend.domain.member.MemberService;
 import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.membercategory.MemberCategoryService;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -35,6 +36,16 @@ public class MemberFacade {
         Member member = memberService.findById(memberId);
         Category category = categoryService.findById(categoryId);
         memberCategoryService.save(member, category);
+    }
+
+    @Transactional
+    public List<String> getCategoryList(int memberId){
+        //맴버카테고리를 순회하며 카테고리 이름을 가져와서 리스트에 담아 리턴
+        return memberCategoryService.findByMemberId(memberId)
+                .stream()
+                .map(memberCategory -> memberCategory.getCategory().getName())
+                .toList();
+
     }
 
 }
