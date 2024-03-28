@@ -3,7 +3,7 @@ import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import { PiEyeClosedDuotone, PiEye } from "react-icons/pi";
 
 import animationData from "@/assets/BookmarkAnimation-2.json";
-import { DATE_REGEX } from "@/constants";
+import { extractDate } from "@/utils/extractUtils";
 
 type PrecedentListItemProps = {
   title: string;
@@ -20,12 +20,12 @@ export default function PrecedentListItem({
   isViewed,
   showDetail,
 }: PrecedentListItemProps) {
-  const date = title.match(DATE_REGEX);
+  const date = extractDate(title);
 
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const isBookmarkedRef = useRef<boolean>(isBookmarked);
-  
+
   useEffect(() => {
     if (isBookmarkedRef.current && lottieRef.current) {
       lottieRef.current.goToAndStop(119, true);

@@ -1,4 +1,4 @@
-export type PrecedentItem = {
+export type PrecedentItemType = {
   title: string;
   content: string;
   isBookmarked: boolean;

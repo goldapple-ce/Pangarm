@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { postPrecedentSearch } from "@/services/precedentService";
-import { PrecedentItem } from "@/types";
+import { PrecedentItemType } from "@/types";
 import PrecedentSearchBar from "@/components/Precedent/PrecedentSearchBar";
 import PrecedentSearchCondition from "@/components/Precedent/PrecedentSearchCondition";
 import PrecedentList from "@/components/Precedent/PrecedentList";
@@ -8,7 +8,7 @@ import { SearchProvider } from "@/components/Precedent/SearchContext";
 import PrecedentDetail from "@/components/Precedent/PrecedentDetail";
 
 export default function PrecedentSearchPage() {
-  const [precedentList, setPrecedentList] = useState<PrecedentItem[]>([]);
+  const [precedentList, setPrecedentList] = useState<PrecedentItemType[]>([]);
   const [detailVisible, setDetailVisible] = useState<boolean>(false);
   const [detailCaseNo, setDetailCaseNo] = useState<string>("");
   const showDetail = (caseNo: string) => {
@@ -58,7 +58,7 @@ export default function PrecedentSearchPage() {
                 showDetail={showDetail}
               />
             </div>
-            <div className=" border-lightGray/60 mx-7 my-[1%] w-[0.1%] border-[1px]"></div>
+            <div className=" mx-7 w-[1px] bg-lightgray" />
             <div>
               <PrecedentSearchCondition></PrecedentSearchCondition>
             </div>
