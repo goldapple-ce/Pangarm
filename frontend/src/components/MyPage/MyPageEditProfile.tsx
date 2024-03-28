@@ -3,13 +3,21 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 
 import { EditFormInput } from "@/types";
-import { signUp } from "@/services/authService";
+import { editInfo } from "@/services/authService";
 
 import MyPageEditProfileHeader from "./MyPageEditProfileHeader";
 import MyPageEditProfileFooter from "./MyPageEditProfileFooter";
 import MyPageEditProfileBody from "./MyPageEditProfileBody";
 
-export default function SignUpForm() {
+type SignUpFormProps = {
+  closeEditModal: () => void;
+  openModal: boolean;
+};
+
+export default function SignUpForm({
+  closeEditModal,
+  openModal,
+}: SignUpFormProps) {
   const {
     register,
     handleSubmit,
@@ -18,8 +26,8 @@ export default function SignUpForm() {
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
-    mutationFn: signUp,
-    onSuccess: (response: { data: { message: any }; status: any }) => {
+    mutationFn: editInfo,
+    onSuccess: (response) => {
       const { message } = response.data;
       const status = response.status;
 
@@ -28,7 +36,7 @@ export default function SignUpForm() {
         navigate("/");
       }
     },
-    onError: (error: any) => {
+    onError: (error) => {
       console.error(error);
     },
   });
@@ -36,15 +44,15 @@ export default function SignUpForm() {
   const onSubmit: SubmitHandler<EditFormInput> = (data: EditFormInput) => {
     mutate(data);
   };
-  // TODO email
+
   return (
     <form
-      className="h-1/2 w-1/2 border bg-white border-lightgray p-20 pb-10 shadow-md"
+      className={`w-1/2 flex-row items-center justify-center border border-lightgray bg-white p-20 pb-10 shadow-md `}
       onSubmit={handleSubmit(onSubmit)}
     >
       <MyPageEditProfileHeader email={"devkwanwoo@gmail.com"} />
       <MyPageEditProfileBody register={register} errors={errors} />
-      <MyPageEditProfileFooter />
+      <MyPageEditProfileFooter closeEditModal={closeEditModal} />
     </form>
   );
 }
