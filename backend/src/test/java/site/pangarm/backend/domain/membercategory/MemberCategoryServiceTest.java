@@ -88,6 +88,8 @@ class MemberCategoryServiceTest {
             assertDoesNotThrow(()->{
                     memberCategoryService.delete(joinMember.getId(), savedCategory.getId());
             });
+
+            assertNull(memberCategoryService.findByMemberIdAndCategoryId(joinMember.getId(), savedCategory.getId()));
         }
     }
 
