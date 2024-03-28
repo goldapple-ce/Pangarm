@@ -49,7 +49,7 @@ public class SecurityConfig {
                         configurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests(auth -> {
                     auth
-                            .requestMatchers("/member/test/**").hasAnyRole("USER")
+                            .requestMatchers("/member/mypage/**").hasAnyRole("USER")
                             .anyRequest().permitAll();
                 })
                .sessionManagement(session ->
