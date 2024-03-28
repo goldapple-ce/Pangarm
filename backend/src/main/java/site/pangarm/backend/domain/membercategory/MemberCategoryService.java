@@ -5,7 +5,9 @@ import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
 
 public interface MemberCategoryService {
+
     void save(Member member, Category category);
+
     void delete(int memberId, int categoryId);
 
     MemberCategory findByMemberIdAndCategoryId(int memberId, int categoryId);
