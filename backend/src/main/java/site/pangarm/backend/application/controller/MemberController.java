@@ -13,6 +13,8 @@ import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.global.response.api.ApiResponse;
 import site.pangarm.backend.global.response.api.ResponseCode;
 
+import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -45,6 +47,13 @@ public class MemberController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_SUBSCRIBE));
+    }
+
+    @GetMapping("/category")
+    public ResponseEntity<ApiResponse<List<String>>> getCategoryList(@AuthenticationPrincipal User user) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_CATEGORYLIST, memberFacade.getCategoryList(Integer.parseInt(user.getUsername()))));
     }
 
 }
