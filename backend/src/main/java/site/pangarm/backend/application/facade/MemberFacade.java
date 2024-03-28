@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
 import site.pangarm.backend.domain.member.MemberService;
+import site.pangarm.backend.domain.member.entity.Member;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
 public class MemberFacade {
+
     private final MemberService memberService;
     private final BCryptPasswordEncoder encoder;
 
@@ -19,5 +21,8 @@ public class MemberFacade {
         memberService.save(request.toEntity(encoder));
     }
 
-//    public
+    public Member getById(int userId) {
+        return memberService.findById(userId);
+    }
+
 }
