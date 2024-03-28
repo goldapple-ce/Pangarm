@@ -2,10 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 
-import { router } from "./routes/router.tsx";
-import "./index.css";
+import "@/index.css";
 import "@radix-ui/themes/styles.css";
+import { router } from "@/routes/router.tsx";
 import { Theme } from "@radix-ui/themes";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
