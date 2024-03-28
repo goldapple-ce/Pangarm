@@ -39,8 +39,12 @@ public class MemberFacade {
     }
 
     @Transactional
+    public void unsubscribe(int memberId, int categoryId){
+        memberCategoryService.delete(memberId, categoryId);
+    }
+
+    @Transactional
     public List<String> getCategoryList(int memberId){
-        //맴버카테고리를 순회하며 카테고리 이름을 가져와서 리스트에 담아 리턴
         return memberCategoryService.findByMemberId(memberId)
                 .stream()
                 .map(memberCategory -> memberCategory.getCategory().getName())
