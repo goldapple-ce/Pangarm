@@ -42,7 +42,7 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<MemberCategory> memberCategoryList = new ArrayList<>();
 
-    private Member(String email,String password, String name,int gender, int age, String job,Role role){
+    private Member(String email, String password, String name, int gender, int age, String job,Role role){
         this.email = email;
         this.password = password;
         this.name = name;
