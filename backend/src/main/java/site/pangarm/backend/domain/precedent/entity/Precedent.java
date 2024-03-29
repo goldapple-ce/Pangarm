@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import site.pangarm.backend.domain.precedentType.entity.PrecedentType;
 import site.pangarm.backend.domain.searchHistoryPrecedentKeyword.entity.PrecedentKeyword;
+import site.pangarm.backend.global.entity.BaseEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.Objects;
         columnNames = {"caseYear", "caseTypeName", "registrationNumber"}
 ))
 @Entity
-public class Precedent {
+public class Precedent extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -133,7 +133,7 @@ dependencies {
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
 
 	// === Swagger ===
-	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
 	// === elastic search ===
 	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'

@@ -1,6 +1,8 @@
 package site.pangarm.backend.domain.viewingHistory;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.domain.member.entity.Member;
@@ -25,5 +27,9 @@ public class ViewingHistoryService {
         return viewingHistoryRepository.findById(viewingHistoryId).orElseThrow(()->
             new ViewingHistoryException(ErrorCode.API_ERROR_NOT_FOUND)
         );
+    }
+
+    public Page<Object[]> findByMember(Member member, Pageable pageable){
+        return viewingHistoryRepository.findByMember(member, pageable);
     }
 }

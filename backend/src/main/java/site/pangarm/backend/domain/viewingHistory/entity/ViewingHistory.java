@@ -7,11 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.precedent.entity.Precedent;
+import site.pangarm.backend.global.entity.BaseEntity;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class ViewingHistory {
+public class ViewingHistory extends BaseEntity {
     @EmbeddedId
     private ViewingHistoryId id;
 

@@ -6,23 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.precedent.entity.Precedent;
+import site.pangarm.backend.global.entity.BaseEntity;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"member","precedent"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"member_id","precedent_id"}))
 @Entity
-public class PrecedentBookmark {
+public class PrecedentBookmark extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member",nullable = false)
+    @JoinColumn(name = "member_id",nullable = false)
     public Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "precedent",nullable = false)
+    @JoinColumn(name = "precedent_id",nullable = false)
     public Precedent precedent;
 
     private PrecedentBookmark(Member member, Precedent precedent){
