@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.searchHistoryPrecedent.entity.SearchHistoryPrecedent;
+import site.pangarm.backend.global.entity.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class SearchHistory {
+public class SearchHistory extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,7 +23,7 @@ public class SearchHistory {
     private String situation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @OneToMany(mappedBy = "searchHistory")

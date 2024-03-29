@@ -53,7 +53,7 @@ public class SecurityConfig {
                             .requestMatchers("/member/**").hasAnyRole("USER")
                             .anyRequest().permitAll();
                 })
-               .sessionManagement(session ->
+                .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new AuthorizationExceptionHandler(objectMapper), JwtAuthorizationFilter.class)
                 .addFilter(new AuthenticationFilter(authenticationManager(authenticationConfiguration), tokenProvider, objectMapper))
