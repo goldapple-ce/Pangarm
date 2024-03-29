@@ -234,9 +234,8 @@ export const precedentHandlers = [
       },
     );
   }),
-  http.get("/precedent/viewed", async ({ request }) => {
+  http.get("/precedent/viewed", async () => {
     // Header에서 AuthToken 가져오기
-    const authToken = request.headers.get("Authorization");
     return HttpResponse.json({
       data: [
         {
@@ -335,9 +334,8 @@ export const precedentHandlers = [
       message: "판례를 성공적으로 가져왔습니다.",
     });
   }),
-  http.get("/precedent/bookmarked", async ({ request }) => {
+  http.get("/precedent/bookmarked", async () => {
     // Header에서 AuthToken 가져오기
-    const authToken = request.headers.get("Authorization");
     return HttpResponse.json({
       data: [
         {

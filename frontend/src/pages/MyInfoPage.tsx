@@ -31,7 +31,7 @@ export default function MyInfoPage() {
         // style={customStyles}
         className={`flex h-screen items-center justify-center`}
       >
-        <MyPageEditProfile closeEditModal={closeEditModal} openModal={false} />
+        <MyPageEditProfile closeEditModal={closeEditModal} />
       </Modal>
       <div className="flex font-TitleLight text-6xl">
         <div className="pt-2">

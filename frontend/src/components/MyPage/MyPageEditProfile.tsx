@@ -11,13 +11,9 @@ import MyPageEditProfileBody from "./MyPageEditProfileBody";
 
 type SignUpFormProps = {
   closeEditModal: () => void;
-  openModal: boolean;
 };
 
-export default function SignUpForm({
-  closeEditModal,
-  openModal,
-}: SignUpFormProps) {
+export default function SignUpForm({ closeEditModal }: SignUpFormProps) {
   const {
     register,
     handleSubmit,
