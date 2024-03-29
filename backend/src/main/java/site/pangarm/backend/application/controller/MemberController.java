@@ -48,7 +48,7 @@ public class MemberController {
     }
 
     @PostMapping("/category-subscribe")
-    public ResponseEntity<ApiResponse<Void>> subscribe(@AuthenticationPrincipal User user, @RequestBody int categoryId) {
+    public ResponseEntity<ApiResponse<Void>> subscribe(@AuthenticationPrincipal(errorOnInvalidType = true) User user, @RequestBody int categoryId) {
         memberFacade.subscribe(Integer.parseInt(user.getUsername()), categoryId);
 
         return ResponseEntity
