@@ -8,6 +8,8 @@ import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
 import site.pangarm.backend.global.error.ErrorCode;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ public class MemberCategoryServiceImpl implements MemberCategoryService{
         memberCategoryRepository.save(new MemberCategory(member, category));
     }
 
+    @Transactional
     @Override
     public void delete(int memberId, int categoryId) {
         memberCategoryRepository.deleteByMemberIdAndCategoryId(memberId, categoryId);
@@ -32,6 +35,11 @@ public class MemberCategoryServiceImpl implements MemberCategoryService{
     @Override
     public MemberCategory findByMemberIdAndCategoryId(int memberId, int categoryId){
         return memberCategoryRepository.findByMemberIdAndCategoryId(memberId, categoryId);
+    }
+
+    @Override
+    public List<MemberCategory> findByMemberId(int memberId) {
+        return memberCategoryRepository.findByMemberId(memberId);
     }
 
 }

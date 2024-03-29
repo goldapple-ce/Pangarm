@@ -32,7 +32,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         this.authenticationManager = authenticationManager;
         this.tokenProvider = tokenProvider;
         this.objectMapper = objectMapper;
-        setFilterProcessesUrl("/member/login");
+        setFilterProcessesUrl("/member/signin");
     }
 
     // login 요청을 하면 회원 정보 확인을 위해서 실행되는 함수

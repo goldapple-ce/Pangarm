@@ -46,11 +46,18 @@ class MemberCategoryServiceTest {
         @DisplayName("성공")
         void whenSuccess() {
 
-            Category savedCategory = categoryService.save(Category.of("name"));
+            Category category = categoryService.save(Category.of("법률 개정"));
 
             assertDoesNotThrow(()->{
-                memberCategoryService.save(joinMember, savedCategory);
+                memberCategoryService.save(joinMember, category);
             });
+
+            MemberCategory savedMemberCategory = memberCategoryService.findByMemberIdAndCategoryId(joinMember.getId(), category.getId());
+
+            assertNotNull(savedMemberCategory);
+            assertEquals(category.getId(), savedMemberCategory.getCategory().getId());
+            assertEquals(joinMember.getId(), savedMemberCategory.getMember().getId());
+
         }
 
         @Test
@@ -81,6 +88,8 @@ class MemberCategoryServiceTest {
             assertDoesNotThrow(()->{
                     memberCategoryService.delete(joinMember.getId(), savedCategory.getId());
             });
+
+            assertNull(memberCategoryService.findByMemberIdAndCategoryId(joinMember.getId(), savedCategory.getId()));
         }
     }
 

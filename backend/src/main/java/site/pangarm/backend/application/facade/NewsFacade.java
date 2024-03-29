@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.application.dto.request.CategoryRegisterRequest;
 import site.pangarm.backend.domain.category.CategoryService;
+import site.pangarm.backend.domain.category.entity.Category;
 import site.pangarm.backend.domain.news.entity.News;
 import site.pangarm.backend.domain.news.NewsService;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -18,16 +21,17 @@ public class NewsFacade {
 
     private final NewsService newsService;
 
-    public void registerCategory(CategoryRegisterRequest request) {
-        categoryService.save(request.toEntity());
-    }
-
+    /** News */
     public void registerNews(News news) {
         newsService.save(news);
     }
 
-    public Iterable<News> findAllNews(Pageable pageable) {
+    public List<News> findAllNews(Pageable pageable) {
         return newsService.findAll(pageable);
+    }
+
+    public List<News> findAllNewsByCategory(String category, Pageable pageable) {
+        return newsService.findAllByCategory(category, pageable);
     }
 
     public News findNewsById(String id) {
@@ -40,6 +44,18 @@ public class NewsFacade {
 
     public void deleteAllNews() {
         newsService.deleteAll();
+    }
+
+    /** News Category */
+    public void registerCategory(CategoryRegisterRequest request) {
+        categoryService.save(request.toEntity());
+    }
+
+    public List<String> findAllCategoryList(){
+        return categoryService.findAll()
+                .stream()
+                .map(Category::getName)
+                .toList();
     }
 
 }
