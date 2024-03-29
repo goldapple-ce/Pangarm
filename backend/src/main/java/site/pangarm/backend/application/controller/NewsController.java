@@ -1,5 +1,6 @@
 package site.pangarm.backend.application.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ public class NewsController {
 
     private final NewsFacade newsFacade;
 
+    /** News */
     @Deprecated
     @PostMapping
     public void save(@RequestBody News news){
@@ -56,6 +58,13 @@ public class NewsController {
         newsFacade.deleteAllNews();
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_NEWS_DELETE_ALL));
+    }
+
+    /** News Category */
+    @GetMapping("/category-list")
+    public ResponseEntity<ApiResponse<List<String>>> findAllCategoryList(){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ApiResponse<>(ResponseCode.API_SUCCESS_CATEGORY_FIND_ALL, newsFacade.findAllCategoryList()));
     }
 
 }
