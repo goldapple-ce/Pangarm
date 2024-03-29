@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.domain.category.entity.Category;
 import site.pangarm.backend.global.error.ErrorCode;
+import java.util.List;
 
 @Transactional(readOnly = true)
 @Service
@@ -50,6 +51,11 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public boolean existsByName(String name) {
         return categoryRepository.existsByName(name);
+    }
+
+    @Override
+    public List<Category> findAll() {
+        return categoryRepository.findAll();
     }
 
     @Override

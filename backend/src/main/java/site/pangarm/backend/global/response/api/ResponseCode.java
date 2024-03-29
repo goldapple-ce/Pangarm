@@ -22,9 +22,10 @@ public enum ResponseCode {
     API_SUCCESS_NEWS_DELETE_ALL(200, "N004", "모든 뉴스를 삭제했습니다."),
 
     //NEWS_CATEGORY
-    API_SUCCESS_MEMBER_SUBSCRIBE(200,"NC001","해당 카테고리를 구독했습니다."),
-    API_SUCCESS_MEMBER_UNSUBSCRIBE(200,"NC002","해당 카테고리를 구독해지했습니다."),
-    API_SUCCESS_MEMBER_CATEGORYLIST(200,"NC003","해당 멤버의 카테고리 리스트를 조회했습니다."),
+    API_SUCCESS_CATEGORY_FIND_ALL(200,"NC001","모든 카테고리를 조회했습니다."),
+    API_SUCCESS_MEMBER_SUBSCRIBE(200,"NC002","해당 카테고리를 구독했습니다."),
+    API_SUCCESS_MEMBER_UNSUBSCRIBE(200,"NC003","해당 카테고리를 구독해지했습니다."),
+    API_SUCCESS_MEMBER_CATEGORY_LIST(200,"NC004","해당 멤버의 카테고리 리스트를 조회했습니다."),
 
     //PRECEDENT
     API_SUCCESS_PRECEDENT_SEARCH(200,"P001","검색을 정상적으로 실행했습니다.")
