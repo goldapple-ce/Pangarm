@@ -44,7 +44,7 @@ public class MemberController {
     public ResponseEntity<ApiResponse<List<String>>> getCategoryList(@AuthenticationPrincipal User user) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_CATEGORYLIST, memberFacade.getCategoryList(Integer.parseInt(user.getUsername()))));
+                .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_CATEGORY_LIST, memberFacade.getCategoryList(Integer.parseInt(user.getUsername()))));
     }
 
     @PostMapping("/category-subscribe")
