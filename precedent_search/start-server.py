@@ -62,6 +62,24 @@ def search(request):
     
 
 
+def detail(caseNumber):
+    choice = df.where((col("caseNumber") == caseNumber))\
+            .select(df.info,
+                    df.relate,
+                    df.body,
+                    df.isPdf
+                )
+    if choice.count() == 0:
+        return None
+    
+    pandasDF = choice.toPandas()
+    response = {}
+    response["info"] = json.loads(pandasDF["info"][0])
+    response["relate"] = json.loads(pandasDF["relate"][0])
+    response["body"] = pandasDF["body"][0]
+    response["isPdf"] = json.loads(pandasDF["isPdf"][0])
+    return response
+    
 
 def summary(caseNumber):
     choice = df.where((col("caseNumber") == caseNumber))\
@@ -144,7 +162,18 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 return
 
             self.return_200_response(response)
-       
+        elif path == "/api/precedent/detail":
+            caseNumber = query_params.get('caseNumber', [None])[0]  # None을 기본값으로 사용
+            if caseNumber == None : 
+                self.return_400_error()
+                return
+            
+            
+            response = detail(caseNumber)
+            if(response == None):
+                self.return_404_PRECEDENT_error()
+                return
+            self.return_200_response(response)
             
         else:
             self.return_404_page_error()
