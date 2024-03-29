@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
+import site.pangarm.backend.application.dto.response.MemberFindByIdResponse;
 import site.pangarm.backend.domain.category.CategoryService;
 import site.pangarm.backend.domain.category.entity.Category;
 import site.pangarm.backend.domain.member.MemberService;
@@ -27,8 +28,8 @@ public class MemberFacade {
         memberService.save(request.toEntity(encoder));
     }
 
-    public Member getById(int userId) {
-        return memberService.findById(userId);
+    public MemberFindByIdResponse getById(int userId) {
+        return MemberFindByIdResponse.of(memberService.findById(userId));
     }
 
     @Transactional

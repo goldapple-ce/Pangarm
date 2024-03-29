@@ -10,8 +10,8 @@ public enum ResponseCode {
     API_SUCCESS_DOMAIN_METHOD(200,"EXAMPLE001","예상 메시지입니다."),
 
     //MEMBER
-    API_SUCCESS_MEMBER_SIGNUP(201,"M001","멤버를 정상적으로 등록했습니다."),
-    API_SUCCESS_MEMBER_SIGNIN(200,"M002","정상적으로 로그인했습니다."),
+    API_SUCCESS_MEMBER_SIGNUP(201,"M001","회원가입에 성공했습니다."),
+    API_SUCCESS_MEMBER_SIGNIN(200,"M002","로그인에 성공했습니다."),
     API_SUCCESS_MEMBER_GET_BY_ID(200,"M003","정상적으로 멤버를 조회했습니다."),
 
     //NEWS
