@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
+import site.pangarm.backend.application.dto.response.MemberFindByIdResponse;
 import site.pangarm.backend.application.facade.MemberFacade;
 import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.global.response.api.ApiResponse;
@@ -29,19 +30,19 @@ public class MemberController {
         memberFacade.signup(memberJoinDto);
 
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_SIGNUP));
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<Member>> getMemberById(@AuthenticationPrincipal User user) {
+    public ResponseEntity<ApiResponse<MemberFindByIdResponse>> getMemberById(@AuthenticationPrincipal(errorOnInvalidType = true) User user) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_GET_BY_ID, memberFacade.getById(Integer.parseInt(user.getUsername()))));
     }
 
     @GetMapping("/category")
-    public ResponseEntity<ApiResponse<List<String>>> getCategoryList(@AuthenticationPrincipal User user) {
+    public ResponseEntity<ApiResponse<List<String>>> getCategoryList(@AuthenticationPrincipal(errorOnInvalidType = true) User user) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_CATEGORY_LIST, memberFacade.getCategoryList(Integer.parseInt(user.getUsername()))));
@@ -52,7 +53,7 @@ public class MemberController {
         memberFacade.subscribe(Integer.parseInt(user.getUsername()), categoryId);
 
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_SUBSCRIBE));
     }
 
