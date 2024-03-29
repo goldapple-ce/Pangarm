@@ -1,11 +1,11 @@
 import React from "react";
 import PrecedentListItem from "@/components/Precedent/PrecedentListItem";
-import { PrecedentItem } from "@/types";
+import { PrecedentItemType } from "@/types";
 import { SelectPivot } from "@/constants";
 import PrecedentListItemOrderSelect from "@/components/Precedent/PrecedentListItemOrderSelect";
 
 interface PrecedentListProps {
-  precedentList: PrecedentItem[];
+  precedentList: PrecedentItemType[];
   showDetail: (caseNo: string) => void;
 }
 

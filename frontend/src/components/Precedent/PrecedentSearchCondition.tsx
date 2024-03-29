@@ -44,7 +44,7 @@ export default function PrecedentSearchCondition() {
   };
 
   return (
-    <div className="w-[300px]">
+    <div className="sticky h-[500px] w-[300px] top-10">
       <div className="flex items-center justify-between p-1">
         <p className="font-SubTitle text-xl">필터</p>
         <GrRefresh />

@@ -1,33 +1,35 @@
 import instance from "@/utils/http-commons";
 
-export const getNewsClassification = () => {
-  instance.get("");
+// 뉴스 전체 리스트
+export const getNewsList = async (page: number, size: number) => {
+  const response = await instance.get(`/news?page=${page}&size=${size}`);
+  return response;
 };
 
-export const getNewsCategoryPopular = () => {
-  instance.get("");
+// 카테고리 별 뉴스 리스트
+export const getCategoryNewsList = async (
+  category: string,
+  page: number,
+  size: number,
+) => {
+  const response = await instance.get(`/news`, {
+    params: {
+      category: category,
+      page: page,
+      size: size,
+    },
+  });
+  return response;
 };
 
-export const getNewsSearch = () => {
-  instance.get("");
+// 뉴스 상세
+export const getNewsDetail = async (newsId: string) => {
+  const response = await instance.get(`/news/${newsId}`);
+  return response;
 };
 
-export const getNewsRecent = () => {
-  instance.get("");
-};
+// 카테고리 등록
 
-export const getNewsPopular = () => {
-  instance.get("");
-};
+// 카테고리 삭제
 
-export const postNewsCategory = () => {
-  instance.get("");
-};
-
-export const deleteNewsCategory = () => {
-  instance.get("");
-};
-
-export const patchNewsCategory = () => {
-  instance.get("");
-};
+// 카테고리 수정
