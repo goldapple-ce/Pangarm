@@ -3,6 +3,7 @@ package site.pangarm.backend.domain.member.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
+import site.pangarm.backend.global.entity.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -19,12 +19,12 @@ public class NewsController {
 
     @Deprecated
     @PostMapping
-    public void save(@RequestBody News news){
+    public void save(@RequestBody News news) {
         newsFacade.registerNews(news);
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<Iterable<News>>> findAll(Pageable pageable){
+    public ResponseEntity<ApiResponse<Iterable<News>>> findAll(Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_NEWS_FIND_ALL, newsFacade.findAllNews(pageable)));
     }

@@ -18,11 +18,11 @@ import java.io.Serializable;
 public class ViewingHistoryId implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "memeber",nullable = false)
+    @JoinColumn(name = "member_id",nullable = false)
     public Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "precedent",nullable = false)
+    @JoinColumn(name = "precedent_id",nullable = false)
     public Precedent precedent;
 
 }

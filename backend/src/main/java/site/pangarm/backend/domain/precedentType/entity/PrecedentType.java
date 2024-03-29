@@ -5,13 +5,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import site.pangarm.backend.domain.caseType.entity.CaseType;
+import site.pangarm.backend.global.entity.BaseEntity;
 
 import java.util.Objects;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class PrecedentType {
+public class PrecedentType extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
