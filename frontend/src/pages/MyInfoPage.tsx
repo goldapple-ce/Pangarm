@@ -1,21 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MyPageEditProfile from "@/components/MyPage/MyPageEditProfile";
 import Modal from "react-modal";
 import { Tab, Tabs } from "@/components/Tabs";
-import MyPageBookmarked from "@/components/MyPage/MyPageBookmarked";
-import MyPageRecentlyViewed from "@/components/MyPage/MyPageRecentlyViewed";
 import MyPageSubscribedKeywords from "@/components/MyPage/MyPageSubscribedKeywords";
-import { postPrecedentSearch } from "@/services/precedentService";
-import { PrecedentItemType } from "@/types";
+import {
+  getBookmarkedPrecedent,
+  getViewedPrecedent,
+} from "@/services/precedentService";
+import MyPagePrecedent from "@/components/MyPage/MyPagePrecedent";
 
 Modal.setAppElement("#root");
 export default function MyInfoPage() {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
-  const [bookmarkedPrecedentList, setBookmarkedPrecedentList] =
-    useState<PrecedentItemType[]>();
-  const [viewedPrecedentList, setViewedPrecedentList] =
-    useState<PrecedentItemType[]>();
   const openEditModal = () => {
     setOpenModal(true);
   };
@@ -23,20 +19,6 @@ export default function MyInfoPage() {
   const closeEditModal = () => {
     setOpenModal(false);
   };
-
-  useEffect(() => {
-    const fetchPrecedents = async () => {
-      try {
-        const res = await postPrecedentSearch("something", 1, 10);
-        if (res && res.data && res.data.data) {
-          setBookmarkedPrecedentList(res.data.data);
-          setViewedPrecedentList(res.data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching precedents:", error);
-      }
-    };
-  }, []);
 
   return (
     <div className="mx-[300px]">
@@ -66,25 +48,22 @@ export default function MyInfoPage() {
         <Tabs>
           <Tab id="tab1" aria-label="북마크한 판례">
             <div className="py-4">
-              { bookmarkedPrecedentList &&
-              <MyPageBookmarked
+              <MyPagePrecedent
+                getPrecedent={getBookmarkedPrecedent}
+                queryKey="bookmarked"
               />
-              }
             </div>
           </Tab>
           <Tab id="tab2" aria-label="최근 본 판례">
             <div className="py-4">
-              { viewedPrecedentList &&
-                <MyPageRecentlyViewed  />
-              }
+              <MyPagePrecedent
+                getPrecedent={getViewedPrecedent}
+                queryKey="viewed"
+              />
             </div>
           </Tab>
           <Tab id="tab3" aria-label="구독한 키워드">
-            <div className="py-4">
-              { 
-                <MyPageSubscribedKeywords />
-              }
-            </div>
+            <div className="py-4">{<MyPageSubscribedKeywords />}</div>
           </Tab>
         </Tabs>
       </div>
