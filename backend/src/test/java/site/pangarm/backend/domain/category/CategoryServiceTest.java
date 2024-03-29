@@ -139,4 +139,22 @@ class CategoryServiceTest {
         }
     }
 
+    @Nested
+    @DisplayName("find all 테스트")
+    class findAll{
+
+        @Test
+        @DisplayName("전체 조회 성공")
+        public void whenSuccess(){
+
+            for (int i = 0; i < 10; i++){
+                Category category = Category.of("카테고리"+i);
+                categoryService.save(category);
+            }
+
+            assertEquals(10, categoryService.findAll().size());
+        }
+
+    }
+
 }
