@@ -48,7 +48,7 @@ export default function PrecedentItem({
 
   return (
     <div
-      className=" font-lighthover:text-clip my-3 w-[500px] font-Content text-xl"
+      className=" font-lighthover:text-clip m-2 h-40 w-[39vh] font-Content text-xl "
       ref={rootRef}
     >
       <div className="flex justify-between ">

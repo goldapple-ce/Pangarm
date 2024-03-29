@@ -41,7 +41,7 @@ export default function PrecedentSearchPage() {
         {detailVisible && (
           <PrecedentDetail
             closeDetail={closeDetail}
-            detailCaseNo={detailCaseNo}
+            detailNo={detailCaseNo}
           />
         )}
         <div

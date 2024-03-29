@@ -6,13 +6,13 @@ import PrecedentDetailRaw from "@/components/Precedent/PrecedentDetailRaw";
 import { Data } from "@/types";
 import instance from "@/utils/http-commons";
 type PrecedentDetailProps = {
-  detailCaseNo: string;
+  detailNo: string;
   closeDetail: () => void;
 };
 
 export default function PrecedentDetail({
   closeDetail,
-  detailCaseNo,
+  detailNo,
 }: PrecedentDetailProps) {
   const [animate, setAnimate] = useState<boolean>(false);
   const [tab, setTab] = useState<boolean>(false);
@@ -20,11 +20,11 @@ export default function PrecedentDetail({
 
   useEffect(() => {
     setAnimate(true);
-    instance.get(`/precedent?caseNumber=${detailCaseNo}`).then((res) => {
+    instance.get(`/precedent?caseNumber=${detailNo}`).then((res) => {
       setData(res.data.data);
       console.log(res.data.data);
     });
-  }, [detailCaseNo]);
+  }, [detailNo]);
 
   const handleClose = () => {
     setAnimate(false);
