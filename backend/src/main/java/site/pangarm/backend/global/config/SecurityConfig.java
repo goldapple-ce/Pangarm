@@ -47,11 +47,9 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .headers(configurer ->
                         configurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
-                .authorizeHttpRequests(auth -> {
-                    auth
-                            .requestMatchers("/member/test/**").hasAnyRole("USER")
-                            .anyRequest().permitAll();
-                })
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/member/test/**").hasAnyRole("USER")
+                        .anyRequest().permitAll())
                .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new AuthorizationExceptionHandler(objectMapper), AuthenticationFilter.class)

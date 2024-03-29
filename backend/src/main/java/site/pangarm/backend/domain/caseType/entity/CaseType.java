@@ -14,7 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class CaseType {
+public class  CaseType {
     @Id
     private Integer code;
 

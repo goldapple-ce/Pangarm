@@ -11,11 +11,33 @@ import site.pangarm.backend.domain.searchHistoryPrecedent.entity.SearchHistoryPr
 interface SearchHistoryPrecedentRepository extends JpaRepository<SearchHistoryPrecedent,Integer> {
     boolean existsBySearchHistoryAndPrecedent(SearchHistory searchHistory, Precedent precedent);
 
-    @Query("select shp, (vh is not null) as isViewed " +
+    @Query(value = "select distinct shp, (vh.id.precedent is not null) ,(pb.precedent is not null)  " +
             "from SearchHistoryPrecedent as shp " +
             "left join ViewingHistory as vh on vh.id.precedent = shp.precedent " +
-            "where shp.searchHistory = :searchHistory " +
+            "left join PrecedentBookmark as pb on pb.precedent = shp.precedent " +
+            "left join PrecedentKeyword as pk on pk.precedent = shp.precedent " +
+            "where shp.searchHistory = :searchHistory  " +
+            "and ((:#{#option.preclude.isViewed} = false) or vh.id.precedent is not null) " +
+            "and ((:#{#option.preclude.isBookmarked} = false) or pb.precedent is not null) " +
+            "and shp.score > :#{#option.minimumSimilarity} " +
+            "and ((:#{#option.duration.startDate} is null) or (shp.precedent.judgementDate >= :#{#option.duration.startDate})) " +
+            "and ((:#{#option.duration.endDate} is null) or (shp.precedent.judgementDate <= :#{#option.duration.endDate})) " +
+            "and (pk.keyword in :#{#option.keywordList}) " +
             "order by shp.score desc")
-    Page<Object[]> findAllWithIsViewedBySearchHistoryOrderByScore(SearchHistory searchHistory, Pageable pageable);
+    Page<Object[]> findDistinctByOptionWithKeywordList(SearchHistory searchHistory, SearchHistoryOption option,Pageable pageable);
 
+
+    @Query(value = "select distinct shp, (vh.id.precedent is not null), (pb.precedent is not null) " +
+            "from SearchHistoryPrecedent as shp " +
+            "left join ViewingHistory as vh on vh.id.precedent = shp.precedent " +
+            "left join PrecedentBookmark as pb on pb.precedent = shp.precedent " +
+            "left join PrecedentKeyword as pk on pk.precedent = shp.precedent " +
+            "where shp.searchHistory = :searchHistory  " +
+            "and ((:#{#option.preclude.isViewed} = false) or vh.id.precedent is not null) " +
+            "and ((:#{#option.preclude.isBookmarked} = false) or pb.precedent is not null) " +
+            "and shp.score > :#{#option.minimumSimilarity} " +
+            "and ((:#{#option.duration.startDate} is null) or (shp.precedent.judgementDate >= :#{#option.duration.startDate})) " +
+            "and ((:#{#option.duration.endDate} is null) or (shp.precedent.judgementDate <= :#{#option.duration.endDate})) " +
+            "order by shp.score desc")
+    Page<Object[]> findDistinctByOption(SearchHistory searchHistory, SearchHistoryOption option,Pageable pageable);
 }
