@@ -1,0 +1,10 @@
+FROM python:3.10.0
+
+WORKDIR /app/
+
+COPY requirements.txt .
+COPY app.py app.py
+RUN mkdir /app/data
+RUN pip install -r requirements.txt
+
+ENTRYPOINT [ "python","app.py" ] 

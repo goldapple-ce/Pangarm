@@ -4,6 +4,28 @@ import math
 import re
 import json
 import logging
+from datetime import datetime
+import os
+ELASTIC_SEARCH_URL = os.environ["ELASTIC_SEARCH_URL"]
+
+
+headers = {
+    'Content-Type': 'application/json',
+}
+
+json_data = {
+    '_class': 'site.pangarm.backend.domain.news.entity.News',
+    'newsLink': 'https://asdfasdfasdf.com/news/123',
+    'title': 'News 3',
+    'content': 'Loremfdasdadsfasdfus et.',
+    'imageUrl': 'https://example.com/images/news/123.jpg',
+    'author': 'John Doe',
+    'createdAt': '2024-03-25T15:00:00.000Z',
+    'categoryList': [
+        '법률 개정',
+        '아동 복지',
+    ],
+}
 
 # 로거 생성
 logger = logging.getLogger(__name__)
@@ -23,7 +45,7 @@ keyword_list = ['법률 개정', '사법 판결', '법정 소송', '규제 변�
 ARTICLE_CNT_PER_PAGE = 10
 
 # 총 얻을 기사 갯수 
-TOTAL_ARTICLE_CNT = 1000 # 변경 가능
+TOTAL_ARTICLE_CNT = 1 # 변경 가능
 
 # 총 카운트
 total_count = 0
@@ -50,7 +72,7 @@ def crawl_news_per_page( keyword, start_num ):
 
         news_content_html_list = pick_news_content_list_from_JSON_response(response)
 
-        link_list_naver_news = get_link_list_by_BeautifulSoup(news_content_html_list)
+        link_list_naver_news = get_link_list_by_BeautifulSoup(news_content_html_list) # 여기서 크롤링 타겟의 뉴스의 링크가 튀어나온다.
         
         for link in link_list_naver_news: # 분기 3 : 각 뉴스에 대해 크롤링 하도록 분산    
             scrap_naver_news(keyword, link)               
@@ -226,8 +248,39 @@ def naverSearchRequest(search_query, start_page_num):
 
 
 def save_data(article_info):
+
+    categoryList = [article_info['keyword']]
+    newsLink = article_info['naverNewsLink']
+    title = article_info['title']
+    content = article_info['content']
+    imageUrl = article_info['imgUrl']
+    author = article_info["writer"]
+    createdAt = article_info['createdAt']
+    createdAt = createdAt.replace("오후","PM")
+    createdAt = createdAt.replace("오전","AM")
+    date_time_obj = datetime.strptime(createdAt, "%Y.%m.%d. %p %I:%M")
+    iso_formatted_string = date_time_obj.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+
+    #iso8601_string = date_time_obj.isoformat()
+
+  #  print(createdAt)
+    
+
+
     # assert True
-    print(article_info)
+    #print(categoryList,newsLink,title,content,imageUrl,createdAt)
+    json_data['newsLink'] = newsLink
+    json_data['title'] = title
+    json_data['imageUrl'] = imageUrl
+    json_data["author"] = author
+    json_data["categoryList"] = categoryList
+    json_data["content"] = content
+    json_data["createdAt"] = iso_formatted_string
+    # print(json_data["createdAt"])
+    # assert False
+    response = requests.post(f'{ELASTIC_SEARCH_URL}/news/_doc', headers=headers, json=json_data)
+ 
+
     
 def isSuitableLink(link):
     return link.startswith("https://n.news.naver.com")
@@ -240,39 +293,6 @@ def pick_news_content_list_from_JSON_response(response):
     resultJson = json.loads(re.sub(r'^jQuery\d+_\d+\(', '', response.text).strip()[:-1]) # 역직렬화를 통해 이스케이프 자동 처리 
     return resultJson["contents"] # json의 contents 내부값만 받아옴
     
-# def on_send_success(record_metadata):
-#     logger.info(f"Record sent to topic {record_metadata.topic} partition [{record_metadata.partition}] offset [{record_metadata.offset}]")
 
-# def on_send_error(excp):
-#     print(f"I am an errback: {excp}")
-
-# def kafka_send(article_info):
-#     #Product 메시지
-#     product_message = {
-#         # "id": f"product_{id}",
-#         "keyword": "가전",
-#         "naverNewsLink": article_info['naverNewsLink'],
-#         "content": article_info['content']
-#         }
-
-#     producer.send('aaa', key=f"article_{id}", value=product_message).add_callback(on_send_success).add_errback(on_send_error)
-
-
-#     # Price 메시지
-#     price_message = {
-#         "id": f"price_{id}",
-#         "routing": f"product_{id}",
-#         "index_name": "테스트2",
-#         "timestamp": current_time,
-#         "price": price
-#         }
-
-#     #producer.send('electronic', key=f"product_{id}".encode('utf-8'), value=json.dumps(product_message).encode('utf-8')).add_callback(on_send_success).add_errback(on_send_error)
-#     producer.send('aaa', key=f"price_{id}", value=price_message).add_callback(on_send_success).add_errback(on_send_error)
-#     id += 1
-
-# 뉴스 크롤링 실행
 crawl_news()
-
-
 
