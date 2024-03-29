@@ -49,12 +49,13 @@ public class SecurityConfig {
                         configurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests(auth -> {
                     auth
-                            .requestMatchers("/member/mypage/**").hasAnyRole("USER")
+                            .requestMatchers("/member/signin", "/member/signup").permitAll()
+                            .requestMatchers("/member/**").hasAnyRole("USER")
                             .anyRequest().permitAll();
                 })
                .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(new AuthorizationExceptionHandler(objectMapper), AuthenticationFilter.class)
+                .addFilterBefore(new AuthorizationExceptionHandler(objectMapper), JwtAuthorizationFilter.class)
                 .addFilter(new AuthenticationFilter(authenticationManager(authenticationConfiguration), tokenProvider, objectMapper))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(authenticationConfiguration), tokenProvider, objectMapper))
                 .exceptionHandling(configurer ->
