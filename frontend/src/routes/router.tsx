@@ -5,7 +5,9 @@ import SignUpPage from "@/pages/SignUpPage";
 import MainPage from "@/pages/MainPage";
 import SignInPage from "@/pages/SignInPage";
 import PrecedentSearchPage from "@/pages/PrecedentSearchPage";
+import MyInfoPage from "@/pages/MyInfoPage";
 import NewsPage from "@/pages/NewsPage";
+import NewsDetailPage from "@/pages/NewsDetailPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,8 +35,16 @@ export const router = createBrowserRouter([
         element: <PrecedentSearchPage />,
       },
       {
+        path: "mypage",
+        element: <MyInfoPage />,
+      },
+      {
         path: "news",
         element: <NewsPage />,
+      },
+      {
+        path: "news/:news-id",
+        element: <NewsDetailPage />,
       },
     ],
   },

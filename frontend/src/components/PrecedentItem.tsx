@@ -1,6 +1,6 @@
-import { useRef, useEffect } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import { PiEyeClosedDuotone, PiEye } from "react-icons/pi";
+import { useEffect, useRef } from "react";
+import { PiEye, PiEyeClosedDuotone } from "react-icons/pi";
 
 import animationData from "@/assets/BookmarkAnimation-2.json";
 import { extractDate } from "@/utils/extractUtils";
@@ -13,7 +13,7 @@ type PrecedentListItemProps = {
   showDetail: (caseNo: string) => void;
 };
 
-export default function PrecedentListItem({
+export default function PrecedentItem({
   title,
   content,
   isBookmarked,
@@ -48,7 +48,7 @@ export default function PrecedentListItem({
 
   return (
     <div
-      className=" font-lighthover:text-clip my-3 w-[900px] font-Content text-xl"
+      className=" font-lighthover:text-clip m-2 h-40 w-[39vh] font-Content text-xl "
       ref={rootRef}
     >
       <div className="flex justify-between ">
