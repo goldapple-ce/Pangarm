@@ -1,8 +1,6 @@
 export const genderList = ["미정", "남자", "여자"];
 export const jobList = ["직업1", "직업2", "직업3", "기타"];
 
-export const DATE_REGEX = /\d{4}\.\s\d{1,2}\.\s\d{1,2}/g;
-
 export const SelectPivot = {
   placeholder: "정렬기준",
   value: ["sim_asc", "sim_dec", "date_asc", "date_dec"],
@@ -90,3 +88,5 @@ export const PrecedentDetailExample = {
     result: "string",
   },
 };
+
+export * from "@/constants/regex";
