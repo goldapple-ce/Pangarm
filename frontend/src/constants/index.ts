@@ -88,3 +88,5 @@ export const PrecedentDetailExample = {
     result: "string",
   },
 };
+
+export * from "@/constants/regex";

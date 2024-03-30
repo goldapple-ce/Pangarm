@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 import { SignUpFormInput } from "@/types";
-import { genderList, jobList } from "@/constants";
+import { VALIDATE_REGEX, genderList, jobList } from "@/constants";
 
 import { PiEye, PiEyeClosedDuotone } from "react-icons/pi";
 
@@ -32,8 +32,7 @@ export default function SignUpFormMain({
           {...register("password", {
             required: "비밀번호를 입력해주세요",
             pattern: {
-              value:
-                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
+              value: VALIDATE_REGEX.PASSWORD,
               message:
                 "비밀번호: 8~16자의 영문, 숫자, 특수문자를 사용해 주세요",
             },
@@ -68,7 +67,7 @@ export default function SignUpFormMain({
         {...register("name", {
           required: "이름을 입력해주세요",
           pattern: {
-            value: /^[가-힣]+$/,
+            value: VALIDATE_REGEX.NAME,
             message: "이름: 한글을 사용해 주세요. (특수기호, 공백 사용 불가)",
           },
         })}
@@ -109,6 +108,10 @@ export default function SignUpFormMain({
       </select>
       <div className="pl-3 text-xs">
         {errors.name && <li className="text-red-500">{errors.name.message}</li>}
+      </div>
+
+      <div className="text-sm text-red-500">
+        {errors?.root?.signUpError.message}
       </div>
     </div>
   );

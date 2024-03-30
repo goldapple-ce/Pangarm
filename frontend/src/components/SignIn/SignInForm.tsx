@@ -1,35 +1,57 @@
 import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
+import axios, { HttpStatusCode } from "axios";
 
 import { SignInFormInput } from "@/types";
 import { useAuthStore } from "@/stores/authStore";
 import { signIn } from "@/services/authService";
 
 export default function SignInForm() {
-  const { register, handleSubmit } = useForm<SignInFormInput>();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<SignInFormInput>();
   const setSignedIn = useAuthStore((state) => state.setSignedIn);
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
     mutationFn: signIn,
     onSuccess: (response) => {
-      const { data, message } = response.data;
-      const { accessToken, refreshToken } = data;
+      const headers = response.headers;
+      const { accessToken, refreshToken } = JSON.parse(headers.authorization);
+
       const status = response.status;
 
-      if (status === 200) {
+      if (status === HttpStatusCode.Ok) {
         setSignedIn();
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
-        console.info(message);
         navigate("/");
-      } else {
-        console.error(message);
       }
     },
     onError: (error) => {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        const response = error.response;
+        if (response) {
+          const { businessCode, errorMessage } = response.data;
+          console.log(businessCode, errorMessage);
+
+          if (businessCode === "G003") {
+            setError("root.signInError", {
+              message: "이메일 또는 비밀번호를 잘못 입력했습니다.",
+            });
+          }
+        } else {
+          // 네트워크 오류 또는 오류 응답이 없는 경우의 처리
+          console.error("An error occurred:", error.message);
+        }
+      } else {
+        // Axios 오류가 아닌 다른 종류의 오류 처리
+        console.error("An unexpected error occurred:", error);
+      }
     },
   });
 
@@ -61,6 +83,9 @@ export default function SignInForm() {
             required
           />
         </div>
+        <p className="text-md text-red-600">
+          {errors?.root?.signInError.message}
+        </p>
       </div>
 
       <div className="mt-20">
