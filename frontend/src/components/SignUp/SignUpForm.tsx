@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
+import axios, { HttpStatusCode } from "axios";
 
 import { SignUpFormInput } from "@/types";
 import { signUp } from "@/services/authService";
@@ -13,6 +14,7 @@ export default function SignUpForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<SignUpFormInput>();
   const navigate = useNavigate();
@@ -20,16 +22,27 @@ export default function SignUpForm() {
   const { mutate } = useMutation({
     mutationFn: signUp,
     onSuccess: (response) => {
-      const { message } = response.data;
       const status = response.status;
 
-      if (status === 200) {
-        alert(message);
+      if (status === HttpStatusCode.Created) {
+        alert("회원가입에 성공했습니다.");
         navigate("/");
       }
     },
     onError: (error) => {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        const response = error.response;
+        if (response) {
+          const { businessCode, errorMessage } = response.data;
+          console.log(businessCode, errorMessage);
+
+          if (businessCode === "G004") {
+            setError("root.signUpError", {
+              message: "이미 가입된 회원입니다.",
+            });
+          }
+        }
+      }
     },
   });
 
