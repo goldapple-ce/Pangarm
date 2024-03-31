@@ -12,4 +12,5 @@ API_KEY={YOUR_API_KEY}
 KAFKA_BOOTSTRAP_SERVER={YOUR_KAFKA_BOOTSTAR_SERVER}
 ```
 
-내용이 채워졌다면 `run.sh` 를 실행해주세요
+내용이 채워졌다면 `run.sh` 를 실행해주세요.
+실행 중인 파일은 data/log에서 확인하실수 있습니다.
