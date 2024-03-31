@@ -98,3 +98,14 @@ type Category = {
   incident: string;
   detail: string;
 };
+
+export type News = {
+  id: string;
+  newsLink: string;
+  title: string;
+  content: string;
+  imageUrl: string;
+  author: string;
+  createdAt: string;
+  categoryList: string[];
+};
