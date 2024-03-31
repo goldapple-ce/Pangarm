@@ -1,0 +1,12 @@
+FROM python:3.10.0
+
+WORKDIR /app/
+
+COPY requirements.txt .
+COPY app.py app.py
+RUN mkdir data
+RUN mkdir data/html
+RUN mkdir data/json
+RUN pip install -r requirements.txt
+
+ENTRYPOINT [ "python","app.py" ] 
