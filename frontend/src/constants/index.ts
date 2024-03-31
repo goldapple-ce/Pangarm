@@ -12,7 +12,7 @@ export const SelectPivot = {
   ],
 };
 export const SearchKeywordExampleList = [
-  "로동",
+  "노동",
   "교통",
   "교육",
   "부동산",
@@ -22,6 +22,7 @@ export const SearchKeywordExampleList = [
   "사이버",
   "지적재산",
   "공무",
+  "법률 개정",
 ];
 
 export const PrecedentDetailExample = {

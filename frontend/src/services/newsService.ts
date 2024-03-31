@@ -12,13 +12,14 @@ export const getCategoryNewsList = async (
   page: number,
   size: number,
 ) => {
-  const response = await instance.get(`/news`, {
+  const response = await instance.get(`/news/by-category`, {
     params: {
       category: category,
       page: page,
       size: size,
     },
   });
+
   return response;
 };
 
