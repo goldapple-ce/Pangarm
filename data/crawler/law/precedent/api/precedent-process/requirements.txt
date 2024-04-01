@@ -1,0 +1,6 @@
+langchain
+sentence-transformers
+bs4
+requests
+kafka-python
+openai
