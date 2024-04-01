@@ -29,6 +29,20 @@ export const getNewsDetail = async (newsId: string) => {
   return response;
 };
 
+// 카테고리 구독 헤제
+export const postUnsubscribeCategory = async (category: string) => {
+  const response = await instance.post(
+    `/member/category-unsubscribe`,
+    { category },
+    {
+      headers: {
+        "Content-Type": "text/plain",
+      },
+    },
+  );
+  return response;
+};
+
 // 카테고리 등록
 
 // 카테고리 삭제

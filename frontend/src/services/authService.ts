@@ -22,7 +22,7 @@ export const reissue = async (refreshToken: string) => {
 };
 
 // 회원 정보 조회
-export const getUserInfo = async () => {
+export const getMemberInfo = async () => {
   const response = await instance.get("/member");
   return response;
 };
@@ -59,7 +59,12 @@ export const postSubscribeBookmark = async (precedentId: string) => {
 
 // 검색 히스토리
 export const getSearchHistory = async () => {
-  const response = await instance.get("api/member/search/history");
+  const response = await instance.get("/member/search/history");
+  return response;
+};
+
+export const getSubscribedCategory = async () => {
+  const response = await instance.get("/member/category");
   return response;
 };
 

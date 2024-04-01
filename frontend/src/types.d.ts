@@ -21,14 +21,7 @@ export type SignInFormInput = {
   password: string;
 };
 
-export type SignUpFormInput = {
-  email: string;
-  password: string;
-  name: string;
-  age: number;
-  gender: number;
-  job: string;
-};
+
 
 export type EditFormInput = {
   currentPassword: string;
@@ -86,6 +79,7 @@ type RelatedLawList = {
   law: string;
   link: string;
 };
+
 type Graph = {
   category: Category;
   caseNumber: string;
@@ -94,10 +88,21 @@ type Graph = {
   judgementDate: string;
   instanceType: string;
 };
+
 type Category = {
   incident: string;
   detail: string;
 };
+
+export type SignUpFormInput = {
+  id: number;
+  email: string;
+  password: string;
+  name: string;
+  age: number;
+  gender: number;
+  job: string;
+}
 
 export type News = {
   id: string;
