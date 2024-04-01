@@ -32,6 +32,11 @@ public class CategoryServiceImpl implements CategoryService{
         });
     }
 
+    @Override
+    public void deleteAll() {
+        categoryRepository.deleteAll();
+    }
+
     @Transactional
     @Override
     public Category update(int id, Category category) {
