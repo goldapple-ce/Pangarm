@@ -17,13 +17,17 @@ public class CaseTypeService {
     private final CaseTypeRepository caseTypeRepository;
 
     public CaseType findByName(String name){
-        return caseTypeRepository.findByName(name).orElseThrow(()->
+        return caseTypeRepository.findByName(name).orElseThrow(() ->
                 new CaseTypeException(ErrorCode.API_ERROR_NOT_FOUND));
     }
 
     public CaseType findByCode(int code){
         return caseTypeRepository.findById(code).orElseThrow(()->
                 new CaseTypeException(ErrorCode.API_ERROR_NOT_FOUND));
+    }
+
+    public boolean existsByName(String name){
+        return caseTypeRepository.existsByName(name);
     }
 
     @Transactional

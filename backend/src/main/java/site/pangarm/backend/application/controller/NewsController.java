@@ -1,6 +1,5 @@
 package site.pangarm.backend.application.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,21 +19,24 @@ public class NewsController {
 
     private final NewsFacade newsFacade;
 
-    /** News */
+    /**
+     * News
+     */
     @Deprecated
     @PostMapping
-    public void save(@RequestBody News news){
+    public void save(@RequestBody News news) {
         newsFacade.registerNews(news);
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<News>>> findAll(Pageable pageable){
+
+    public ResponseEntity<ApiResponse<List<News>>> findAll(Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_NEWS_FIND_ALL, newsFacade.findAllNews(pageable)));
     }
 
     @GetMapping("/by-category")
-    public ResponseEntity<ApiResponse<List<News>>> findAllByCategory(@RequestParam String category, Pageable pageable){
+    public ResponseEntity<ApiResponse<List<News>>> findAllByCategory(@RequestParam String category, Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_NEWS_FIND_ALL_BY_CATEGORY, newsFacade.findAllNewsByCategory(category, pageable)));
     }
@@ -60,9 +62,11 @@ public class NewsController {
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_NEWS_DELETE_ALL));
     }
 
-    /** News Category */
+    /**
+     * News Category
+     */
     @GetMapping("/category-list")
-    public ResponseEntity<ApiResponse<List<String>>> findAllCategoryList(){
+    public ResponseEntity<ApiResponse<List<String>>> findAllCategoryList() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_CATEGORY_FIND_ALL, newsFacade.findAllCategoryList()));
     }
