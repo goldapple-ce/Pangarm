@@ -64,7 +64,7 @@ public class MemberController {
     }
 
     @PostMapping("/category-subscribe")
-    public ResponseEntity<ApiResponse<Void>> subscribe(@AuthenticationPrincipal(errorOnInvalidType = true) User user, @RequestBody int categoryId) {
+    public ResponseEntity<ApiResponse<Void>> subscribe(@AuthenticationPrincipal(errorOnInvalidType = true) User user, @RequestParam("category_id") int categoryId) {
         memberFacade.subscribe(Integer.parseInt(user.getUsername()), categoryId);
 
         return ResponseEntity
@@ -73,7 +73,7 @@ public class MemberController {
     }
 
     @PostMapping("/category-unsubscribe")
-    public ResponseEntity<ApiResponse<Void>> unsubscribe(@AuthenticationPrincipal User user, @RequestBody int categoryId) {
+    public ResponseEntity<ApiResponse<Void>> unsubscribe(@AuthenticationPrincipal User user, @RequestParam("category_id") int categoryId) {
         memberFacade.unsubscribe(Integer.parseInt(user.getUsername()), categoryId);
 
         return ResponseEntity
