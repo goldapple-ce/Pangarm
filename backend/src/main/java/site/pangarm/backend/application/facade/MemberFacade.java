@@ -40,14 +40,14 @@ public class MemberFacade {
     }
 
     public PrecedentSearchHistoryResponse findAllSearchHistory(User user) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
+        Member member = memberService.findByUser(user);
         List<SearchHistory> searchHistoryList = searchHistoryService.findAllByMember(member);
         return PrecedentSearchHistoryResponse.of(searchHistoryList);
     }
 
     @Transactional
     public void bookmarkPrecedent(User user, int precedentId) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
+        Member member = memberService.findByUser(user);
         Precedent precedent = precedentService.findById(precedentId);
 
         bookmarkService.update(member, precedent);

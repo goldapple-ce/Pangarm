@@ -73,19 +73,19 @@ public class PrecedentFacade {
     }
 
     public PrecedentBookmarkedResponse getBookmarkedPrecedent(User user, Pageable pageable) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
+        Member member = memberService.findByUser(user);
         Page<Object[]> precedentBookmarkPage = precedentBookmarkService.findByMember(member, pageable);
         return PrecedentBookmarkedResponse.of(precedentBookmarkPage);
     }
 
     public PrecedentViewedResponse getViewedPrecedent(User user, Pageable pageable) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
+        Member member = memberService.findByUser(user);
         Page<Object[]> viewedPrecedentPage = viewingHistoryService.findByMember(member, pageable);
         return PrecedentViewedResponse.of(viewedPrecedentPage);
     }
 
     public PrecedentSearchSummaryClientResponse getPrecedentSummary(User user, String caseNumber) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
+        Member member = memberService.findByUser(user);
         Precedent precedent = precedentService.findByCaseNumber(caseNumber);
         viewingHistoryService.save(member,precedent);
         PrecedentSearchSummaryClientResponse response = precedentFetchAPI.fetchAPI("/summary?caseNumber=",caseNumber, PrecedentSearchSummaryClientResponse.class);
@@ -94,9 +94,11 @@ public class PrecedentFacade {
     }
 
     public PrecedentSearchDetailClientResponse getPrecedentDetail(User user, String caseNumber) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
+        Member member = memberService.findByUser(user);
         Precedent precedent = precedentService.findByCaseNumber(caseNumber);
         viewingHistoryService.save(member,precedent);
         return precedentFetchAPI.fetchAPI("/detail?caseNumber=",caseNumber, PrecedentSearchDetailClientResponse.class);
     }
+
+
 }
