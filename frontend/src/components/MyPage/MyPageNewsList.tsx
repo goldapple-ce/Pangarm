@@ -1,5 +1,6 @@
 import { getCategoryNewsList } from "@/services/newsService";
 import { useQuery } from "@tanstack/react-query";
+
 type MyPageNewsListProps = {
   currentCategory: string;
 };
@@ -21,7 +22,12 @@ export default function MyPageNewsList({
   }
 
   const newsList = data?.data.data;
-  return <div className="m-2 w-9/12 bg-lightgray ">
-    
-  </div>;
+  console.log(newsList);
+  return (
+    <div className="m-2 w-9/12 bg-lightgray ">
+      {/* {newsList.map((value) => {
+        <CategoryNewsListItem key={value} />;
+      })} */}
+    </div>
+  );
 }

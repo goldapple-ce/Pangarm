@@ -1,4 +1,3 @@
-import { PrecedentItemType } from "@/types";
 import { useState } from "react";
 import PrecedentItem from "../PrecedentItem";
 import { useQuery } from "@tanstack/react-query";
