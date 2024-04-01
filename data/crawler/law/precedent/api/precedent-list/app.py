@@ -3,6 +3,8 @@ import requests
 import json
 import os
 from kafka import KafkaProducer
+from dotenv import load_dotenv
+load_dotenv()
 
 
 API_KEY = os.environ.get("API_KEY")
