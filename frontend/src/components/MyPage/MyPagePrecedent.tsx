@@ -1,9 +1,11 @@
 import { PrecedentItemType } from "@/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PrecedentItem from "../PrecedentItem";
 import { useQuery } from "@tanstack/react-query";
 import PrecedentDetail from "../Precedent/PrecedentDetail";
 import { AxiosResponse } from "axios";
+import ErrorEmptyAnimation from "../Error/ErrorEmptyAnimation";
+import Error500Animation from "../Error/Error500Animation";
 
 type MyPagePrecedentProps = {
   getPrecedent: () => Promise<AxiosResponse>;
@@ -14,15 +16,12 @@ export default function MyPagePrecedent({
   getPrecedent,
   queryKey,
 }: MyPagePrecedentProps) {
-  const [precedentData, setPrecedentData] = useState<
-    PrecedentItemType[] | undefined
-  >();
   const [isDetailOpen, setDetailOpen] = useState<boolean>(false);
   const [detailNo, setDetailNo] = useState<string>("");
 
   const { data, error, isLoading } = useQuery({
-    queryKey: [`${queryKey}`],
-    queryFn: getPrecedent,
+    queryKey: [queryKey],
+    queryFn: () => getPrecedent(),
   });
 
   const showDetail = (c: string) => {
@@ -34,28 +33,40 @@ export default function MyPagePrecedent({
     setDetailOpen(false);
   };
 
-  useEffect(() => {
-    setPrecedentData(data ? data.data.data : undefined);
-    console.log(data?.data.data);
-  }, [data]);
-
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error...!</div>;
+  console.log(`####### ${queryKey}`);
+  console.log(data);
+  const precedentData = data?.data.data;
   return (
     <div className="flex max-h-[60vh] flex-wrap overflow-y-scroll">
       {isDetailOpen && (
         <PrecedentDetail closeDetail={closeDetail} detailNo={detailNo} />
       )}
-      {precedentData &&
-        precedentData.map((value) => (
-          <PrecedentItem
-            title={value.title}
-            content={value.content}
-            isBookmarked={value.isBookmarked}
-            isViewed={value.isViewed}
-            showDetail={showDetail}
-          />
-        ))}
+      {precedentData ? (
+        precedentData.length === 0 ? (
+          precedentData.map(
+            (value: {
+              title: string;
+              content: string;
+              isBookmarked: boolean;
+              isViewed: boolean;
+            }) => (
+              <PrecedentItem
+                title={value.title}
+                content={value.content}
+                isBookmarked={value.isBookmarked}
+                isViewed={value.isViewed}
+                showDetail={showDetail}
+              />
+            ),
+          )
+        ) : (
+          <ErrorEmptyAnimation />
+        )
+      ) : (
+        <Error500Animation />
+      )}
     </div>
   );
 }

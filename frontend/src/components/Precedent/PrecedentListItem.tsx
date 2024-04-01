@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import { PiEyeClosedDuotone, PiEye } from "react-icons/pi";
 
-import animationData from "@/assets/BookmarkAnimation-2.json";
+import animationData from "@/assets/lotties/BookmarkAnimation-2.json";
 import { extractDate } from "@/utils/extractUtils";
 
 type PrecedentListItemProps = {
