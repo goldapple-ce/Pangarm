@@ -33,16 +33,26 @@ export default function MainMember() {
       <div className="font-TitleMedium text-3xl text-yellow">판가름</div>
 
       <div className="flex gap-2">
-        <HistoryList onSelectSituation={handleSelectSituation} />
-        <MainSearchForm
-          register={register}
-          handleSubmit={handleSubmit}
-          reset={reset}
-          watch={watch}
-          setValue={() => setValue}
-          isValid={isValid}
-          selectedSituation={selectedSituation}
-        />
+        <div className="w-1/2">
+          <p className="mb-2 text-center font-TitleMedium text-3xl text-gray">
+            검색 기록
+          </p>
+          <HistoryList onSelectSituation={handleSelectSituation} />
+        </div>
+        <div className="w-1/2">
+          <p className="mb-2 text-center font-TitleMedium text-3xl text-gray">
+            판례 찾기
+          </p>
+          <MainSearchForm
+            register={register}
+            handleSubmit={handleSubmit}
+            reset={reset}
+            watch={watch}
+            setValue={() => setValue}
+            isValid={isValid}
+            selectedSituation={selectedSituation}
+          />
+        </div>
       </div>
     </div>
   );
