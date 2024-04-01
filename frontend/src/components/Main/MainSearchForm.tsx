@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   SubmitHandler,
@@ -5,6 +6,7 @@ import {
   UseFormHandleSubmit,
   UseFormReset,
   UseFormWatch,
+  UseFormSetValue,
 } from "react-hook-form";
 
 import { GrRefresh } from "react-icons/gr";
@@ -12,15 +14,17 @@ import { GrRefresh } from "react-icons/gr";
 import { useSituationStore } from "@/stores/situationStore";
 
 type Input = {
-  content: string;
+  situation: string;
 };
 
 interface MainSearchFormProps {
   register: UseFormRegister<Input>;
   handleSubmit: UseFormHandleSubmit<Input>;
   reset: UseFormReset<Input>;
+  setValue?: UseFormSetValue<Input>;
   watch: UseFormWatch<Input>;
   isValid: boolean;
+  selectedSituation?: string;
 }
 
 export default function MainSearchForm({
@@ -28,24 +32,30 @@ export default function MainSearchForm({
   handleSubmit,
   reset,
   watch,
+  setValue,
   isValid,
+  selectedSituation,
 }: MainSearchFormProps) {
-  const watchContent = watch("content", "");
-  const setContent = useSituationStore((state) => state.setSituation);
+  const watchSituation = watch("situation", "");
+  const setSituation = useSituationStore((state) => state.setSituation);
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<Input> = (data) => {
-    setContent(data.content);
+    setSituation(data.situation);
     navigate("/precedent-search");
-
-    // TODO: 상황을 제출했을 때 할 일
   };
+
+  useEffect(() => {
+    if (setValue && selectedSituation) {
+      setValue("situation", selectedSituation);
+    }
+  }, [selectedSituation, setValue]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="relative">
         <textarea
-          {...register("content", { required: "내용을 입력해주세요." })}
+          {...register("situation", { required: "내용을 입력해주세요." })}
           cols={100}
           rows={12}
           className="w-full resize-none rounded-lg border border-lightgray bg-lightblue p-12"
@@ -61,7 +71,7 @@ export default function MainSearchForm({
         </div>
 
         <div className="absolute bottom-3.5 right-3 text-lightgray">
-          {watchContent.length}/250
+          {watchSituation.length}/250
         </div>
       </div>
       <input
