@@ -10,6 +10,20 @@
 
 실제 프로덕션 환경은 `14대`의 `Hadoop cluster` 로 구성되었습니다.
 
+아래 명령어를 통해 파이썬 의존성을 설치해주세요
+
+파이썬 3.10.x 에서 정상 실행 확인 된 코드입니다.
+
+```sh
+pip install -r requirements.txt
+```
+
+그 후 .env 파일에 아래 값을 추가해주세요
+
+```
+KAFKA_BOOTSTRAP_SERVER=YOUR_KAFKA_SERVER
+```
+
 ## 코드 및 실행 안내
 
 ### start-data-store.py
