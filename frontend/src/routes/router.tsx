@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
         element: <NewsPage />,
       },
       {
-        path: "news/:news-id",
+        path: "news/:newsId",
         element: <NewsDetailPage />,
       },
     ],
