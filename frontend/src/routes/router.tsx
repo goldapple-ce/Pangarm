@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: "search-precedent",
+        path: "precedent-search",
         element: <PrecedentSearchPage />,
       },
       {
