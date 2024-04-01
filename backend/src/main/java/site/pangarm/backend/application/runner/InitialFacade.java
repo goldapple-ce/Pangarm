@@ -5,27 +5,32 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.pangarm.backend.domain.caseType.entity.CaseType;
 import site.pangarm.backend.domain.caseType.CaseTypeService;
-
+import site.pangarm.backend.domain.category.CategoryService;
 import java.io.IOException;
-import java.util.List;
 
 @Transactional
 @RequiredArgsConstructor
 @Service
-public class InitialFacade {
+class InitialFacade {
     private final ObjectMapper objectMapper;
     private final CaseTypeService caseTypeService;
+    private final CategoryService categoryService;
 
-    public void saveCaseTypeList() throws IOException {
-        List<CaseType> caseTypeList = loadCaseTypeFile();
-        caseTypeService.saveAll(caseTypeList);
+    void saveCaseTypeList() throws IOException {
+        CaseTypeListVo caseTypeListVo = loadFile("caseTypeList.json", CaseTypeListVo.class);
+        caseTypeService.saveAll(caseTypeListVo.caseTypeList());
     }
 
-    private List<CaseType> loadCaseTypeFile() throws IOException {
-        ClassPathResource resource = new ClassPathResource("caseTypeList.json");
-        CaseTypeListVo wrapper = objectMapper.readValue(resource.getInputStream(), CaseTypeListVo.class);
-        return wrapper.caseTypeList();
+    void saveNewsCategory() throws IOException {
+        CategoryListVo categoryListVo = loadFile("categoryList.json", CategoryListVo.class);
+        categoryListVo.categoryList()
+                .forEach(categoryService::save);
     }
+
+    protected <T> T loadFile(String path, Class<T> responseType) throws IOException {
+        ClassPathResource resource = new ClassPathResource(path);
+        return objectMapper.readValue(resource.getInputStream(), responseType);
+    }
+
 }
