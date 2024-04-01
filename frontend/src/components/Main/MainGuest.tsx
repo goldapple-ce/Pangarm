@@ -6,7 +6,7 @@ import Logo from "@/assets/imgs/Logo.svg?react";
 import MainSearchForm from "@/components/Main/MainSearchForm";
 
 type Input = {
-  content: string;
+  situation: string;
 };
 
 export default function MainGuest() {
