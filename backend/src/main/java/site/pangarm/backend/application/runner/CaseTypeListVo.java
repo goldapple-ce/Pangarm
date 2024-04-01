@@ -6,8 +6,8 @@ import site.pangarm.backend.domain.caseType.entity.CaseType;
 import java.util.List;
 
 
-record CaseTypeListVo(@JsonProperty List<CaseType> caseTypeList) {
-    CaseTypeListVo(@JsonProperty List<CaseType> caseTypeList) {
+record CaseTypeListVo(List<CaseType> caseTypeList) {
+    CaseTypeListVo(List<CaseType> caseTypeList) {
         this.caseTypeList = caseTypeList;
     }
 }
