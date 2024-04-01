@@ -39,4 +39,8 @@ public class MemberServiceImpl implements MemberService{
         }
     }
 
+    public Member findByUser(User user){
+        return user == null ?null :findById(Integer.parseInt(user.getUsername()));
+    }
+
 }
