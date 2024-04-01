@@ -1,10 +1,15 @@
+import { News } from "@/types";
 import SimilarNewsListItem from "@/components/NewsDetail/SimilarNewsListItem";
 
-export default function SimilarNewsList() {
+interface SimilarNewsListProps {
+  newsList: News[];
+}
+
+export default function SimilarNewsList({ newsList }: SimilarNewsListProps) {
   return (
     <div className="flex flex-col gap-3">
-      {Array.from({ length: 5 }).map((_, idx) => (
-        <SimilarNewsListItem key={idx} />
+      {newsList.map((news) => (
+        <SimilarNewsListItem key={news.id} newsInfo={news} />
       ))}
     </div>
   );

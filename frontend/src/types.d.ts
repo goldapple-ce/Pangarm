@@ -21,14 +21,7 @@ export type SignInFormInput = {
   password: string;
 };
 
-export type SignUpFormInput = {
-  email: string;
-  password: string;
-  name: string;
-  age: number;
-  gender: number;
-  job: string;
-};
+
 
 export type EditFormInput = {
   currentPassword: string;
@@ -109,4 +102,15 @@ export type SignUpFormInput = {
   age: number;
   gender: number;
   job: string;
+}
+
+export type News = {
+  id: string;
+  newsLink: string;
+  title: string;
+  content: string;
+  imageUrl: string;
+  author: string;
+  createdAt: string;
+  categoryList: string[];
 };

@@ -13,6 +13,14 @@ export const signUp = async (signUpData: SignUpFormInput) => {
   return response;
 };
 
+// 토큰 재발급
+export const reissue = async (refreshToken: string) => {
+  const response = await instance.post("/member/reissue", {
+    refreshToken,
+  });
+  return response;
+};
+
 // 회원 정보 조회
 export const getMemberInfo = async () => {
   const response = await instance.get("/member");
