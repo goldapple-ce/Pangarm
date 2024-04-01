@@ -23,7 +23,7 @@ public class SearchHistoryPrecedentService {
     }
 
     public Page<Object[]> findAllWithIsViewedBySearchHistory(SearchHistory searchHistory, SearchHistoryOption option, Pageable page){
-        if(option.getKeywordList().isEmpty())
+        if(option.getKeywordList() == null || option.getKeywordList().isEmpty())
             return searchHistoryPrecedentRepository.findDistinctByOption(searchHistory,option,page);
         return searchHistoryPrecedentRepository.findDistinctByOptionWithKeywordList(searchHistory,option,page);
     }
