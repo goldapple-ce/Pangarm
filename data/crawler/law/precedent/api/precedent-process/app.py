@@ -10,8 +10,8 @@ from langchain_core.output_parsers import JsonOutputParser
 from langchain.schema.runnable import RunnablePassthrough
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings import HuggingFaceEmbeddings
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
 
 KAFKA_BOOTSTRAP_SERVER = os.environ.get("KAFKA_BOOTSTRAP_SERVER")
