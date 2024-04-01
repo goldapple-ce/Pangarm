@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 
-import { useContentStore } from "@/stores/contentStore";
+import { useSituationStore } from "@/stores/situationStore";
 
 export default function PrecedentSearchBar() {
-  const content = useContentStore((state) => state.content);
+  const situation = useSituationStore((state) => state.situation);
 
   const [isFocused, setIsFocused] = useState(false);
-  const [text, setText] = useState(content); // textarea의 내용을 관리하는 state
+  const [text, setText] = useState(situation); // textarea의 내용을 관리하는 state
 
   return (
     <form

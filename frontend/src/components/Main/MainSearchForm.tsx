@@ -1,4 +1,4 @@
-import { useContentStore } from "@/stores/contentStore";
+import { useNavigate } from "react-router-dom";
 import {
   SubmitHandler,
   UseFormRegister,
@@ -6,8 +6,10 @@ import {
   UseFormReset,
   UseFormWatch,
 } from "react-hook-form";
+
 import { GrRefresh } from "react-icons/gr";
-import { useNavigate } from "react-router-dom";
+
+import { useSituationStore } from "@/stores/situationStore";
 
 type Input = {
   content: string;
@@ -29,7 +31,7 @@ export default function MainSearchForm({
   isValid,
 }: MainSearchFormProps) {
   const watchContent = watch("content", "");
-  const setContent = useContentStore((state) => state.setContent);
+  const setContent = useSituationStore((state) => state.setSituation);
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<Input> = (data) => {
