@@ -62,7 +62,7 @@ public class PrecedentFacade {
         return PrecedentSearchResponse.of(searchHistoryPrecedentPage, keywordList);
     }
 
-    public void savePrecedentHistory(SearchHistory searchHistory, SearchPrecedentClientResponse.Precedent precedentVO) {
+    private void savePrecedentHistory(SearchHistory searchHistory, SearchPrecedentClientResponse.Precedent precedentVO) {
         if(caseTypeService.existsByName(precedentVO.getInfo().getCaseTypeName())){
             CaseType caseType = caseTypeService.findByName(precedentVO.getInfo().getCaseTypeName());
             PrecedentType precedentType = precedentTypeService.save(caseType, precedentVO.getInfo().getType().getCourtName(), precedentVO.getInfo().getType().getVerdict());
