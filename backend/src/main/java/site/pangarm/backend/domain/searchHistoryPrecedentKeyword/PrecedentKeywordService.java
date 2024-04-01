@@ -17,15 +17,17 @@ public class PrecedentKeywordService {
     private final PrecedentKeywordRepository precedentKeywordRepository;
 
     @Transactional
-    public List<PrecedentKeyword> saveAll(Precedent precedent, List<String> keywordList){
+    public List<PrecedentKeyword> saveAll(Precedent precedent, List<String> keywordList) {
         List<PrecedentKeyword> precedentKeywordList = new ArrayList<>();
-        for(String keyword:keywordList){
-            precedentKeywordList.add(PrecedentKeyword.of(precedent,keyword));
+        for (String keyword : keywordList) {
+            precedentKeywordList.add(precedentKeywordRepository.findByPrecedentAndKeyword(precedent, keyword).orElseGet(() ->
+                    precedentKeywordRepository.save(PrecedentKeyword.of(precedent, keyword))
+            ));
         }
         return precedentKeywordRepository.saveAll(precedentKeywordList);
     }
 
-    public List<String> findAllKeywordListBy(SearchHistory searchHistory){
+    public List<String> findAllKeywordListBy(SearchHistory searchHistory) {
         return precedentKeywordRepository.findAllKeywordBySearchHistoryPrecedent_SearchHistory(searchHistory);
     }
 }

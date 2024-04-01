@@ -7,4 +7,6 @@ import java.util.Optional;
 
 interface CaseTypeRepository extends JpaRepository<CaseType,Integer> {
     Optional<CaseType> findByName(String name);
+
+    boolean existsByName(String name);
 }

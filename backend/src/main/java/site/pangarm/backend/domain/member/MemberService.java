@@ -1,5 +1,6 @@
 package site.pangarm.backend.domain.member;
 
+import org.springframework.security.core.userdetails.User;
 import site.pangarm.backend.domain.member.entity.Member;
 
 public interface MemberService {
@@ -9,4 +10,5 @@ public interface MemberService {
     Member findByEmail(String email);
 
     Member findById(int userId);
+
 }
