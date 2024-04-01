@@ -25,8 +25,8 @@ device = "cuda" if os.environ.get("DEVICE") in ["gpu", "GPU"] else "cpu"
 KAFKA_CONSUME_TOPIC = "precedent-api-list"
 # KAFKA_PRODUCE_TOPIC = "precedent_proceesed_with_vector"
 KAFKA_PRODUCE_TOPIC = "precedent-process"
+FILE_STORE_PATH = "/app/data"
 # FILE_STORE_PATH = "/app/data"
-FILE_STORE_PATH = "./data"
 
 assert KAFKA_BOOTSTRAP_SERVER != None
 assert GPT_KEY != None
