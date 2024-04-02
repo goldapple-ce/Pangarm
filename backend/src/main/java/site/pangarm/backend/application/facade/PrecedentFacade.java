@@ -67,7 +67,8 @@ public class PrecedentFacade {
             CaseType caseType = caseTypeService.findByName(precedentVO.getInfo().getCaseTypeName());
             PrecedentType precedentType = precedentTypeService.save(caseType, precedentVO.getInfo().getType().getCourtName(), precedentVO.getInfo().getType().getVerdict());
             Precedent precedent = precedentService.save(precedentVO.getInfo().getCaseNumber(), precedentVO.getInfo().getCaseName(), precedentVO.getInfo().getJudgementDate(), precedentVO.getSummary(), precedentType);
-            precedentKeywordService.saveAll(precedent, precedentVO.getKeywordList());
+            if(precedentVO.getKeywordList() != null)
+                precedentKeywordService.saveAll(precedent, precedentVO.getKeywordList());
             searchHistoryPrecedentService.save(searchHistory, precedent, precedentVO.getScore());
         }
     }
