@@ -24,7 +24,7 @@ public enum ResponseCode {
 
     //NEWS_CATEGORY
     API_SUCCESS_CATEGORY_FIND_ALL(200,"NC001","모든 카테고리를 조회했습니다."),
-    API_SUCCESS_MEMBER_SUBSCRIBE(200,"NC002","해당 카테고리를 구독했습니다."),
+    API_SUCCESS_MEMBER_SUBSCRIBE(201,"NC002","해당 카테고리를 구독했습니다."),
     API_SUCCESS_MEMBER_UNSUBSCRIBE(200,"NC003","해당 카테고리를 구독해지했습니다."),
     API_SUCCESS_MEMBER_CATEGORY_LIST(200,"NC004","해당 멤버의 카테고리 리스트를 조회했습니다."),
 

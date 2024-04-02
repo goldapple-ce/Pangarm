@@ -30,7 +30,6 @@ public class MemberController {
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse<Void>> signup(@Valid @RequestBody MemberSignUpRequest memberJoinDto) {
         memberFacade.signup(memberJoinDto);
-
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_SIGNUP));
@@ -39,34 +38,33 @@ public class MemberController {
     @GetMapping
     public ResponseEntity<ApiResponse<MemberFindByIdResponse>> getMemberById(@AuthenticationPrincipal(errorOnInvalidType = true) User user) {
         return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_GET_BY_ID, memberFacade.getById(Integer.parseInt(user.getUsername()))));
+                .ok(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_GET_BY_ID, memberFacade.getById(Integer.parseInt(user.getUsername()))));
     }
 
     @Operation(summary = "검색 히스토리 찾기", description = "검색 히스토리 찾기입니다. 로그인이 필요합니다.")
     @GetMapping("/search/history")
     public ResponseEntity<ApiResponse<PrecedentSearchHistoryResponse>> findAllSearchHistory(@AuthenticationPrincipal(errorOnInvalidType = true) User user) {
         PrecedentSearchHistoryResponse response = memberFacade.findAllSearchHistory(user);
-        return ResponseEntity.ok(new ApiResponse<>(ResponseCode.API_SUCCESS_NEWS_FIND_BY_ID, response));
+        return ResponseEntity
+                .ok(new ApiResponse<>(ResponseCode.API_SUCCESS_NEWS_FIND_BY_ID, response));
     }
 
     @Operation(summary = "판례 북마크", description = "판례 북마크입니다. 로그인이 필요합니다.")
     @PutMapping("/precedent")
     public ResponseEntity<ApiResponse<Void>> bookMark(@AuthenticationPrincipal(errorOnInvalidType = true) User user, @RequestParam("id") int precedentId) {
         memberFacade.bookmarkPrecedent(user, precedentId);
-        return ResponseEntity.ok(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_BOOKMARK));
+        return ResponseEntity
+                .ok(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_BOOKMARK));
     }
 
     @GetMapping("/category")
     public ResponseEntity<ApiResponse<List<String>>> getCategoryList(@AuthenticationPrincipal(errorOnInvalidType = true) User user) {
         return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_CATEGORY_LIST, memberFacade.getCategoryList(Integer.parseInt(user.getUsername()))));
+                .ok(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_CATEGORY_LIST, memberFacade.getCategoryList(Integer.parseInt(user.getUsername()))));
     }
 
     @PostMapping("/category-subscribe")
     public ResponseEntity<ApiResponse<Void>> subscribe(@AuthenticationPrincipal(errorOnInvalidType = true) User user, @RequestParam("name") String categoryName) {;
-
         memberFacade.subscribe(Integer.parseInt(user.getUsername()), categoryName);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -75,10 +73,9 @@ public class MemberController {
 
     @PostMapping("/category-unsubscribe")
     public ResponseEntity<ApiResponse<Void>> unsubscribe(@AuthenticationPrincipal User user, @RequestParam("name") String categoryName) {
-
         memberFacade.unsubscribe(Integer.parseInt(user.getUsername()), categoryName);
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.NO_CONTENT)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_UNSUBSCRIBE));
     }
 }
