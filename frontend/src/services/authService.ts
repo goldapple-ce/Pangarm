@@ -33,16 +33,18 @@ export const getRecommendPrecedent = async () => {
   return response;
 };
 
-// 뉴스 구독
-export const postSubscribeNewsKeyword = async (categoryId: number) => {
+// 뉴스 카테고리 구독
+export const postSubscribeNewsCategory = async (category: string) => {
   const response = await instance.post(
-    "/member/category-subscribe",
-    { categoryId },
-    {
-      headers: {
-        "Content-Type": "text/plain",
-      },
-    },
+    `/member/category-subscribe?category_id=${category}`,
+  );
+  return response;
+};
+
+// 뉴스 카테고리 구독 해제
+export const postUnsubscribeNewsCategory = async (category: number) => {
+  const response = await instance.post(
+    `/member/category-unsubscribe?category_id=${category}`,
   );
   return response;
 };
