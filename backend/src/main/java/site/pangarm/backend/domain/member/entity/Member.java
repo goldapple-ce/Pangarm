@@ -7,6 +7,7 @@ import site.pangarm.backend.global.entity.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,7 +39,6 @@ public class Member extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
-
 
     @OneToMany(mappedBy = "member")
     private List<MemberCategory> memberCategoryList = new ArrayList<>();

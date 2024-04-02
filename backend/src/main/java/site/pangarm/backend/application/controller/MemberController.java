@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
 import site.pangarm.backend.application.dto.response.MemberFindByIdResponse;
+import site.pangarm.backend.application.dto.response.MemberSubscribeInfo;
 import site.pangarm.backend.application.dto.response.PrecedentSearchHistoryResponse;
 import site.pangarm.backend.application.facade.MemberFacade;
 import site.pangarm.backend.global.response.api.ApiResponse;
@@ -77,5 +78,11 @@ public class MemberController {
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_UNSUBSCRIBE));
+    }
+
+    @GetMapping("/all-member-subscribe-info")
+    public ResponseEntity<ApiResponse<List<MemberSubscribeInfo>>> getAllMemberSubscribeInfo() {
+        return ResponseEntity
+                .ok(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_FIND_ALL_MEMBER_SUBSCRIBE_INFO, memberFacade.getAllMemberSubscribeInfoList()));
     }
 }
