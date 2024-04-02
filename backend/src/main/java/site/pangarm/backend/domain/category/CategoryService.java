@@ -19,4 +19,6 @@ public interface CategoryService {
     List<Category> findAll();
 
     Category findById(Integer categoryId) throws CategoryException;
+
+    Category findByName(String name) throws CategoryException;
 }

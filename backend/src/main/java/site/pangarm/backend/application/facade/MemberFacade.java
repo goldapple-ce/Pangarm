@@ -58,15 +58,16 @@ public class MemberFacade {
     }
 
     @Transactional
-    public void subscribe(int memberId, int categoryId) {
+    public void subscribe(int memberId, String categoryName) {
         Member member = memberService.findById(memberId);
-        Category category = categoryService.findById(categoryId);
+        Category category = categoryService.findByName(categoryName);
         memberCategoryService.save(member, category);
     }
 
     @Transactional
-    public void unsubscribe(int memberId, int categoryId) {
-        memberCategoryService.delete(memberId, categoryId);
+    public void unsubscribe(int memberId, String categoryName) {
+        Category category = categoryService.findByName(categoryName);
+        memberCategoryService.delete(memberId, category.getId());
     }
 
     @Transactional
