@@ -36,7 +36,7 @@ export const getRecommendPrecedent = async () => {
 // 뉴스 카테고리 구독
 export const postSubscribeNewsCategory = async (category: string) => {
   const response = await instance.post(
-    `/member/category-subscribe?category_id=${category}`,
+    `/member/category-subscribe?name=${category}`,
   );
   return response;
 };
@@ -44,7 +44,7 @@ export const postSubscribeNewsCategory = async (category: string) => {
 // 뉴스 카테고리 구독 해제
 export const postUnsubscribeNewsCategory = async (category: string) => {
   const response = await instance.post(
-    `/member/category-unsubscribe?category_id=${category}`,
+    `/member/category-unsubscribe?name=${category}`,
   );
   return response;
 };
@@ -62,6 +62,7 @@ export const postSubscribeBookmark = async (precedentId: string) => {
 // 검색 히스토리
 export const getSearchHistory = async () => {
   const response = await instance.get("/member/search/history");
+  console.log(response);
   return response;
 };
 
