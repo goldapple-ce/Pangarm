@@ -16,6 +16,4 @@ public interface MemberCategoryService {
 
     List<MemberCategory> findByMemberId(int memberId);
 
-    List<String> getCategoryNameList(List<MemberCategory> memberCategoryList);
-
 }

@@ -14,6 +14,7 @@ import site.pangarm.backend.domain.category.entity.Category;
 import site.pangarm.backend.domain.member.MemberService;
 import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.membercategory.MemberCategoryService;
+import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
 import site.pangarm.backend.domain.precedent.PrecedentService;
 import site.pangarm.backend.domain.precedent.entity.Precedent;
 import site.pangarm.backend.domain.precedentBookmark.PrecedentBookmarkService;
@@ -79,8 +80,17 @@ public class MemberFacade {
     }
 
     public List<MemberSubscribeInfo> getAllMemberSubscribeInfoList() {
-        List<Member> memberList = memberService.findAll();
-        return memberList.stream().map(member -> new MemberSubscribeInfo(member.getEmail(), memberCategoryService.getCategoryNameList(member.getMemberCategoryList()))).toList();
+        return memberService.findAll()
+                .stream()
+                .map(member -> new MemberSubscribeInfo(member.getEmail(), transferToCategoryNameList(member.getMemberCategoryList())))
+                .toList();
+    }
+
+    private List<String> transferToCategoryNameList(List<MemberCategory> memberCategoryList) {
+        return memberCategoryList
+                .stream()
+                .map(memberCategory -> memberCategory.getCategory().getName())
+                .toList();
     }
 
 }
