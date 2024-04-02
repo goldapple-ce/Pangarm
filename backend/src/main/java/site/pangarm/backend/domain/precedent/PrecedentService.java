@@ -19,12 +19,12 @@ public class PrecedentService {
 
     public Precedent findByCaseNumber(String caseNumber) {
         return precedentRepository.findByCaseNumber(CaseNumber.of(caseNumber))
-                .orElseThrow(()->new PrecedentException(ErrorCode.API_ERROR_NOT_FOUND));
+                .orElseThrow(()->new PrecedentException(ErrorCode.API_ERROR_PRECEDENT_NOT_FOUND));
     }
 
     public Precedent findById(int id){
         return precedentRepository.findById(id)
-                .orElseThrow(()->new PrecedentException(ErrorCode.API_ERROR_NOT_FOUND));
+                .orElseThrow(()->new PrecedentException(ErrorCode.API_ERROR_PRECEDENT_NOT_FOUND));
     }
 
     @Transactional

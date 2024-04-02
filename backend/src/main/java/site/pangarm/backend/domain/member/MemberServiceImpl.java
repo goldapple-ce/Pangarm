@@ -24,18 +24,18 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Member findByEmail(String email) {
         return memberRepository.findByEmail(email).orElseThrow(()->
-                new MemberException(ErrorCode.API_ERROR_NOT_FOUND));
+                new MemberException(ErrorCode.API_ERROR_MEMBER_NOT_FOUND));
     }
 
     @Override
     public Member findById(int id) {
         return memberRepository.findById(id).orElseThrow(()->
-                new MemberException(ErrorCode.API_ERROR_NOT_FOUND));
+                new MemberException(ErrorCode.API_ERROR_MEMBER_NOT_FOUND));
     }
 
     private void validation(String email){
         if(memberRepository.existsByEmail(email)){
-            throw new MemberException(ErrorCode.API_ERROR_ALREADY_EXIST);
+            throw new MemberException(ErrorCode.API_ERROR_MEMBER_ALREADY_EXIST);
         }
     }
 

@@ -24,7 +24,7 @@ public class PrecedentKeywordService {
                     precedentKeywordRepository.save(PrecedentKeyword.of(precedent, keyword))
             ));
         }
-        return precedentKeywordRepository.saveAll(precedentKeywordList);
+        return precedentKeywordList;
     }
 
     public List<String> findAllKeywordListBy(SearchHistory searchHistory) {

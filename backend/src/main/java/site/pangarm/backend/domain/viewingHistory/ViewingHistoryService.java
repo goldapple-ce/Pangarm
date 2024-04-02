@@ -25,7 +25,7 @@ public class ViewingHistoryService {
 
     public ViewingHistory findById(ViewingHistoryId viewingHistoryId){
         return viewingHistoryRepository.findById(viewingHistoryId).orElseThrow(()->
-            new ViewingHistoryException(ErrorCode.API_ERROR_NOT_FOUND)
+            new ViewingHistoryException(ErrorCode.API_ERROR_VIEWING_HISTORY_NOT_FOUND)
         );
     }
 

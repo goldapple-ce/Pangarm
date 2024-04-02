@@ -30,7 +30,7 @@ public class SearchHistoryPrecedentService {
 
     private SearchHistoryPrecedent validation(SearchHistory searchHistory, Precedent precedent,double score){
         if(searchHistoryPrecedentRepository.existsBySearchHistoryAndPrecedent(searchHistory,precedent)){
-            throw new SearchHistoryPrecedentException(ErrorCode.API_ERROR_ALREADY_EXIST);
+            throw new SearchHistoryPrecedentException(ErrorCode.API_ERROR_SEARCH_HISTORY_PRECEDENT_ALREADY_EXIST);
         }
         return SearchHistoryPrecedent.of(searchHistory,precedent,score);
     }
