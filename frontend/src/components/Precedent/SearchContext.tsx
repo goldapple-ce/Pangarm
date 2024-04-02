@@ -30,12 +30,16 @@ export const useSearch = () => {
 };
 export const SearchProvider = ({ children }: SearchProviderProps) => {
   const [filters, setFilters] = useState<FiltersType>({
-    keywords: [],
-    startDate: "",
-    endDate: "",
-    isViewed: false,
-    isBookmarked: false,
-    minSimilarity: 50,
+    keywordList: [],
+    duration: {
+      startDate: "",
+      endDate: "",
+    },
+    preclude: {
+      viewed: false,
+      bookmarked: false,
+    },
+    minimumSimilarity: 50,
   });
   // 필터 상태와 상태를 변경하는 함수를 value로 넘깁니다.
   return (

@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import { postPrecedentSearch } from "@/services/precedentService";
-import { PrecedentItemType } from "@/types";
+import { useState } from "react";
 import PrecedentSearchBar from "@/components/Precedent/PrecedentSearchBar";
 import PrecedentSearchCondition from "@/components/Precedent/PrecedentSearchCondition";
 import PrecedentList from "@/components/Precedent/PrecedentList";
@@ -8,7 +6,6 @@ import { SearchProvider } from "@/components/Precedent/SearchContext";
 import PrecedentDetail from "@/components/Precedent/PrecedentDetail";
 
 export default function PrecedentSearchPage() {
-  const [precedentList, setPrecedentList] = useState<PrecedentItemType[]>([]);
   const [detailVisible, setDetailVisible] = useState<boolean>(false);
   const [detailCaseNo, setDetailCaseNo] = useState<string>("");
   const showDetail = (caseNo: string) => {
@@ -20,29 +17,11 @@ export default function PrecedentSearchPage() {
     setDetailVisible(false);
   };
 
-  useEffect(() => {
-    const fetchPrecedents = async () => {
-      try {
-        const res = await postPrecedentSearch("something", 1, 10);
-        if (res && res.data && res.data.data) {
-          setPrecedentList(res.data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching precedents:", error);
-      }
-    };
-
-    fetchPrecedents();
-  }, []);
-
   return (
     <SearchProvider>
       <div>
         {detailVisible && (
-          <PrecedentDetail
-            closeDetail={closeDetail}
-            detailNo={detailCaseNo}
-          />
+          <PrecedentDetail closeDetail={closeDetail} detailNo={detailCaseNo} />
         )}
         <div
           className={`mx-3 mt-3 w-full flex-row items-center justify-center gap-6 px-72 ${detailVisible ? " overflow-hidden " : ""}`}
@@ -52,12 +31,7 @@ export default function PrecedentSearchPage() {
             <PrecedentSearchBar></PrecedentSearchBar>
           </div>
           <div className="mx-5 mt-12 flex">
-            <div>
-              <PrecedentList
-                precedentList={precedentList}
-                showDetail={showDetail}
-              />
-            </div>
+            <PrecedentList showDetail={showDetail} />
             <div className=" mx-7 w-[1px] bg-lightgray" />
             <div>
               <PrecedentSearchCondition></PrecedentSearchCondition>

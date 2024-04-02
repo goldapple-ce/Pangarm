@@ -5,6 +5,7 @@ import PrecedentDetail from "../Precedent/PrecedentDetail";
 import { AxiosResponse } from "axios";
 import ErrorEmptyAnimation from "../Error/ErrorEmptyAnimation";
 import Error500Animation from "../Error/Error500Animation";
+import LoadingAnimation from "../LoadingAnimation";
 
 type MyPagePrecedentProps = {
   getPrecedent: () => Promise<AxiosResponse>;
@@ -32,8 +33,18 @@ export default function MyPagePrecedent({
     setDetailOpen(false);
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error...!</div>;
+  if (isLoading)
+    return (
+      <div>
+        <LoadingAnimation />
+      </div>
+    );
+  if (error)
+    return (
+      <div>
+        <Error500Animation />
+      </div>
+    );
   console.log(`####### ${queryKey}`);
   console.log(data);
   const precedentData = data?.data.data;

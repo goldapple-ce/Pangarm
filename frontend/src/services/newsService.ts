@@ -29,6 +29,19 @@ export const getNewsDetail = async (newsId: string) => {
   return response;
 };
 
+
+
+export const getCategoryList = async () => {
+  const response = await instance.get(`/news/category-list`);
+  return response;
+};
+
+// 카테고리 등록
+
+// 카테고리 삭제
+
+// 카테고리 수정
+
 // 뉴스 카테고리 리스트
 export const getNewsCategoryList = async () => {
   const response = await instance.get("/news/category-list");

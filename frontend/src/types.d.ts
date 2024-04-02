@@ -1,19 +1,30 @@
 export type PrecedentItemType = {
-  title: string;
-  content: string;
-  isBookmarked: boolean;
-  isViewed: boolean;
-  similarity?: number;
-  keywords?: string[];
+  id: number;
+  caseNumber: string;
+  caseName: string;
+  summary: string;
+  similarity: number;
+  keywordList: string[];
+  createAt: string;
+  viewed: false;
+  bookmarked: false;
 };
 
 export type FiltersType = {
-  keywords: string[];
+  keywordList: string[];
+  duration: Duration;
+  preclude: Preclude;
+  minimumSimilarity: number;
+};
+
+export type Duration = {
   startDate: string;
   endDate: string;
-  isViewed: boolean;
-  isBookmarked: boolean;
-  minSimilarity: number;
+};
+
+export type Preclude = {
+  viewed: boolean;
+  bookmarked: boolean;
 };
 
 export type SignInFormInput = {
@@ -28,68 +39,6 @@ export type EditFormInput = {
   age: number;
   gender: number;
   job: string;
-};
-
-export type GetPrecedentBody = {
-  data: Data;
-  message: string;
-};
-export type Data = {
-  title: string;
-  summary: Summary;
-  detail: Detail;
-};
-
-export type Detail = {
-  basicInformation: BasicInformation;
-  part: Part;
-  originalJudgment: OriginalJudgment;
-  disposal: Disposal;
-  purport: string;
-  opinion: Part;
-  fact: string;
-  judgement: string;
-  result: string;
-};
-type Disposal = {
-  type: string;
-  content: string;
-};
-type OriginalJudgment = {
-  caseNumber: string;
-  courthouse: string;
-  judgementDate: string;
-};
-type Part = {
-  plaintiff: string;
-  defendant: string;
-};
-type BasicInformation = {
-  graph: Graph;
-  relatedLawList: RelatedLawList[];
-  citedPrecedent: CitedPrecedent[];
-};
-type CitedPrecedent = {
-  precedent: string;
-  link: string;
-};
-type RelatedLawList = {
-  law: string;
-  link: string;
-};
-
-type Graph = {
-  category: Category;
-  caseNumber: string;
-  caseName: string;
-  courthouse: string;
-  judgementDate: string;
-  instanceType: string;
-};
-
-type Category = {
-  incident: string;
-  detail: string;
 };
 
 export type SignUpFormInput = {
@@ -112,6 +61,61 @@ export type News = {
   createdAt: string;
   categoryList: string[];
 };
+
+/** 판례 요약 타입  */
+export interface Welcome4 {
+  data: Data;
+  message: string;
+}
+
+export interface PrecedentSummary {
+  info: Info;
+  relate: Relate;
+  parties: Opinion;
+  originalJudgement: OriginalJudgement;
+  purport: string;
+  fact: string;
+  opinion: Opinion;
+  judgement: string;
+  conclusion: string;
+  summary: string;
+}
+
+export interface Info {
+  caseNumber: string;
+  caseName: string;
+  judgementDate: string;
+  type: Type;
+}
+
+export interface Type {
+  incident: string;
+  courtName: string;
+  verdict: string;
+}
+
+export interface Opinion {
+  plaintiff: null;
+  defendant: null;
+}
+
+export interface OriginalJudgement {
+  caseNumber: string;
+}
+
+export interface Relate {
+  lawList: LawList[];
+  precedentList: OriginalJudgement[];
+}
+
+export interface LawList {
+  lawName: string;
+  searchNumber: string;
+  searchName: string;
+  searchType: string;
+  searchKey: string;
+}
+/******************** */
 
 export type SearchHistory = {
   id: number;

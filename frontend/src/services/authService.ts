@@ -75,3 +75,10 @@ export const editInfo = async (editInfoData: EditFormInput) => {
   const response = await instance.post("", editInfoData);
   return response;
 };
+// 카테고리 구독 헤제
+export const postUnsubscribeCategory = async (categoryId: number) => {
+  const response = await instance.post(
+    `/member/category-unsubscribe/${categoryId}`,
+  );
+  return response;
+};
