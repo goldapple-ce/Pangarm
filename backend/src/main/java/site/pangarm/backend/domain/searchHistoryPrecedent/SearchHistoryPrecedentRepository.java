@@ -8,8 +8,11 @@ import site.pangarm.backend.domain.precedent.entity.Precedent;
 import site.pangarm.backend.domain.searchHistory.entity.SearchHistory;
 import site.pangarm.backend.domain.searchHistoryPrecedent.entity.SearchHistoryPrecedent;
 
+import java.util.Optional;
+
 interface SearchHistoryPrecedentRepository extends JpaRepository<SearchHistoryPrecedent,Integer> {
     boolean existsBySearchHistoryAndPrecedent(SearchHistory searchHistory, Precedent precedent);
+    Optional<SearchHistoryPrecedent> findBySearchHistoryAndPrecedent(SearchHistory searchHistory, Precedent precedent);
 
     @Query(value = "select distinct shp, (vh.id.precedent is not null) ,(pb.precedent is not null)  " +
             "from SearchHistoryPrecedent as shp " +

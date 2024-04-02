@@ -12,7 +12,7 @@ import site.pangarm.backend.global.entity.BaseEntity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@ToString
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"search_history_id","precedent_id"})})
 public class SearchHistoryPrecedent extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
