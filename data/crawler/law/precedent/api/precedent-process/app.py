@@ -10,12 +10,14 @@ from langchain_core.output_parsers import JsonOutputParser
 from langchain.schema.runnable import RunnablePassthrough
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings import HuggingFaceEmbeddings
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
 
 KAFKA_BOOTSTRAP_SERVER = os.environ.get("KAFKA_BOOTSTRAP_SERVER")
 GPT_KEY = os.environ.get("GPT_KEY")
+
+
 
 
 device = "cuda" if os.environ.get("DEVICE") in ["gpu", "GPU"] else "cpu"
@@ -24,11 +26,12 @@ KAFKA_CONSUME_TOPIC = "precedent-api-list"
 # KAFKA_PRODUCE_TOPIC = "precedent_proceesed_with_vector"
 KAFKA_PRODUCE_TOPIC = "precedent-process"
 FILE_STORE_PATH = "/app/data"
-# FILE_STORE_PATH = "."
+# FILE_STORE_PATH = "/app/data"
 
 assert KAFKA_BOOTSTRAP_SERVER != None
 assert GPT_KEY != None
 
+print(KAFKA_BOOTSTRAP_SERVER,GPT_KEY,device)
 
 consumer = KafkaConsumer(
     KAFKA_CONSUME_TOPIC,
@@ -115,7 +118,7 @@ def save_html(file_name, html):
 
 
 def save_json(file_name, json_data):
-    with open(f"{FILE_STORE_PATH}/json/{file_name}.json", "w") as f:
+    with open(f"{FILE_STORE_PATH}/json/{file_name}.json", "w",encoding="utf8") as f:
         json.dump(json_data, f, ensure_ascii=False, indent=4)
 
 
