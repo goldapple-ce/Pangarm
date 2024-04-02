@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
 import site.pangarm.backend.application.dto.response.MemberFindByIdResponse;
+import site.pangarm.backend.application.dto.response.MemberSubscribeInfo;
 import site.pangarm.backend.application.dto.response.PrecedentSearchHistoryResponse;
 import site.pangarm.backend.domain.category.CategoryService;
 import site.pangarm.backend.domain.category.entity.Category;
@@ -70,12 +71,16 @@ public class MemberFacade {
         memberCategoryService.delete(memberId, category.getId());
     }
 
-    @Transactional
     public List<String> getCategoryList(int memberId) {
         return memberCategoryService.findByMemberId(memberId)
                 .stream()
                 .map(memberCategory -> memberCategory.getCategory().getName())
                 .toList();
+    }
+
+    public List<MemberSubscribeInfo> getAllMemberSubscribeInfoList() {
+        List<Member> memberList = memberService.findAll();
+        return memberList.stream().map(member -> new MemberSubscribeInfo(member.getEmail(), memberCategoryService.getCategoryNameList(member.getMemberCategoryList()))).toList();
     }
 
 }

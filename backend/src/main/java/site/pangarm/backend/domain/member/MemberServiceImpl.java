@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.global.error.ErrorCode;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -41,6 +43,11 @@ public class MemberServiceImpl implements MemberService{
 
     public Member findByUser(User user){
         return user == null ?null :findById(Integer.parseInt(user.getUsername()));
+    }
+
+    @Override
+    public List<Member> findAll() {
+        return memberRepository.findAll();
     }
 
 }
