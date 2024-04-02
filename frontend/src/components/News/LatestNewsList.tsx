@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { useQuery } from "@tanstack/react-query";
 import Slider from "react-slick";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
@@ -8,19 +6,19 @@ import { getNewsList } from "@/services/newsService";
 
 import LatestNewsListItem from "@/components/News/LatestNewsListItem";
 
-export default function CategoryNewsList() {
-  const [page, setPage] = useState(0);
-  const size = 4;
+export default function LatestNewsList() {
+  const size = 20;
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["latestNewsList", page],
-    queryFn: () => getNewsList(page, size),
+    queryKey: ["latestNewsList"],
+    queryFn: () => getNewsList(0, size),
   });
 
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
+    autoplay: true,
     slidesToShow: 2,
     slidesToScroll: 2,
     rows: 2,
@@ -28,13 +26,11 @@ export default function CategoryNewsList() {
     nextArrow: (
       <MdArrowForwardIos
         color="navy"
-        onClick={() => setPage((prev) => prev + 1)}
       />
     ),
     prevArrow: (
       <MdArrowBackIos
         color="navy"
-        onClick={() => setPage((prev) => Math.max(1, prev - 1))}
       />
     ),
   };

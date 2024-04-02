@@ -1,9 +1,11 @@
-import ErrorEmptyAnimation from "../Error/ErrorEmptyAnimation";
-import Error500Animation from "../Error/Error500Animation";
-import MyPageCategory from "./MyPageCategory";
+import Swal from "sweetalert2";
+import { useMutation } from "@tanstack/react-query";
+
 import { postUnsubscribeNewsCategory } from "@/services/authService";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { getCategoryList } from "@/services/newsService";
+
+import ErrorEmptyAnimation from "@/components/Error/ErrorEmptyAnimation";
+import Error500Animation from "@/components/Error/Error500Animation";
+import MyPageCategory from "@/components/MyPage/MyPageCategory";
 
 type MyPageCategoryListProps = {
   categoryList: string[];
@@ -16,26 +18,26 @@ export default function MyPageCategoryList({
   handleCategoryClick,
   currentCategory,
 }: MyPageCategoryListProps) {
-  const { data } = useQuery({
-    queryKey: ["categoryList"],
-    queryFn: getCategoryList,
-  });
-
   const { mutate } = useMutation({
     mutationFn: postUnsubscribeNewsCategory,
     onError: (error) => {
       console.log(error);
-      alert("구독 해제 중에 오류가 발생했습니다.");
+      Swal.fire({
+        text: "구독 해제중에 오류가 발생했습니다.",
+        icon: "error",
+      });
     },
     onSuccess: (data) => {
       console.log(data);
-      alert("구독 해제 성공");
+      Swal.fire({
+        text: "구독 해제에 성공했습니다.",
+        icon: "success",
+      });
     },
   });
 
   const handleUnsubscribeClick = (category: string) => {
-    const index = data?.data.data.indexOf(category);
-    mutate(index);
+    mutate(category);
   };
 
   return (
@@ -52,7 +54,9 @@ export default function MyPageCategoryList({
             />
           ))
         ) : (
-          <ErrorEmptyAnimation />
+          <div className="flex h-full w-full items-center justify-center">
+            <ErrorEmptyAnimation />
+          </div>
         )
       ) : (
         <Error500Animation />
