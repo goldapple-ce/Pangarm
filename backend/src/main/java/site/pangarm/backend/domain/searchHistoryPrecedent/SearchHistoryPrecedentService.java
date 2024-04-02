@@ -19,7 +19,7 @@ public class SearchHistoryPrecedentService {
 
     @Transactional
     public SearchHistoryPrecedent save(SearchHistory searchHistory, Precedent precedent, double score){
-        return searchHistoryPrecedentRepository.save(validation(searchHistory,precedent,score));
+        return searchHistoryPrecedentRepository.save(SearchHistoryPrecedent.of(searchHistory,precedent,score));
     }
 
     public Page<Object[]> findAllWithIsViewedBySearchHistory(SearchHistory searchHistory, SearchHistoryOption option, Pageable page){
