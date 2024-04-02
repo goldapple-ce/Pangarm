@@ -7,16 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.precedent.entity.Precedent;
 import site.pangarm.backend.domain.viewingHistory.entity.ViewingHistory;
-import site.pangarm.backend.domain.viewingHistory.entity.ViewingHistoryId;
 
 import java.util.Optional;
 
-public interface ViewingHistoryRepository extends JpaRepository<ViewingHistory, ViewingHistoryId> {
-    Optional<ViewingHistory> findById_MemberAndId_Precedent(Member member, Precedent precedent);
+public interface ViewingHistoryRepository extends JpaRepository<ViewingHistory, Integer> {
+    Optional<ViewingHistory> findByMemberAndPrecedent(Member member, Precedent precedent);
 
     @Query("select vh,(pb is not null) as isBookmarked " +
             "from ViewingHistory as vh " +
-            "left join PrecedentBookmark as pb on pb.precedent = vh.id.precedent " +
-            "where vh.id.member = :member")
+            "left join PrecedentBookmark as pb on pb.precedent = vh.precedent " +
+            "where vh.member = :member")
     Page<Object[]> findByMember(Member member, Pageable pageable);
 }

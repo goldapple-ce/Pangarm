@@ -40,4 +40,8 @@ public class PrecedentService {
                 precedentRepository.save(precedent));
     }
 
+    public boolean existsById(String caseNumber){
+        return precedentRepository.existsByCaseNumber(CaseNumber.of(caseNumber));
+    }
+
 }

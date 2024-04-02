@@ -18,7 +18,7 @@ public interface PrecedentBookmarkRepository extends JpaRepository<PrecedentBook
 
     @Query("select pb,(vh is not null) as isViewed " +
             "from PrecedentBookmark as pb " +
-            "left join ViewingHistory as vh on vh.id.precedent = pb.precedent " +
+            "left join ViewingHistory as vh on vh.precedent = pb.precedent " +
             "where pb.member = :member")
     Page<Object[]> findAllByMember(Member member, Pageable pageable);
 }

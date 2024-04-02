@@ -60,7 +60,7 @@ public class PrecedentResponse {
     }
 
     public static PrecedentResponse of(ViewingHistory viewingHistory, boolean isViewed, boolean isBookmarked) {
-        Precedent precedent = viewingHistory.getId().getPrecedent();
+        Precedent precedent = viewingHistory.getPrecedent();
 
         int id = precedent.getId();
         String caseNumber = precedent.getCaseNumber().toString();
