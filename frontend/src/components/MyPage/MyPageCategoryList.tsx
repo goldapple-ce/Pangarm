@@ -1,7 +1,7 @@
 import ErrorEmptyAnimation from "../Error/ErrorEmptyAnimation";
 import Error500Animation from "../Error/Error500Animation";
 import MyPageCategory from "./MyPageCategory";
-import { postUnsubscribeCategory } from "@/services/authService";
+import { postUnsubscribeNewsCategory } from "@/services/authService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getCategoryList } from "@/services/newsService";
 
