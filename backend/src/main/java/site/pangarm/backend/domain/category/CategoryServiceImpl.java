@@ -69,4 +69,10 @@ public class CategoryServiceImpl implements CategoryService{
                 .orElseThrow(()->new CategoryException(ErrorCode.API_ERROR_NOT_FOUND));
     }
 
+    @Override
+    public Category findByName(String name) throws CategoryException {
+        return categoryRepository.findByName(name)
+                .orElseThrow(()->new CategoryException(ErrorCode.API_ERROR_NOT_FOUND));
+    }
+
 }

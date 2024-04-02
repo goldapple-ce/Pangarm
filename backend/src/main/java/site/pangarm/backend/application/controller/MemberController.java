@@ -64,18 +64,18 @@ public class MemberController {
     }
 
     @PostMapping("/category-subscribe")
-    public ResponseEntity<ApiResponse<Void>> subscribe(@AuthenticationPrincipal(errorOnInvalidType = true) User user, @RequestParam("category_id") int categoryId) {
-        memberFacade.subscribe(Integer.parseInt(user.getUsername()), categoryId);
+    public ResponseEntity<ApiResponse<Void>> subscribe(@AuthenticationPrincipal(errorOnInvalidType = true) User user, @RequestParam("name") String categoryName) {;
 
+        memberFacade.subscribe(Integer.parseInt(user.getUsername()), categoryName);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_SUBSCRIBE));
     }
 
     @PostMapping("/category-unsubscribe")
-    public ResponseEntity<ApiResponse<Void>> unsubscribe(@AuthenticationPrincipal User user, @RequestParam("category_id") int categoryId) {
-        memberFacade.unsubscribe(Integer.parseInt(user.getUsername()), categoryId);
+    public ResponseEntity<ApiResponse<Void>> unsubscribe(@AuthenticationPrincipal User user, @RequestParam("name") String categoryName) {
 
+        memberFacade.unsubscribe(Integer.parseInt(user.getUsername()), categoryName);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_UNSUBSCRIBE));
