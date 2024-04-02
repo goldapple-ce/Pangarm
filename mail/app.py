@@ -90,7 +90,7 @@ class Mail:
     <img src="{image_url}" alt="Avatar" style="width: 100%; height: 300px;">
     <div style="padding: 2px 16px;">
       <h4><b>{title}</b></h4> 
-      <p>{content[:100]}</p> 
+      <p>{content[:100]}...</p> 
     </div>
     </a>
   </div>"""
@@ -123,15 +123,14 @@ def main():
     es = ElasticSearch(ELASTIC_SEARCH_URL)
     news_json = es.getNewsByCategoryList(category_list)
 
-    user_list = [  # todo : Backend api 생성시 가져올것.
-        {"email": "someEmail", "category_list": []}
-    ]
+    user_list = requests.get(
+        f"{SERVER_URL}/api/member/all-member-subscribe-info").json()["data"]
 
     now = datetime.now()
     title = now.strftime("[판가름 뉴스레터] %Y년%m월%d일 구독 뉴스를 알려드립니다.")
     for user in user_list:
         user_email = user["email"]
-        user_category_list = user["category_list"]
+        user_category_list = user["categoryList"]
         if (len(user_category_list) == 0):
             continue
 
