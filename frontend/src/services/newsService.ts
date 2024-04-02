@@ -29,13 +29,7 @@ export const getNewsDetail = async (newsId: string) => {
   return response;
 };
 
-// 뉴스 구독
-export const postSubscribeNewsKeyword = async (categoryId: number) => {
-  const response = await instance.post(
-    `/member/category-subscribe/${categoryId}`,
-  );
-  return response;
-};
+
 
 export const getCategoryList = async () => {
   const response = await instance.get(`/news/category-list`);
@@ -47,3 +41,9 @@ export const getCategoryList = async () => {
 // 카테고리 삭제
 
 // 카테고리 수정
+
+// 뉴스 카테고리 리스트
+export const getNewsCategoryList = async () => {
+  const response = await instance.get("/news/category-list");
+  return response;
+};

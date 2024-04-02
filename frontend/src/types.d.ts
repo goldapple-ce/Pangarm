@@ -116,3 +116,8 @@ export interface LawList {
   searchKey: string;
 }
 /******************** */
+
+export type SearchHistory = {
+  id: number;
+  situation: string;
+};

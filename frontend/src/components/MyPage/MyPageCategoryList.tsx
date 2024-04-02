@@ -22,7 +22,7 @@ export default function MyPageCategoryList({
   });
 
   const { mutate } = useMutation({
-    mutationFn: postUnsubscribeCategory,
+    mutationFn: postUnsubscribeNewsCategory,
     onError: (error) => {
       console.log(error);
       alert("구독 해제 중에 오류가 발생했습니다.");

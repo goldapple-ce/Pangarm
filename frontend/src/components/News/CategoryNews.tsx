@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import { BiSearch } from "react-icons/bi";
 import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
 
-import { SearchKeywordExampleList } from "@/constants";
+import { getNewsCategoryList } from "@/services/newsService";
+
 import CategoryNewsList from "@/components/News/CategoryNewsList";
 import CategoryButton from "@/components/News/CategoryButton";
 
@@ -12,14 +14,35 @@ export default function CategoryNews() {
   const [showMore, setShowMore] = useState(false);
   const [keyword, setKeyword] = useState("");
 
-  const filteredKeywordList = SearchKeywordExampleList.filter((element) =>
-    element.includes(keyword),
+  const searchCategoryInput = useRef<HTMLInputElement>(null);
+  const onMove = () => {
+    searchCategoryInput.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["newsCategoryList"],
+    queryFn: getNewsCategoryList,
+    select: (data) => {
+      const newsCategoryList = data.data.data;
+      return newsCategoryList;
+    },
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const filteredCategoryList = data.filter((category: string) =>
+    category.includes(keyword),
   );
 
   return (
     <div>
       {/* Header */}
-      <div className="font-TitleBold text-2xl">
+      <div className="font-TitleBold text-2xl" ref={searchCategoryInput}>
         <span className="text-navy">카테고리</span>
         <span> 별 뉴스</span>
       </div>
@@ -39,6 +62,7 @@ export default function CategoryNews() {
               placeholder="카테고리 검색"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
+              onClick={onMove}
             />
             <BiSearch
               size={20}
@@ -47,11 +71,11 @@ export default function CategoryNews() {
           </div>
 
           {/* Category ButtonList */}
-          {filteredKeywordList.map((keyword, index) => (
+          {filteredCategoryList.map((category: string, index: number) => (
             <CategoryButton
               key={index}
-              keyword={keyword}
-              isSelected={keyword === selectedCategory}
+              category={category}
+              isSelected={category === selectedCategory}
               onSelect={setSelectedCategory}
             />
           ))}
