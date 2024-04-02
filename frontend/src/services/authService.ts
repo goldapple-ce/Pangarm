@@ -33,20 +33,6 @@ export const getRecommendPrecedent = async () => {
   return response;
 };
 
-// 뉴스 구독
-export const postSubscribeNewsKeyword = async (categoryId: number) => {
-  const response = await instance.post(
-    "/member/category-subscribe",
-    { categoryId },
-    {
-      headers: {
-        "Content-Type": "text/plain",
-      },
-    },
-  );
-  return response;
-};
-
 // 판례 북마크
 export const postSubscribeBookmark = async (precedentId: string) => {
   const response = await instance.post(`/member/precedent`, {
@@ -71,5 +57,12 @@ export const getSubscribedCategory = async () => {
 // 회원 정보 수정
 export const editInfo = async (editInfoData: EditFormInput) => {
   const response = await instance.post("", editInfoData);
+  return response;
+};
+// 카테고리 구독 헤제
+export const postUnsubscribeCategory = async (categoryId: number) => {
+  const response = await instance.post(
+    `/member/category-unsubscribe/${categoryId}`,
+  );
   return response;
 };
