@@ -54,14 +54,20 @@ public class Precedent extends BaseEntity {
 
     public static Precedent of(String caseNumber, String caseName, LocalDate judgementDate, String summary,PrecedentType precedentType){
         if(summary != null && summary.length() > 200){
-            summary = summary.substring(0,200);
+            summary = summary.substring(0,200)+"...";
+        }
+        if(caseName != null && caseName.length() > 250){
+            caseName = caseName.substring(0,200)+"...";
         }
         return new Precedent(CaseNumber.of(caseNumber),caseName,judgementDate,summary,precedentType);
     }
 
     public static Precedent of(CaseNumber caseNumber, String caseName, LocalDate judgementDate, String summary,PrecedentType precedentType){
         if(summary != null && summary.length() > 200){
-            summary = summary.substring(0,200);
+            summary = summary.substring(0,200)+"...";
+        }
+        if(caseName != null && caseName.length() > 250){
+            caseName = caseName.substring(0,200)+"...";
         }
         return new Precedent(caseNumber,caseName,judgementDate,summary,precedentType);
     }
