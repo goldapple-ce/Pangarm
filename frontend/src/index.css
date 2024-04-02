@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "YoonGothic310";
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
+    format("woff2");
+}
+@font-face {
+  font-family: "YoonGothic320";
+  font-display: swap;
+  src: url("./assets/fonts/HakgyoansimBareondotumR.ttf") format("truetype");
+}
+@font-face {
+  font-family: "GmarketSansTTFBold";
+  font-display: swap;
+  font-weight: bold;
+  src: url("./assets/fonts/GmarketSansTTFBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "GmarketSansTTFMedium";
+  font-display: swap;
+  src: url("./assets/fonts/GmarketSansTTFMedium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "GmarketSansTTFLight";
+  font-display: swap;
+  src: url("./assets/fonts/GmarketSansTTFLight.ttf") format("truetype");
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+}
+
+.text-clip {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
