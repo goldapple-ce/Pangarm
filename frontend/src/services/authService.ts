@@ -42,7 +42,7 @@ export const postSubscribeNewsCategory = async (category: string) => {
 };
 
 // 뉴스 카테고리 구독 해제
-export const postUnsubscribeNewsCategory = async (category: number) => {
+export const postUnsubscribeNewsCategory = async (category: string) => {
   const response = await instance.post(
     `/member/category-unsubscribe?category_id=${category}`,
   );

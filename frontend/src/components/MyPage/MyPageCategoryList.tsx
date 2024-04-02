@@ -1,7 +1,7 @@
 import ErrorEmptyAnimation from "../Error/ErrorEmptyAnimation";
 import Error500Animation from "../Error/Error500Animation";
 import MyPageCategory from "./MyPageCategory";
-import { postUnsubscribeCategory } from "@/services/newsService";
+import { postUnsubscribeNewsCategory } from "@/services/authService";
 import { useMutation } from "@tanstack/react-query";
 
 type MyPageCategoryListProps = {
@@ -14,7 +14,7 @@ export default function MyPageCategoryList({
   handleCategoryClick,
 }: MyPageCategoryListProps) {
   const { mutate } = useMutation({
-    mutationFn: postUnsubscribeCategory,
+    mutationFn: postUnsubscribeNewsCategory,
     onError: (error) => {
       console.log(error);
       alert("구독 해제 중에 오류가 발생했습니다.");
