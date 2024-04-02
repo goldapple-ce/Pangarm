@@ -3,28 +3,33 @@ import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import { PiEyeClosedDuotone, PiEye } from "react-icons/pi";
 
 import animationData from "@/assets/lotties/BookmarkAnimation-2.json";
-import { extractDate } from "@/utils/extractUtils";
 
 type PrecedentListItemProps = {
-  title: string;
-  content: string;
-  isBookmarked: boolean;
-  isViewed: boolean;
+  caseNumber: string;
+  caseName: string;
+  summary: string;
+  similarity: number;
+  keywordList: string[];
+  createAt: string;
+  viewed: boolean;
+  bookmarked: boolean;
   showDetail: (caseNo: string) => void;
 };
 
 export default function PrecedentListItem({
-  title,
-  content,
-  isBookmarked,
-  isViewed,
+  caseNumber,
+  caseName,
+  summary,
+  // similarity,
+  // keywordList,
+  createAt,
+  viewed,
+  bookmarked,
   showDetail,
 }: PrecedentListItemProps) {
-  const date = extractDate(title);
-
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const rootRef = useRef<HTMLDivElement>(null);
-  const isBookmarkedRef = useRef<boolean>(isBookmarked);
+  const isBookmarkedRef = useRef<boolean>(bookmarked);
 
   useEffect(() => {
     if (isBookmarkedRef.current && lottieRef.current) {
@@ -35,6 +40,7 @@ export default function PrecedentListItem({
   // TODO axios 요청 send
   const handleBookmarkClick = () => {
     if (lottieRef.current) {
+      lottieRef.current.setSpeed(1.5);
       if (isBookmarkedRef.current) {
         lottieRef.current.setDirection(-1);
       } else {
@@ -48,20 +54,24 @@ export default function PrecedentListItem({
 
   return (
     <div
-      className=" font-lighthover:text-clip my-3 w-[900px] font-Content text-xl"
+      className=" font-lighthover:text-clip my-3 w-full font-Content text-xl"
       ref={rootRef}
     >
       <div className="flex justify-between ">
         <div
           className="w-3/4 min-w-0 flex-shrink truncate"
           onClick={() => {
-            showDetail(title);
+            showDetail(caseNumber);
           }}
         >
-          <p className="text-ellipsis text-xl">{title}</p>
+          <p className="truncate text-xl">
+            {caseNumber} - {caseName}
+          </p>
         </div>
 
         <div className="flex items-center">
+          <PiEye className={viewed ? "" : "hidden"} />
+          <PiEyeClosedDuotone className={viewed ? "hidden" : ""} />
           <Lottie
             className="w-8"
             animationData={animationData}
@@ -70,20 +80,22 @@ export default function PrecedentListItem({
             lottieRef={lottieRef}
             onClick={handleBookmarkClick}
           />
-          <PiEye className={isViewed ? "" : "hidden"} />
-          <PiEyeClosedDuotone className={isViewed ? "hidden" : ""} />
         </div>
       </div>
       <div>
-        <p className="text-lg">{date}. 선고</p>
+        {createAt ? (
+          <p className="text-lg">{createAt}. 선고</p>
+        ) : (
+          <p>선고 날짜 미정</p>
+        )}
       </div>
       <p
         onClick={() => {
-          showDetail(title);
+          showDetail(caseNumber);
         }}
         className="me-3 mt-1 text-clip text-sm text-gray  hover:text-clip "
       >
-        {content}
+        {summary}
       </p>
       <div></div>
     </div>
