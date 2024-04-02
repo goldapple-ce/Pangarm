@@ -14,6 +14,7 @@ public enum ResponseCode {
     API_SUCCESS_MEMBER_SIGNIN(200,"M002","정상적으로 로그인했습니다."),
     API_SUCCESS_MEMBER_BOOKMARK(200,"M004","북마크를 정상적으로 실행했습니다."),
     API_SUCCESS_MEMBER_GET_BY_ID(200,"M003","정상적으로 멤버를 조회했습니다."),
+    API_SUCCESS_MEMBER_FIND_ALL_MEMBER_SUBSCRIBE_INFO(200,"M005","모든 맴버의 구독 정보를 조회했습니다."),
 
     //NEWS
     API_SUCCESS_NEWS_FIND_ALL(200, "N001", "모든 뉴스를 조회했습니다."),

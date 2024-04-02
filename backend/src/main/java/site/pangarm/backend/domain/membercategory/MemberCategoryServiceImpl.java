@@ -42,4 +42,9 @@ public class MemberCategoryServiceImpl implements MemberCategoryService{
         return memberCategoryRepository.findByMemberId(memberId);
     }
 
+    @Override
+    public List<String> getCategoryNameList(List<MemberCategory> memberCategoryList) {
+        return memberCategoryList.stream().map(memberCategory -> memberCategory.getCategory().getName()).toList();
+    }
+
 }
