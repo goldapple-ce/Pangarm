@@ -3,87 +3,113 @@ import { useEffect, useRef } from "react";
 import { PiEye, PiEyeClosedDuotone } from "react-icons/pi";
 
 import animationData from "@/assets/lotties/BookmarkAnimation-2.json";
-import { extractDate } from "@/utils/extractUtils";
+import { putSubscribeBookmark } from "@/services/authService";
+import { useMutation } from "@tanstack/react-query";
 
 type PrecedentListItemProps = {
-  title: string;
-  content: string;
-  isBookmarked: boolean;
-  isViewed: boolean;
+  id: number;
+  caseNumber: string;
+  caseName: string;
+  summary: string;
+  keywordList: string[];
+  createAt: string;
+  viewed: false;
+  bookmarked: false;
   showDetail: (caseNo: string) => void;
 };
 
 export default function PrecedentItem({
-  title,
-  content,
-  isBookmarked,
-  isViewed,
+  id,
+  caseNumber,
+  caseName,
+  summary,
+  keywordList,
+  createAt,
+  viewed,
+  bookmarked,
   showDetail,
 }: PrecedentListItemProps) {
-  const date = extractDate(title);
-
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const rootRef = useRef<HTMLDivElement>(null);
-  const isBookmarkedRef = useRef<boolean>(isBookmarked);
-
-  useEffect(() => {
-    if (isBookmarkedRef.current && lottieRef.current) {
-      lottieRef.current.goToAndStop(119, true);
-    }
-  }, []);
+  const isBookmarkedRef = useRef<boolean>(bookmarked);
 
   // TODO axios 요청 send
+  const { mutate, isSuccess } = useMutation({
+    mutationFn: putSubscribeBookmark,
+  });
+
   const handleBookmarkClick = () => {
+    mutate(id);
+    console.log(isSuccess);
     if (lottieRef.current) {
+      lottieRef.current.setSpeed(1.5);
       if (isBookmarkedRef.current) {
         lottieRef.current.setDirection(-1);
       } else {
         lottieRef.current.setDirection(1);
       } // 애니메이션 방향을 거꾸로 설정
       lottieRef.current.play();
-
-      isBookmarkedRef.current = !isBookmarkedRef.current;
     }
+    isBookmarkedRef.current = !isBookmarkedRef.current;
   };
-
+  useEffect(() => {
+    if (isBookmarkedRef.current && lottieRef.current) {
+      lottieRef.current.goToAndStop(119, true);
+    }
+  }, []);
   return (
     <div
-      className=" font-lighthover:text-clip m-2 h-40 w-[39vh] font-Content text-xl "
+      className=" font-lighthover:text-clip m-6 w-5/12 font-Content text-xl"
       ref={rootRef}
     >
+      <div className="w-10/12 truncate">
+        {keywordList &&
+          keywordList.map((value) => {
+            return (
+              <span
+                key={value}
+                className="me-2 font-Content text-sm text-lightgray"
+              >
+                #{value}
+              </span>
+            );
+          })}
+      </div>
       <div className="flex justify-between ">
         <div
           className="w-3/4 min-w-0 flex-shrink truncate"
           onClick={() => {
-            showDetail(title);
+            showDetail(caseNumber);
           }}
         >
-          <p className="text-ellipsis text-xl">{title}</p>
+          <p className="truncate text-xl">
+            {caseNumber} - {caseName}
+          </p>
         </div>
 
         <div className="flex items-center">
+          <PiEye className={viewed ? "" : "hidden"} />
+          <PiEyeClosedDuotone className={viewed ? "hidden" : ""} />
           <Lottie
-            className="w-8"
+            className="w-8 hover:cursor-pointer"
             animationData={animationData}
             loop={false}
             autoplay={false}
             lottieRef={lottieRef}
             onClick={handleBookmarkClick}
           />
-          <PiEye className={isViewed ? "" : "hidden"} />
-          <PiEyeClosedDuotone className={isViewed ? "hidden" : ""} />
         </div>
       </div>
-      <div>
-        <p className="text-lg">{date}. 선고</p>
+      <div className=" flex justify-between text-sm">
+        {createAt ? <span>{createAt}. 선고</span> : <span>선고 날짜 미정</span>}
       </div>
       <p
         onClick={() => {
-          showDetail(title);
+          showDetail(caseNumber);
         }}
         className="me-3 mt-1 text-clip text-sm text-gray  hover:text-clip "
       >
-        {content}
+        {summary}
       </p>
       <div></div>
     </div>

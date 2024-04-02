@@ -2,12 +2,37 @@ import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 
 import { useSituationStore } from "@/stores/situationStore";
+import { UseMutateFunction } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
+import { postPrecedentSearchType } from "@/services/precedentService";
+import { useSearch } from "@/components/Precedent/SearchContext";
 
-export default function PrecedentSearchBar() {
+type PrecedentSearchBarType = {
+  mutate: UseMutateFunction<
+    AxiosResponse,
+    Error,
+    postPrecedentSearchType,
+    unknown
+  >;
+  handleLoading: () => void;
+};
+
+export default function PrecedentSearchBar({
+  mutate,
+  handleLoading,
+}: PrecedentSearchBarType) {
   const situation = useSituationStore((state) => state.situation);
-
+  const setSituation = useSituationStore((state) => state.setSituation);
   const [isFocused, setIsFocused] = useState(false);
   const [text, setText] = useState(situation); // textarea의 내용을 관리하는 state
+  const { filters } = useSearch();
+
+  //TODO content, filter 종속
+  const handleSearch = () => {
+    setSituation(text);
+    handleLoading();
+    mutate({ situation: text, page: 0, size: 10, filter: filters });
+  };
 
   return (
     <form
@@ -27,7 +52,7 @@ export default function PrecedentSearchBar() {
         onChange={(e) => setText(e.target.value)}
         value={text}
       />
-      <IoSearchOutline />
+      <IoSearchOutline onClick={handleSearch} />
     </form>
   );
 }
