@@ -5,6 +5,7 @@ import { getNewsDetail } from "@/services/newsService";
 
 import NewsDetail from "@/components/NewsDetail/NewsDetail";
 import SimilarNews from "@/components/NewsDetail/SimilarNews";
+import NewsDetailCategoryList from "@/components/NewsDetail/NewsDetailCategoryList";
 
 export default function NewsDetailPage() {
   const navigate = useNavigate();
@@ -20,30 +21,25 @@ export default function NewsDetailPage() {
     },
   });
 
-  if(isLoading) {
-    return <div>Loading...</div>
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  const {
-    title,
-    content,
-    imageUrl,
-    author,
-    createdAt,
-    categoryList,
-  } = data?.data.data || {};
+  const { title, content, imageUrl, author, createdAt, categoryList } =
+    data?.data.data || {};
 
   return (
     <>
-      {/* 카테고리 */}
-      <div className="ml-[300px] flex gap-3 text-lg text-gray">
-        {categoryList.map((category: string, index: number) => (
-          <div key={index}>#{category}</div>
-        ))}
-      </div>
+      <NewsDetailCategoryList categoryList={categoryList} />
 
       <div className="mx-[300px] flex gap-5">
-        <NewsDetail title={title} createdAt={createdAt} imageUrl={imageUrl} author={author} content={content} />
+        <NewsDetail
+          title={title}
+          createdAt={createdAt}
+          imageUrl={imageUrl}
+          author={author}
+          content={content}
+        />
 
         <div className="w-[1px] bg-slate-100" />
 
