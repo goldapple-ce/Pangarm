@@ -11,6 +11,7 @@ import MyPagePrecedent from "@/components/MyPage/MyPagePrecedent";
 import { getMemberInfo } from "@/services/authService";
 import { useQuery } from "@tanstack/react-query";
 import Error500Animation from "@/components/Error/Error500Animation";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 Modal.setAppElement("#root");
 export default function MyInfoPage() {
@@ -30,7 +31,12 @@ export default function MyInfoPage() {
   };
 
   if (isLoading) {
-    return <>회원 정보를 불러오는 중입니다...</>;
+    return (
+      <div>
+        <LoadingAnimation />
+        <p className="text-center">회원 정보를 불러오는 중입니다...</p>
+      </div>
+    );
   }
 
   if (error) {
@@ -54,22 +60,22 @@ export default function MyInfoPage() {
       >
         <MyPageEditProfile closeEditModal={closeEditModal} />
       </Modal>
-      <div className="flex font-TitleLight text-6xl">
-        <div className="pt-2">
+      <div className="flex font-TitleLight text-4xl">
+        <div className="pt-1.5">
           <span className="font-TitleMedium">{data?.data.data.name}</span> 님의
           정보
         </div>
         <button
-          className="mx-5 my-2 rounded-lg bg-navy px-4 text-2xl text-white"
+          className="mx-5 my-2 rounded-lg bg-navy px-4 py-1 text-lg text-white"
           onClick={openEditModal}
         >
           정보 수정
         </button>
       </div>
-      <div className="mt-7">
+      <div className="mt-3">
         <Tabs>
           <Tab id="tab1" aria-label="북마크한 판례">
-            <div className="py-4">
+            <div className="py-2">
               <MyPagePrecedent
                 getPrecedent={getBookmarkedPrecedent}
                 queryKey="bookmarked"
@@ -77,7 +83,7 @@ export default function MyInfoPage() {
             </div>
           </Tab>
           <Tab id="tab2" aria-label="최근 본 판례">
-            <div className="py-4">
+            <div className="py-2">
               <MyPagePrecedent
                 getPrecedent={getViewedPrecedent}
                 queryKey="viewed"
@@ -85,7 +91,7 @@ export default function MyInfoPage() {
             </div>
           </Tab>
           <Tab id="tab3" aria-label="구독한 키워드">
-            <div className="py-4">{<MyPageSubscribedCategory />}</div>
+            <div className="py-2">{<MyPageSubscribedCategory />}</div>
           </Tab>
         </Tabs>
       </div>

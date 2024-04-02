@@ -2,7 +2,6 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "/api",
-  timeout: 1000,
 });
 
 instance.interceptors.request.use(
@@ -63,6 +62,5 @@ instance.interceptors.request.use(
 //     return Promise.reject(error);
 //   }
 // );
-
 
 export default instance;

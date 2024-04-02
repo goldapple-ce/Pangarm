@@ -5,6 +5,7 @@ import MyPageCategoryList from "@/components/MyPage/MyPageCategoryList";
 import MyPageNewsList from "@/components/MyPage/MyPageNewsList";
 import { getSubscribedCategory } from "@/services/authService";
 import Error500Animation from "@/components/Error/Error500Animation";
+import LoadingAnimation from "../LoadingAnimation";
 
 export default function MyPageSubscribedCategory() {
   const [currentCategory, setCurrentCategory] = useState<string>("");
@@ -19,7 +20,11 @@ export default function MyPageSubscribedCategory() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <LoadingAnimation />
+      </div>
+    );
   }
 
   if (error) {
@@ -32,9 +37,10 @@ export default function MyPageSubscribedCategory() {
   }
 
   return (
-    <div className="flex h-[60vh]">
+    <div className="flex h-[60vh] w-full">
       <MyPageCategoryList
         categoryList={data?.data.data}
+        currentCategory={currentCategory}
         handleCategoryClick={handleCategoryClick}
       />
       <MyPageNewsList currentCategory={currentCategory} />
