@@ -21,7 +21,7 @@ public enum ErrorCode {
     API_ERROR_AUTH_BY_AUTHORIZATION_IS_NECESSARY(401, "AUTH007", "사용자 인증이 필요합니다."),
 
     API_ERROR_MEMBER_NOT_FOUND(400,"M001","존재하지 않는 멤버"),
-    API_ERROR_MEMBER_ALREADY_EXIST(400,"M002","존재하지 않는 멤버"),
+    API_ERROR_MEMBER_ALREADY_EXIST(400,"M002","이미 존재하는 멤버"),
 
     API_ERROR_PRECEDENT_NOT_FOUND(400,"P001","존재하지 않는 판례"),
     API_ERROR_PRECEDENT_ALREADY_EXIST(400,"P002","이미 존재하는 판례"),

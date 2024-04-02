@@ -78,26 +78,35 @@ public class PrecedentFacade {
         return PrecedentBookmarkedResponse.of(precedentBookmarkPage);
     }
 
+
     public PrecedentViewedResponse getViewedPrecedent(User user, Pageable pageable) {
         Member member = memberService.findByUser(user);
+        log.info(member.getEmail());
         Page<Object[]> viewedPrecedentPage = viewingHistoryService.findByMember(member, pageable);
         return PrecedentViewedResponse.of(viewedPrecedentPage);
     }
 
+    @Transactional
     public PrecedentSearchSummaryClientResponse getPrecedentSummary(User user, String caseNumber) {
-        Member member = memberService.findByUser(user);
-        Precedent precedent = precedentService.findByCaseNumber(caseNumber);
-        viewingHistoryService.save(member,precedent);
+        saveViewingHistory(user,caseNumber);
         PrecedentSearchSummaryClientResponse response = precedentFetchAPI.fetchAPI("/summary?caseNumber=",caseNumber, PrecedentSearchSummaryClientResponse.class);
         log.info(response.getConclusion());
         return response;
     }
 
+    @Transactional
     public PrecedentSearchDetailClientResponse getPrecedentDetail(User user, String caseNumber) {
-        Member member = memberService.findByUser(user);
-        Precedent precedent = precedentService.findByCaseNumber(caseNumber);
-        viewingHistoryService.save(member,precedent);
+        saveViewingHistory(user,caseNumber);
         return precedentFetchAPI.fetchAPI("/detail?caseNumber=",caseNumber, PrecedentSearchDetailClientResponse.class);
+    }
+
+    private void saveViewingHistory(User user, String caseNumber){
+        Member member = memberService.findByUser(user);
+        if(member != null && precedentService.existsById(caseNumber)){
+            Precedent precedent = precedentService.findByCaseNumber(caseNumber);
+            log.info(member.getEmail());
+            viewingHistoryService.save(member,precedent);
+        }
     }
 
 

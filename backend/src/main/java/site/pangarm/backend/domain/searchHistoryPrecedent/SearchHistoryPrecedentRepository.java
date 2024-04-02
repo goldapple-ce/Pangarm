@@ -14,13 +14,13 @@ interface SearchHistoryPrecedentRepository extends JpaRepository<SearchHistoryPr
     boolean existsBySearchHistoryAndPrecedent(SearchHistory searchHistory, Precedent precedent);
     Optional<SearchHistoryPrecedent> findBySearchHistoryAndPrecedent(SearchHistory searchHistory, Precedent precedent);
 
-    @Query(value = "select distinct shp, (vh.id.precedent is not null) ,(pb.precedent is not null)  " +
+    @Query(value = "select distinct shp, (vh.precedent is not null) ,(pb.precedent is not null)  " +
             "from SearchHistoryPrecedent as shp " +
-            "left join ViewingHistory as vh on vh.id.precedent = shp.precedent " +
+            "left join ViewingHistory as vh on vh.precedent = shp.precedent " +
             "left join PrecedentBookmark as pb on pb.precedent = shp.precedent " +
             "left join PrecedentKeyword as pk on pk.precedent = shp.precedent " +
             "where shp.searchHistory = :searchHistory  " +
-            "and ((:#{#option.preclude.isViewed} = false) or vh.id.precedent is not null) " +
+            "and ((:#{#option.preclude.isViewed} = false) or vh.precedent is not null) " +
             "and ((:#{#option.preclude.isBookmarked} = false) or pb.precedent is not null) " +
             "and shp.score > :#{#option.minimumSimilarity} " +
             "and ((:#{#option.duration.startDate} is null) or (shp.precedent.judgementDate >= :#{#option.duration.startDate})) " +
@@ -30,13 +30,13 @@ interface SearchHistoryPrecedentRepository extends JpaRepository<SearchHistoryPr
     Page<Object[]> findDistinctByOptionWithKeywordList(SearchHistory searchHistory, SearchHistoryOption option,Pageable pageable);
 
 
-    @Query(value = "select distinct shp, (vh.id.precedent is not null), (pb.precedent is not null) " +
+    @Query(value = "select distinct shp, (vh.precedent is not null), (pb.precedent is not null) " +
             "from SearchHistoryPrecedent as shp " +
-            "left join ViewingHistory as vh on vh.id.precedent = shp.precedent " +
+            "left join ViewingHistory as vh on vh.precedent = shp.precedent " +
             "left join PrecedentBookmark as pb on pb.precedent = shp.precedent " +
             "left join PrecedentKeyword as pk on pk.precedent = shp.precedent " +
             "where shp.searchHistory = :searchHistory  " +
-            "and ((:#{#option.preclude.isViewed} = false) or vh.id.precedent is not null) " +
+            "and ((:#{#option.preclude.isViewed} = false) or vh.precedent is not null) " +
             "and ((:#{#option.preclude.isBookmarked} = false) or pb.precedent is not null) " +
             "and shp.score > :#{#option.minimumSimilarity} " +
             "and ((:#{#option.duration.startDate} is null) or (shp.precedent.judgementDate >= :#{#option.duration.startDate})) " +
