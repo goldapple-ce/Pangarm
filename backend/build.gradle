@@ -1,0 +1,196 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.9'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.asciidoctor.jvm.convert' version '3.3.2'
+	id 'jacoco'
+}
+
+group = 'site.pangarm'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
+}
+
+jacoco {
+	// JaCoCo 버전
+	toolVersion = '0.8.8'
+
+//  테스트결과 리포트를 저장할 경로 변경
+//  default는 "${project.reporting.baseDir}/jacoco"
+	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+jacocoTestReport {
+	reports {
+		// 원하는 리포트를 켜고 끌 수 있다.
+		html.required = true
+		xml.required = true
+
+//      각 리포트 타입 마다 리포트 저장 경로를 설정할 수 있다.
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+
+	finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			// 'element'가 없으면 프로젝트의 전체 파일을 합친 값을 기준으로 한다.
+			limit {
+				// 'counter'를 지정하지 않으면 default는 'INSTRUCTION'
+				// 'value'를 지정하지 않으면 default는 'COVEREDRATIO'
+				minimum = 0.30
+			}
+		}
+
+		rule {
+			// 룰을 간단히 켜고 끌 수 있다.
+			enabled = true
+
+			// 룰을 체크할 단위는 클래스 단위
+			element = 'CLASS'
+
+			limit {
+				counter = 'BRANCH'
+				value = 'COVEREDRATIO'
+				minimum = 0.30
+			}
+
+			// 라인 커버리지를 최소한 80% 만족시켜야 한다.
+			limit {
+				counter = 'LINE'
+				value = 'COVEREDRATIO'
+				minimum = 0.20
+			}
+
+			// 빈 줄을 제외한 코드의 라인수를 최대 200라인으로 제한한다.
+			limit {
+				counter = 'LINE'
+				value = 'TOTALCOUNT'
+				maximum = 200
+			}
+
+			// 커버리지 체크를 제외할 클래스들
+			excludes = [
+                    '*.test.*',
+                    '*.global*',
+					'*.dto.*',
+					'*.*Vo',
+					'*.client.*',
+					'*.InitialFacade',
+					'*.entity.*',
+					'*.*Repository',
+					'*.*Exception',
+					'*.*Builder'
+			]
+		}
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	runtimeOnly 'com.h2database:h2'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2'
+
+	// === security ===
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	// === jwt ===
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
+
+	// === jpa ===
+ 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+
+	// === Swagger ===
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
+	// === elastic search ===
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+
+	// === QueryDsl ===
+//	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+//	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+//	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+//	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+}
+
+tasks.named('bootBuildImage') {
+	builder = 'paketobuildpacks/builder-jammy-base:latest'
+}
+
+tasks.named('test') {
+	jacoco {
+		destinationFile = layout.buildDirectory.dir('jacoco/jacoco.exec').get().asFile
+	}
+	outputs.dir snippetsDir
+	useJUnitPlatform()
+	finalizedBy 'jacocoTestReport'
+}
+
+tasks.named('asciidoctor') {
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+tasks.register('testCoverage', Test) {
+	group 'verification'
+	description 'Runs the unit tests with coverage'
+
+	dependsOn(':test',
+			':jacocoTestReport',
+			':jacocoTestCoverageVerification')
+
+	tasks['jacocoTestReport'].mustRunAfter(tasks.getByName('test'))
+	tasks['jacocoTestCoverageVerification'].mustRunAfter(tasks.getByName('jacocoTestReport'))
+}
+
+//
+//// [3] Querydsl 설정부
+//def generated = 'src/main/generated'
+//
+//// [4] querydsl QClass 파일 생성 위치를 지정
+//tasks.withType(JavaCompile) {
+//	options.getGeneratedSourceOutputDirectory().set(file(generated))
+//}
+//
+//// [5] java source set 에 querydsl QClass 위치 추가
+//sourceSets {
+//	main.java.srcDirs += [ generated ]
+//}
+//
+//// [6] gradle clean 시에 QClass 디렉토리 삭제
+//clean {
+//	delete file(generated)
+//}
+
