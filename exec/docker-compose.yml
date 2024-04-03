@@ -1,0 +1,86 @@
+version: "3"
+services:
+    elastic:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.17.18
+        environment:
+            - discovery.type=single-node
+        ports:
+            - "9200:9200" # http 통신용
+        networks:
+            - elastic-nat
+
+    mail:
+        build:
+            context: ../
+            dockerfile: ./exec/mail/dockerfile
+        env_file:
+            - ./mail/.env
+        ports:
+            - "28080:8080"
+
+    backend:
+        build:
+            context: ../
+            dockerfile: ./exec/backend/dockerfile
+        env_file:
+            - ./backend/.env
+        volumes:
+            - ./resource:/resource
+        restart: always
+        ports:
+            - "18080:8080"
+
+        networks:
+            - db-nat
+            - backend-nat
+            - elastic-nat
+
+    nginx:
+        build:
+            context: ../
+            dockerfile: ./exec/nginx/dockerfile
+
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - /etc/letsencrypt:/etc/letsencrypt
+            - ./nginx/conf.d:/etc/nginx/conf.d
+        networks:
+            - backend-nat
+        # restart: always
+
+    database:
+        image: mysql
+        env_file:
+            - ./mysql/.env
+        volumes:
+            - ./mysql:/var/lib/mysql
+        networks:
+            - db-nat
+
+    zookeeper:
+        image: wurstmeister/zookeeper:latest
+        container_name: zookeeper
+        restart: always
+        networks:
+            - kafka-nat
+    kafka:
+        image: wurstmeister/kafka:latest
+        container_name: kafka
+        ports:
+            - "9092:9092"
+        environment:
+            KAFKA_ADVERTISED_HOST_NAME: kafka
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        networks:
+            - kafka-nat
+
+networks:
+    nginx:
+    db-nat:
+    backend-nat:
+    elastic-nat:
+    kafka-nat:
