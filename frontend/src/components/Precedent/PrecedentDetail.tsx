@@ -109,7 +109,7 @@ export default function PrecedentDetail({
               <div className="flex justify-between px-6 py-2 ">
                 <div className="flex">
                   <p
-                    className={`mx-6 transition-all ease-in-out ${!tab && `font-TitleBold text-navy`}`}
+                    className={`mx-6 cursor-pointer transition-all ease-in-out ${!tab && `font-TitleBold text-navy`}`}
                     onClick={() => {
                       setTab(false);
                     }}
@@ -117,7 +117,7 @@ export default function PrecedentDetail({
                     요약 보기
                   </p>
                   <p
-                    className={`mx-7 transition-all ease-in-out ${tab && `font-TitleBold text-navy`}`}
+                    className={`mx-7 cursor-pointer transition-all ease-in-out ${tab && `font-TitleBold text-navy`}`}
                     onClick={() => {
                       setTab(true);
                     }}
