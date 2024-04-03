@@ -48,8 +48,8 @@ export default function PrecedentSearchCondition({
 
   const setDate = (date: string, value: string) => {
     setFilters((t) => {
-      console.log(date);
-      console.log(date, value);
+      // console.log(date);
+      // console.log(date, value);
       return {
         ...t,
         duration: {
@@ -69,7 +69,7 @@ export default function PrecedentSearchCondition({
 
   const setToggleFalse = (label: string) => {
     setFilters((t) => {
-      console.log(filters.preclude);
+      // console.log(filters.preclude);
       return {
         ...t,
         preclude: {
@@ -82,7 +82,7 @@ export default function PrecedentSearchCondition({
 
   const setToggleTrue = (label: string) => {
     setFilters((t) => {
-      console.log(filters.preclude);
+      // console.log(filters.preclude);
       return {
         ...t,
         preclude: {

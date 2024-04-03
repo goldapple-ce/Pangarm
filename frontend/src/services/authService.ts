@@ -62,7 +62,7 @@ export const putSubscribeBookmark = async (precedentId: number) => {
 // 검색 히스토리
 export const getSearchHistory = async () => {
   const response = await instance.get("/member/search/history");
-  console.log(response);
+  // console.log(response);
   return response;
 };
 

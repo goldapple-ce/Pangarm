@@ -32,12 +32,12 @@ export default function MyPagePrecedent({
         <Error500Animation />
       </div>
     );
-  console.log(`####### ${queryKey}`);
-  console.log(data);
+  // console.log(`####### ${queryKey}`);
+  // console.log(data);
   const precedentData = data?.data.data.precedentList;
-  console.log(precedentData);
+  // console.log(precedentData);
   return (
-    <div className="flex max-h-[60vh] flex-wrap overflow-y-scroll">
+    <div className="flex h-[60vh] flex-wrap overflow-y-scroll">
       {precedentData ? (
         precedentData.length !== 0 ? (
           precedentData.map(
@@ -64,10 +64,14 @@ export default function MyPagePrecedent({
             ),
           )
         ) : (
-          <ErrorEmptyAnimation />
+          <div className="flex h-full">
+            <ErrorEmptyAnimation />
+          </div>
         )
       ) : (
-        <Error500Animation />
+        <div className="flex h-full">
+          <Error500Animation />
+        </div>
       )}
     </div>
   );

@@ -4,7 +4,7 @@
  * const dateTime = "2024-03-28T10:53:00.000+00:00";
  *
  * // 03월 28일 10:53
- * console.log(formatDateWithoutYear(dateTime))
+ * // console.log(formatDateWithoutYear(dateTime))
  * ```
  */
 export const formatDateWithoutYear = (dateTime: string) => {
@@ -36,7 +36,7 @@ export const formatDateWithoutYear = (dateTime: string) => {
  * const dateTime = "2024-03-28T10:53:00.000+00:00";
  *
  * // 2024. 03. 28. 오전 10:53
- * console.log(formatDateWithYear(dateTime))
+ * // console.log(formatDateWithYear(dateTime))
  * ```
  */
 export const formatDateWithYear = (dateTime: string) => {
@@ -49,7 +49,7 @@ export const formatDateWithYear = (dateTime: string) => {
     hour12: true,
     timeZone: "UTC",
   });
-  
+
   const date = new Date(dateTime);
   const result = formatter.format(date);
 

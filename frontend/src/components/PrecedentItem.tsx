@@ -34,7 +34,7 @@ export default function PrecedentItem({
   const isBookmarkedRef = useRef<boolean>(bookmarked);
 
   // TODO axios 요청 send
-  const { mutate, isSuccess } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: putSubscribeBookmark,
   });
 
@@ -48,7 +48,7 @@ export default function PrecedentItem({
 
   const handleBookmarkClick = () => {
     mutate(id);
-    console.log(isSuccess);
+    // console.log(isSuccess);
     if (lottieRef.current) {
       lottieRef.current.setSpeed(1.5);
       if (isBookmarkedRef.current) {
