@@ -11,7 +11,7 @@ export default function CategoryButton({
 }: CategoryButtonProps) {
   return (
     <button
-      className={`flex-shrink-0 rounded-xl border-2 border-navy px-3 py-0.5 font-bold ${isSelected ? "bg-navy text-yellow" : "bg-white text-navy"}`}
+      className={`translate-color flex-shrink-0 rounded-xl border-2 border-navy px-3 py-0.5 font-bold duration-200 ease-in-out ${isSelected ? "bg-navy text-yellow hover:opacity-90" : "bg-white text-navy hover:bg-lightblue"}`}
       onClick={() => onSelect(category)}
     >
       #{category}

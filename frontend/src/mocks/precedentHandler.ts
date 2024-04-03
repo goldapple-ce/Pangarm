@@ -11,15 +11,15 @@ export const precedentHandlers = [
     "/precedent",
     async ({ request }) => {
       // Header에서 AuthToken 가져오기
-      const authToken = request.headers.get("Authorization");
+      //  const authToken = request.headers.get("Authorization");
 
       // URL 에서 PARAMS 가져오기
-      const url = new URL(request.url);
-      const pageNumber = url.searchParams.get("page");
-      const size = url.searchParams.get("size");
+      // const url = new URL(request.url);
+      // const pageNumber = url.searchParams.get("page");
+      // const size = url.searchParams.get("size");
 
       // 콘솔로 다 뽑아 먹어보기
-      console.log(authToken, url, pageNumber, size);
+      // console.log(authToken, url, pageNumber, size);
 
       //Body에서 정보 가져오기
       const data = await request.json();

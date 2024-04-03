@@ -5,6 +5,7 @@ import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { getNewsList } from "@/services/newsService";
 
 import LatestNewsListItem from "@/components/News/LatestNewsListItem";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 export default function LatestNewsList() {
   const size = 20;
@@ -36,7 +37,7 @@ export default function LatestNewsList() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
   if (isError) {
     return <div>Error: {error.message}</div>;

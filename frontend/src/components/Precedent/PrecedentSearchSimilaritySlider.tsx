@@ -2,16 +2,19 @@ import * as Slider from "@radix-ui/react-slider";
 
 type SimilaritySliderProps = {
   setSimilarity: (value: number[]) => void;
+  minimunSimilarity: number;
 };
 
 export default function PrecedentSearchSimilaritySlider({
   setSimilarity,
+  minimunSimilarity,
 }: SimilaritySliderProps) {
   return (
     <>
       <Slider.Root
         className="relative flex h-5 w-[300px] touch-none select-none items-center"
         defaultValue={[50]}
+        value={[minimunSimilarity]}
         max={100}
         step={1}
         onValueChange={(value) => setSimilarity(value)}

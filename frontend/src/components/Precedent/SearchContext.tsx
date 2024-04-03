@@ -36,8 +36,8 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
       endDate: "",
     },
     preclude: {
-      viewed: false,
-      bookmarked: false,
+      isViewed: true,
+      isBookmarked: true,
     },
     minimumSimilarity: 50,
   });

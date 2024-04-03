@@ -20,15 +20,15 @@ export default function MyPageCategoryList({
 }: MyPageCategoryListProps) {
   const { mutate } = useMutation({
     mutationFn: postUnsubscribeNewsCategory,
-    onError: (error) => {
-      console.log(error);
+    onError: () => {
+      // console.log(error);
       Swal.fire({
         text: "구독 해제중에 오류가 발생했습니다.",
         icon: "error",
       });
     },
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
+      // console.log(data);
       Swal.fire({
         text: "구독 해제에 성공했습니다.",
         icon: "success",

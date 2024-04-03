@@ -7,6 +7,7 @@ import { News } from "@/types";
 import { getCategoryNewsList } from "@/services/newsService";
 
 import CategoryNewsListItem from "@/components/News/CategoryNewsListItem";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 interface CategoryNewsListProps {
   category: string;
@@ -31,7 +32,7 @@ export default function CategoryNewsList({ category }: CategoryNewsListProps) {
   }, [inView, fetchNextPage, hasNextPage]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
 
   if (data?.pages.every((el) => el.data.data.length == 0)) {

@@ -8,6 +8,7 @@ import { getNewsCategoryList } from "@/services/newsService";
 
 import CategoryNewsList from "@/components/News/CategoryNewsList";
 import CategoryButton from "@/components/News/CategoryButton";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 export default function CategoryNews() {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -32,7 +33,7 @@ export default function CategoryNews() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
 
   const filteredCategoryList = data.filter((category: string) =>
@@ -81,7 +82,7 @@ export default function CategoryNews() {
           ))}
         </div>
         <button
-          className="absolute right-0 top-0.5 flex h-7 w-7 items-center justify-center rounded-xl border-2 border-navy"
+          className="absolute right-0 top-0.5 flex h-7 w-7 items-center justify-center rounded-xl border-2 border-navy transition-colors duration-200 ease-in-out hover:bg-lightblue"
           onClick={() => setShowMore((prev) => !prev)}
         >
           {showMore ? <ArrowDownIcon /> : <ArrowUpIcon />}

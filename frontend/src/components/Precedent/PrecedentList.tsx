@@ -1,49 +1,75 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
+import { AxiosResponse } from "axios";
+
 import PrecedentListItem from "@/components/Precedent/PrecedentListItem";
-import { PrecedentItemType } from "@/types";
 import { SelectPivot } from "@/constants";
 import PrecedentListItemOrderSelect from "@/components/Precedent/PrecedentListItemOrderSelect";
-import { postPrecedentSearch } from "@/services/precedentService";
-import { useMutation } from "@tanstack/react-query";
+import { postPrecedentSearchType } from "@/services/precedentService";
+import { UseMutateFunction } from "@tanstack/react-query";
 import { useSearch } from "@/components/Precedent/SearchContext";
-import PrecedentLoadingAnimation from "../PrecedentLoadingAnimation";
-import Error500Animation from "../Error/Error500Animation";
+import PrecedentLoadingAnimation from "@/components/PrecedentLoadingAnimation";
+import Error500Animation from "@/components/Error/Error500Animation";
+import { PrecedentItemType } from "@/types";
+import { useSituationStore } from "@/stores/situationStore";
+import ErrorEmptyAnimation from "../Error/ErrorEmptyAnimation";
+import { useInView } from "react-intersection-observer";
 
 interface PrecedentListProps {
-  showDetail: (caseNo: string) => void;
+  precedentList: PrecedentItemType[];
+  isLoading: boolean;
+  isError: boolean;
+  mutate: UseMutateFunction<
+    AxiosResponse,
+    Error,
+    postPrecedentSearchType,
+    unknown
+  >;
+  resultCount: number;
 }
 
 // export default function PrecedentList({ precedentList }: PrecedentListProps) {
-export default function PrecedentList({ showDetail }: PrecedentListProps) {
-  const [precedentList, setPrecedentList] = useState<PrecedentItemType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
-
+export default function PrecedentList({
+  precedentList,
+  isLoading,
+  isError,
+  mutate,
+  resultCount,
+}: PrecedentListProps) {
   const { filters } = useSearch();
-  const { mutate } = useMutation({
-    mutationFn: postPrecedentSearch,
-    onSuccess: (res) => {
-      setIsLoading(false);
-      setIsError(false);
-      console.log(res);
-      setPrecedentList(res.data.data.precedentList.content);
-    },
-    onError: (err) => {
-      setIsLoading(false);
-      setIsError(true);
-      console.log(err);
-    },
-  });
+  const situation = useSituationStore((state) => state.situation);
+  const size = useRef<number>(10);
+  const [ref, inView] = useInView();
 
-  //TODO content, filter 종속
   useEffect(() => {
-    mutate({ situation: "나는 대머리다.", page: 0, size: 10, filter: filters });
+    if (situation !== "")
+      mutate({
+        situation: situation,
+        page: 0,
+        size: size.current,
+        filter: filters,
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (inView) {
+      size.current = size.current + 10;
+      mutate({
+        situation: situation,
+        page: 0,
+        size: size.current,
+        filter: filters,
+      });
+    }
+  }, [filters, inView, mutate, situation]);
+
   return (
     <div className="w-8/12 flex-row">
-      {isLoading ? (
+      {situation === "" ? (
+        <div className="flex h-full flex-col items-center justify-center">
+          <p className="font-TitleLight text-3xl">검색어를 입력해주세요</p>
+        </div>
+      ) : isLoading ? (
         <div>
           <PrecedentLoadingAnimation />
         </div>
@@ -54,12 +80,13 @@ export default function PrecedentList({ showDetail }: PrecedentListProps) {
             무언가 잘못됐어요... 나중에 다시 시도해주세요
           </p>
         </div>
+      ) : resultCount === 0 ? (
+        <ErrorEmptyAnimation />
       ) : (
         <>
           <div className="mb-3 flex justify-between">
             <div className="text-xl">
-              검색 결과 총{" "}
-              <span className="text-yellow">{precedentList.length}</span> 건
+              검색 결과 총 <span className="text-yellow">{resultCount}</span> 건
             </div>
 
             <div>
@@ -72,35 +99,21 @@ export default function PrecedentList({ showDetail }: PrecedentListProps) {
           </div>
           <div>
             {precedentList &&
-              precedentList.map(
-                ({
-                  id,
-                  caseNumber,
-                  caseName,
-                  summary,
-                  similarity,
-                  keywordList,
-                  createAt,
-                  viewed,
-                  bookmarked,
-                }) => (
-                  <React.Fragment key={id}>
-                    <PrecedentListItem
-                      caseNumber={caseNumber}
-                      caseName={caseName}
-                      summary={summary}
-                      similarity={similarity}
-                      keywordList={keywordList}
-                      createAt={createAt}
-                      viewed={viewed}
-                      bookmarked={bookmarked}
-                      showDetail={showDetail}
-                    />
+              precedentList.map((precedentData: PrecedentItemType) => {
+                precedentData.similarity = Math.min(
+                  precedentData.similarity,
+                  100,
+                );
+                return (
+                  <React.Fragment key={precedentData.caseNumber}>
+                    <PrecedentListItem precedentData={precedentData} />
                     <hr className="opacity-30" />
                   </React.Fragment>
-                ),
-              )}
+                );
+              })}
           </div>
+
+          <div ref={ref} className="h-2 w-full" />
         </>
       )}
     </div>
