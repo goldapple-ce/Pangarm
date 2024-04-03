@@ -10,7 +10,6 @@ export default function HeaderLeft() {
       <Link to="news">
         <Box>법 뉴스</Box>
       </Link>
-      <Box>법령 사전</Box>
     </Flex>
   );
 }

@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+
+import Swal from "sweetalert2";
+import axios, { HttpStatusCode } from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import axios, { HttpStatusCode } from "axios";
 
 import { SignUpFormInput } from "@/types";
 import { signUp } from "@/services/authService";
@@ -25,8 +27,13 @@ export default function SignUpForm() {
       const status = response.status;
 
       if (status === HttpStatusCode.Created) {
-        alert("회원가입에 성공했습니다.");
-        navigate("/");
+        Swal.fire({
+          text: "회원가입에 성공했습니다.",
+          icon: "success",
+        }).then(() => {
+          navigate("/");
+        });
+        return;
       }
     },
     onError: (error) => {
@@ -36,7 +43,7 @@ export default function SignUpForm() {
           const { businessCode, errorMessage } = response.data;
           console.log(businessCode, errorMessage);
 
-          if (businessCode === "G004") {
+          if (businessCode === "M002") {
             setError("root.signUpError", {
               message: "이미 가입된 회원입니다.",
             });

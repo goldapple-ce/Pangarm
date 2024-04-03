@@ -4,6 +4,7 @@ import { SearchHistory } from "@/types";
 import { getSearchHistory } from "@/services/authService";
 
 import HistoryListItem from "@/components/Main/HistoryListItem";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 interface HistoryListProps {
   onSelectSituation: (situation: string) => void;
@@ -20,7 +21,7 @@ export default function HistoryList({ onSelectSituation }: HistoryListProps) {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
 
   return (

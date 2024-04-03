@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { Box, Flex } from "@radix-ui/themes";
 
-import { TbBellRingingFilled } from "react-icons/tb";
-
 interface HeaderRightProps {
   onSignOut: () => void;
   isSignedIn: boolean;
@@ -26,7 +24,6 @@ export default function HeaderRight({
       )}
       {isSignedIn && (
         <>
-          <TbBellRingingFilled className="text-yellow" size={30} />
           <Link to={"/mypage"}>
             <Box>내정보</Box>
           </Link>
