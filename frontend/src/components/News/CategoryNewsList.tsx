@@ -16,7 +16,7 @@ interface CategoryNewsListProps {
 export default function CategoryNewsList({ category }: CategoryNewsListProps) {
   const { data, hasNextPage, isLoading, fetchNextPage } = useInfiniteQuery({
     queryKey: ["getNewsListOfCategory", category],
-    queryFn: ({ pageParam = 0 }) => getCategoryNewsList(category, pageParam, 3),
+    queryFn: ({ pageParam = 0 }) => getCategoryNewsList(category, pageParam, 12),
     initialPageParam: 0,
     getNextPageParam: (_lastPage, allPages) => {
       return allPages.length + 1;
