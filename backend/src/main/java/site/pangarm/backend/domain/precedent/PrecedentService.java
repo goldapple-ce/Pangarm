@@ -19,12 +19,12 @@ public class PrecedentService {
 
     public Precedent findByCaseNumber(String caseNumber) {
         return precedentRepository.findByCaseNumber(CaseNumber.of(caseNumber))
-                .orElseThrow(()->new PrecedentException(ErrorCode.API_ERROR_NOT_FOUND));
+                .orElseThrow(()->new PrecedentException(ErrorCode.API_ERROR_PRECEDENT_NOT_FOUND));
     }
 
     public Precedent findById(int id){
         return precedentRepository.findById(id)
-                .orElseThrow(()->new PrecedentException(ErrorCode.API_ERROR_NOT_FOUND));
+                .orElseThrow(()->new PrecedentException(ErrorCode.API_ERROR_PRECEDENT_NOT_FOUND));
     }
 
     @Transactional
@@ -38,6 +38,10 @@ public class PrecedentService {
     public Precedent save(Precedent precedent){
         return precedentRepository.findByCaseNumber(precedent.getCaseNumber()).orElseGet(()->
                 precedentRepository.save(precedent));
+    }
+
+    public boolean existsById(String caseNumber){
+        return precedentRepository.existsByCaseNumber(CaseNumber.of(caseNumber));
     }
 
 }

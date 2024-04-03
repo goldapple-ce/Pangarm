@@ -40,7 +40,7 @@ public class PrecedentBookmarkService {
 
     public PrecedentBookmark findById(int id){
         return precedentBookmarkRepository.findById(id).orElseThrow(()->
-            new PrecedentBookmarkException(ErrorCode.API_ERROR_NOT_FOUND)
+            new PrecedentBookmarkException(ErrorCode.API_ERROR_PRECEDENT_BOOKMARK_NOT_FOUND)
         );
     }
 
@@ -50,7 +50,7 @@ public class PrecedentBookmarkService {
 
     private PrecedentBookmark validation(PrecedentBookmark precedentBookmark){
         if(precedentBookmarkRepository.existsByMemberAndPrecedent(precedentBookmark.getMember(),precedentBookmark.getPrecedent()))
-            throw new PrecedentBookmarkException(ErrorCode.API_ERROR_ALREADY_EXIST);
+            throw new PrecedentBookmarkException(ErrorCode.API_ERROR_PRECEDENT_BOOKMARK_ALREADY_EXIST);
         return precedentBookmark;
     }
 }

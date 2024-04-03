@@ -1,5 +1,6 @@
 package site.pangarm.backend.domain.category;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,11 @@ class CategoryServiceTest {
     private CategoryService categoryService;
 
     @Autowired CategoryRepository categoryRepository;
+
+    @BeforeEach
+    void setUp(){
+        categoryRepository.deleteAll();
+    }
 
     @Nested
     @DisplayName("save 테스트")
@@ -80,6 +86,28 @@ class CategoryServiceTest {
                 categoryService.delete(1);
             });
         }
+    }
+
+    @Nested
+    @DisplayName("delete all  테스트")
+    class deleteAllTest{
+
+        @Test
+        @DisplayName("성공")
+        void whenSuccess() {
+            //GIVEN
+            for (int i = 0; i < 10; i++){
+                Category category = Category.of("카테고리"+i);
+                categoryService.save(category);
+            }
+
+            //WHEN
+            categoryService.deleteAll();
+
+            //THEN
+            assertEquals(0, categoryService.findAll().size());
+        }
+
     }
 
     @Nested

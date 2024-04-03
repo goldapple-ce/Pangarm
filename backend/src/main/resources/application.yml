@@ -32,6 +32,9 @@ spring:
   precedent-client:
     url: ${PRECEDENT_CLIENT_URL} # ex)https://precedent-cherrypick.wookoo.shop
 
+  profiles:
+    active: init
+
 springdoc:
   default-consumes-media-type: application/json
   default-produces-media-type: application/json

@@ -59,10 +59,10 @@ public class PrecedentSearchRequest {
     public SearchHistoryOption toOption(){
         return SearchHistoryOption.builder()
                 .keywordList(keywordList)
-                .startDate(duration.startDate)
-                .endDate(duration.endDate)
-                .isBookmarked(preclude.isBookmarked)
-                .isViewed(preclude.isViewed)
+                .startDate(duration != null ?duration.startDate:null)
+                .endDate(duration != null ?duration.endDate:null)
+                .isBookmarked(preclude != null && preclude.isBookmarked)
+                .isViewed(preclude != null && preclude.isViewed)
                 .minimumSimilarity(minimumSimilarity)
                 .build();
     }

@@ -30,7 +30,7 @@ public class PrecedentTypeService {
     public PrecedentType findBy(CaseType caseType,String courtName,String verdict){
         return precedentTypeRepository
                 .findByCaseTypeAndCourtNameAndVerdict(caseType, courtName, verdict)
-                .orElseThrow(()-> new PrecedentTypeException(ErrorCode.API_ERROR_NOT_FOUND));
+                .orElseThrow(()-> new PrecedentTypeException(ErrorCode.API_ERROR_PRECEDENT_TYPE_NOT_FOUND));
     }
 
 }

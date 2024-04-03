@@ -32,6 +32,11 @@ public class CategoryServiceImpl implements CategoryService{
         });
     }
 
+    @Override
+    public void deleteAll() {
+        categoryRepository.deleteAll();
+    }
+
     @Transactional
     @Override
     public Category update(int id, Category category) {
@@ -61,6 +66,12 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public Category findById(Integer categoryId) throws CategoryException {
         return categoryRepository.findById(categoryId)
+                .orElseThrow(()->new CategoryException(ErrorCode.API_ERROR_NOT_FOUND));
+    }
+
+    @Override
+    public Category findByName(String name) throws CategoryException {
+        return categoryRepository.findByName(name)
                 .orElseThrow(()->new CategoryException(ErrorCode.API_ERROR_NOT_FOUND));
     }
 

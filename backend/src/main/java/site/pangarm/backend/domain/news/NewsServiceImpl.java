@@ -42,4 +42,9 @@ public class NewsServiceImpl implements NewsService{
     public void deleteAll() {
         newsRepository.deleteAll();
     }
+
+    @Override
+    public List<News> searchNews(String keyword, Pageable pageable) {
+        return newsRepository.searchNews(keyword, pageable);
+    }
 }

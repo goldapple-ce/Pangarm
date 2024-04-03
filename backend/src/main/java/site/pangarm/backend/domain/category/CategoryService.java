@@ -10,6 +10,8 @@ public interface CategoryService {
 
     void delete(int categoryId);
 
+    void deleteAll();
+
     Category update(int id, Category category);
 
     boolean existsByName(String name);
@@ -17,4 +19,6 @@ public interface CategoryService {
     List<Category> findAll();
 
     Category findById(Integer categoryId) throws CategoryException;
+
+    Category findByName(String name) throws CategoryException;
 }
