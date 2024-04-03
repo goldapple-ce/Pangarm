@@ -36,7 +36,7 @@ export default function PrecedentSearchBar({
 
   return (
     <form
-      className={`mt-4 flex w-full items-center justify-between rounded-md border border-lightgray bg-lightblue p-4 text-2xl text-navy transition-all duration-300 ease-in-out ${isFocused ? "h-48" : "h-16"}`}
+      className={`mt-4 flex w-full items-center justify-between rounded-md border border-lightgray bg-lightblue p-4 text-xl text-navy transition-all duration-300 ease-in-out ${isFocused ? "h-48" : "h-16"}`}
       // Form의 높이를 조절할 클래스를 조건부로 적용
     >
       <textarea

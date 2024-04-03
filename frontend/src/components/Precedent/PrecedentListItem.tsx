@@ -65,7 +65,7 @@ export default function PrecedentListItem({
         />
       )}
       <div
-        className=" font-lighthover:text-clip my-3 w-full font-Content text-xl"
+        className=" my-3 w-full font-Content text-xl font-light hover:text-clip"
         ref={rootRef}
       >
         <div className="w-10/12 truncate">
@@ -83,7 +83,7 @@ export default function PrecedentListItem({
         </div>
         <div className="flex justify-between ">
           <div
-            className="w-3/4 min-w-0 flex-shrink truncate"
+            className="w-3/4 min-w-0 flex-shrink cursor-pointer truncate"
             onClick={() => {
               showDetail();
             }}
@@ -124,7 +124,7 @@ export default function PrecedentListItem({
           onClick={() => {
             showDetail();
           }}
-          className="me-3 mt-1 text-clip text-sm text-gray  hover:text-clip "
+          className="me-3 mt-1 cursor-pointer text-clip text-sm text-gray hover:text-clip "
         >
           {precedentData.summary}
         </p>
