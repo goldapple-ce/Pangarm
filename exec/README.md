@@ -177,6 +177,14 @@ server {
 }
 ```
 
+## 뉴스 수집 설정
+
+`data/crawler/newspaper/singlenode/.env` [링크](../data/crawler/newspaper/singlenode/.env) 파일을 아래와 같이 설정해주세요
+
+```
+ELASTIC_SEARCH_URL=host.docker.internal:9200
+```
+
 # 실행하기
 
 최초 실행은 다음과 같은 과정이 필요합니다.
@@ -188,6 +196,7 @@ server {
 5. `spark` 폴더의 `start-data-store.py` 실행 [가이드 문서](../spark/README.md)
 6. 판례 데이터 수집 및 적재
 7. `spark` 폴더의 `start-server.py` 실행 [가이드 문서](../spark/README.md)
+8. 뉴스 데이터 수집
 
 ## Docker 설치
 
@@ -218,7 +227,9 @@ server {
 `spark` 폴더로 이동 후 아래 명령어를 타이핑해주세요.
 
 ```
+
 spark-submit --master yarn --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1 start-data-store.py
+
 ```
 
 `kafka` 에서 판례 정보를 저장할 준비가 되었습니다.
@@ -247,7 +258,9 @@ spark-submit --master yarn --packages org.apache.spark:spark-sql-kafka-0-10_2.12
 약 `1500`개의 미리 전처리된 데이터세트를 작성해놓았습니다. `data/processed/.env` [링크](../data/processed/.env) 를 아래와 같이 수정해주세요.
 
 ```
+
 KAFKA_BOOTSTRAP_SERVER=host.docker.internal:9092
+
 ```
 
 그 후 [run.sh](../data/processed/run.sh) 를 실행해주세요.
@@ -265,3 +278,9 @@ spark-submit --master yarn start-server.py
 자동으로 서버가 실행 될것입니다.
 
 자세한 정보는 [여기](../spark/README.md) 에서 확인해주세요.
+
+## 뉴스 수집 실행
+
+`data/crawler/newspaper/singlenode/run.sh` [링크](../data/crawler/newspaper/singlenode/run.sh) 를 실행 해주세요.
+
+자동으로 docker 환경에서 실행됩니다.
