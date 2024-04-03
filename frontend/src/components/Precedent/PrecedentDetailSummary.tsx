@@ -73,19 +73,17 @@ export default function PrecedentDetailSummary({
           <p className="ms-4 mt-1 font-bold">관련법령</p>
           <div className="m-2 mx-5 flex h-full rounded border border-lightgray bg-lightblue p-5">
             {precedentSummary.relate.lawList &&
-              precedentSummary.relate.lawList.map(
-                ({ lawName, searchNumber }, index) => (
-                  <React.Fragment key={searchNumber}>
-                    {`${index > 0 ? " / " : ""}${lawName}`}{" "}
-                  </React.Fragment>
-                ),
-              )}
+              precedentSummary.relate.lawList.map(({ lawName }, index) => (
+                <React.Fragment key={lawName}>
+                  {`${index > 0 ? " / " : ""}${lawName}`}{" "}
+                </React.Fragment>
+              ))}
           </div>
         </div>
         <div>
           <p className="ms-4 font-bold">인용판례</p>
           <div className="m-2 mx-5 flex h-full rounded border border-lightgray bg-lightblue p-5">
-            {precedentSummary.relate.precedentList &&
+            {precedentSummary.relate.precedentList ? (
               precedentSummary.relate.precedentList.map(
                 ({ caseNumber }, index) => (
                   <p
@@ -93,7 +91,10 @@ export default function PrecedentDetailSummary({
                     key={caseNumber}
                   >{`${index > 0 ? " / " : ""}${caseNumber}`}</p>
                 ),
-              )}
+              )
+            ) : (
+              <p>인용 판례가 존재하지 않습니다.</p>
+            )}
           </div>
         </div>
       </div>
