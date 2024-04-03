@@ -1,5 +1,5 @@
-import SignUpAnimation from "../components/SignUp/SignUpAnimation";
-import SignUpForm from "../components/SignUp/SignUpForm";
+import SignUpAnimation from "@/components/SignUp/SignUpAnimation";
+import SignUpForm from "@/components/SignUp/SignUpForm";
 
 export default function SignUpPage() {
   return (

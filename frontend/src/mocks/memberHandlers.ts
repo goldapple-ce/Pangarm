@@ -38,8 +38,8 @@ export const memberHandlers = [
   http.post("/member/sign-up", async ({ request }) => {
     const data = (await request.json()) as SignUpRequestBody;
     const { email, password, name, job } = data;
-    console.log(`[MSW-memberSignIn]`);
-    console.log(data);
+    // console.log(`[MSW-memberSignIn]`);
+    // console.log(data);
 
     let status = 200;
     let message = "회원가입에 성공했습니다.";

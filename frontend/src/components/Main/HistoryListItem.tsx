@@ -9,10 +9,12 @@ export default function HistoryListItem({
 }: HistoryListItemProps) {
   return (
     <div
-      className="box-border h-10 w-full cursor-pointer border-b border-lightgray p-3"
+      className="bg-lightnavy mt-1 w-full cursor-pointer"
       onClick={() => onSelectSituation(situation)}
     >
-      <p className="line-clamp-4">{situation}</p>
+      <p className="mx-3 mt-1 line-clamp-2 h-16 rounded-md border border-lightgray p-2 font-SubTitle shadow-md transition-colors hover:bg-lightgray ">
+        <span className="line-clamp-2">{situation}</span>
+      </p>
     </div>
   );
 }

@@ -6,7 +6,7 @@ import instance from "../utils/http-commons";
 
 // 판례 검색
 
-type postPrecedentSearchType = {
+export type postPrecedentSearchType = {
   situation: string;
   page: number;
   size: number;
@@ -35,13 +35,13 @@ export const postPrecedentSearch = async ({
       },
     },
   );
-  console.log(response);
+  // console.log(response);
   return response;
 };
 
 // 판례 요약
 export const getPrecedentSummary = async (caseNumber: string) => {
-  const response = await instance.get(`/precedent/search/sumamry`, {
+  const response = await instance.get(`/precedent/search/summary`, {
     params: {
       caseNumber: caseNumber,
     },
@@ -80,6 +80,8 @@ export const getViewedPrecedent = async () => {
   const response = await instance.get(`/precedent/viewed`);
   return response;
 };
+
+// 판례 북마크
 
 // 판례 요약 보기
 

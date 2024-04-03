@@ -6,6 +6,7 @@ import { getNewsDetail } from "@/services/newsService";
 import NewsDetail from "@/components/NewsDetail/NewsDetail";
 import SimilarNews from "@/components/NewsDetail/SimilarNews";
 import NewsDetailCategoryList from "@/components/NewsDetail/NewsDetailCategoryList";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 export default function NewsDetailPage() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function NewsDetailPage() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
 
   const { title, content, imageUrl, author, createdAt, categoryList } =

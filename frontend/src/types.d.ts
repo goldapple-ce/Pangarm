@@ -23,8 +23,8 @@ export type Duration = {
 };
 
 export type Preclude = {
-  viewed: boolean;
-  bookmarked: boolean;
+  isViewed: boolean;
+  isBookmarked: boolean;
 };
 
 export type SignInFormInput = {
@@ -62,7 +62,7 @@ export type News = {
   categoryList: string[];
 };
 
-/** 판례 요약 타입  */
+/** 판례 리스트 요약 타입  */
 export interface Welcome4 {
   data: Data;
   message: string;
@@ -121,3 +121,91 @@ export type SearchHistory = {
   id: number;
   situation: string;
 };
+
+/** 판례 요약 타입 */
+export interface PrecedentDetailSummaryType {
+  info: Info;
+  relate: Relate;
+  parties: Parties;
+  originalJudgement: PrecedentList;
+  purport: string;
+  fact: string;
+  opinion: Opinion;
+  judgement: string;
+  conclusion: string;
+  summary: string;
+}
+interface Opinion {
+  plaintiff?: string;
+  defendant?: string;
+}
+interface Parties {
+  plaintiff?: string;
+  defendant?: string;
+}
+interface Relate {
+  lawList: LawList[];
+  precedentList: PrecedentList[];
+}
+interface PrecedentList {
+  caseNumber: string;
+}
+interface LawList {
+  lawName: string;
+  searchNumber: string;
+  searchName: string;
+  searchType: string;
+  searchKey: string;
+}
+interface Info {
+  caseNumber: string;
+  caseName: string;
+  judgementDate: string;
+  type: Type;
+}
+interface Type {
+  incident: string;
+  courtName: string;
+  verdict: string;
+}
+
+/********* */
+
+/** 판례 상세 타입  */
+export interface PrecedentDetailType {
+  info: Info;
+  relate: Relate;
+  body: string;
+  isPdf: boolean;
+  pdf: boolean;
+}
+
+export interface Info {
+  caseNumber: string;
+  caseName: string;
+  judgementDate: string;
+  type: Type;
+}
+
+export interface Type {
+  incident: string;
+  courtName: string;
+  verdict: string;
+}
+
+export interface Relate {
+  lawList: LawList[];
+  precedentList: PrecedentList[];
+}
+
+export interface LawList {
+  lawName: string;
+  searchNumber: string;
+  searchName: string;
+  searchType: string;
+  searchKey: string;
+}
+
+export interface PrecedentList {
+  caseNumber: string;
+}

@@ -50,8 +50,8 @@ export const postUnsubscribeNewsCategory = async (category: string) => {
 };
 
 // 판례 북마크
-export const postSubscribeBookmark = async (precedentId: string) => {
-  const response = await instance.post(`/member/precedent`, {
+export const putSubscribeBookmark = async (precedentId: number) => {
+  const response = await instance.put(`/member/precedent`, null, {
     params: {
       id: precedentId,
     },
@@ -62,7 +62,7 @@ export const postSubscribeBookmark = async (precedentId: string) => {
 // 검색 히스토리
 export const getSearchHistory = async () => {
   const response = await instance.get("/member/search/history");
-  console.log(response);
+  // console.log(response);
   return response;
 };
 
