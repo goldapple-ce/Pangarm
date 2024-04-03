@@ -51,14 +51,14 @@ public class PrecedentController {
     }
 
     @GetMapping("/search/summary")
-    @Operation(summary = "판례요약 찾기", description = "판례요약 찾기입니다. 로그인이 필요합니다.")
+    @Operation(summary = "판례요약 찾기", description = "판례요약 찾기입니다. 로그인 유무와 상관없이 사용할 수 있습니다. 페이지별로 볼 수 있습니다.")
     public ResponseEntity<ApiResponse<PrecedentSearchSummaryClientResponse>> getPrecedentSummary(@AuthenticationPrincipal User user, @NotBlank @RequestParam("caseNumber") @Schema(description = "사건번호", defaultValue = "2017도10601") String caseNumber) {
         PrecedentSearchSummaryClientResponse response = precedentFacade.getPrecedentSummary(user, caseNumber);
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.API_SUCCESS_PRECEDENT_SEARCH_SUMMARY, response));
     }
 
     @GetMapping("/search/detail")
-    @Operation(summary = "판례상세 찾기", description = "판례상세 찾기입니다. 로그인이 필요합니다.")
+    @Operation(summary = "판례상세 찾기", description = "판례상세 찾기입니다. 로그인 유무와 상관없이 사용할 수 있습니다. 페이지별로 볼 수 있습니다.")
     public ResponseEntity<ApiResponse<PrecedentSearchDetailClientResponse>> getPrecedentDetail(@AuthenticationPrincipal User user, @NotBlank @RequestParam("caseNumber") @Schema(description = "사건번호", defaultValue = "2017도10601") String caseNumber) {
         PrecedentSearchDetailClientResponse response = precedentFacade.getPrecedentDetail(user, caseNumber);
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.API_SUCCESS_PRECEDENT_SEARCH_DETAIL, response));

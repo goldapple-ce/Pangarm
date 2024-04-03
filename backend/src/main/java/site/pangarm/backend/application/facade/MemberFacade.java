@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
 import site.pangarm.backend.application.dto.response.MemberFindByIdResponse;
+import site.pangarm.backend.application.dto.response.MemberSubscribeInfo;
 import site.pangarm.backend.application.dto.response.PrecedentSearchHistoryResponse;
 import site.pangarm.backend.domain.category.CategoryService;
 import site.pangarm.backend.domain.category.entity.Category;
 import site.pangarm.backend.domain.member.MemberService;
 import site.pangarm.backend.domain.member.entity.Member;
 import site.pangarm.backend.domain.membercategory.MemberCategoryService;
+import site.pangarm.backend.domain.membercategory.entity.MemberCategory;
 import site.pangarm.backend.domain.precedent.PrecedentService;
 import site.pangarm.backend.domain.precedent.entity.Precedent;
 import site.pangarm.backend.domain.precedentBookmark.PrecedentBookmarkService;
@@ -40,14 +42,14 @@ public class MemberFacade {
     }
 
     public PrecedentSearchHistoryResponse findAllSearchHistory(User user) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
+        Member member = memberService.findByUser(user);
         List<SearchHistory> searchHistoryList = searchHistoryService.findAllByMember(member);
         return PrecedentSearchHistoryResponse.of(searchHistoryList);
     }
 
     @Transactional
     public void bookmarkPrecedent(User user, int precedentId) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
+        Member member = memberService.findByUser(user);
         Precedent precedent = precedentService.findById(precedentId);
 
         bookmarkService.update(member, precedent);
@@ -58,20 +60,34 @@ public class MemberFacade {
     }
 
     @Transactional
-    public void subscribe(int memberId, int categoryId) {
+    public void subscribe(int memberId, String categoryName) {
         Member member = memberService.findById(memberId);
-        Category category = categoryService.findById(categoryId);
+        Category category = categoryService.findByName(categoryName);
         memberCategoryService.save(member, category);
     }
 
     @Transactional
-    public void unsubscribe(int memberId, int categoryId) {
-        memberCategoryService.delete(memberId, categoryId);
+    public void unsubscribe(int memberId, String categoryName) {
+        Category category = categoryService.findByName(categoryName);
+        memberCategoryService.delete(memberId, category.getId());
     }
 
-    @Transactional
     public List<String> getCategoryList(int memberId) {
         return memberCategoryService.findByMemberId(memberId)
+                .stream()
+                .map(memberCategory -> memberCategory.getCategory().getName())
+                .toList();
+    }
+
+    public List<MemberSubscribeInfo> getAllMemberSubscribeInfoList() {
+        return memberService.findAll()
+                .stream()
+                .map(member -> new MemberSubscribeInfo(member.getEmail(), transferToCategoryNameList(member.getMemberCategoryList())))
+                .toList();
+    }
+
+    private List<String> transferToCategoryNameList(List<MemberCategory> memberCategoryList) {
+        return memberCategoryList
                 .stream()
                 .map(memberCategory -> memberCategory.getCategory().getName())
                 .toList();

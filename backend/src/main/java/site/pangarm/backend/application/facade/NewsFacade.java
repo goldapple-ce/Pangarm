@@ -46,6 +46,10 @@ public class NewsFacade {
         newsService.deleteAll();
     }
 
+    public List<News> searchNews(String keyword, Pageable pageable) {
+        return newsService.searchNews(keyword, pageable);
+    }
+
     /** News Category */
     public void registerCategory(CategoryRegisterRequest request) {
         categoryService.save(request.toEntity());

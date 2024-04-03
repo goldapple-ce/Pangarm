@@ -8,7 +8,7 @@ import site.pangarm.backend.domain.searchHistoryPrecedent.entity.SearchHistoryPr
 import site.pangarm.backend.domain.searchHistoryPrecedentKeyword.entity.PrecedentKeyword;
 import site.pangarm.backend.domain.viewingHistory.entity.ViewingHistory;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,19 +23,19 @@ public class PrecedentResponse {
     private final boolean isViewed;
     private final Double similarity;
     private final List<String> keywordList;
-    private final LocalDateTime createAt;
+    private final LocalDate createAt;
 
-    private PrecedentResponse(int id, String caseNumber, String caseName, String summary, boolean isBookmarked, boolean isViewed, LocalDateTime createAt, List<String> keywordList) {
+    private PrecedentResponse(int id, String caseNumber, String caseName, String summary, boolean isBookmarked, boolean isViewed, LocalDate createAt, List<String> keywordList) {
         this(id, caseNumber, caseName, summary, isBookmarked, isViewed, null, keywordList, createAt);
     }
 
-    private PrecedentResponse(int id, String caseNumber, String caseName, String summary, boolean isBookmarked, boolean isViewed, List<String> keywordList) {
-        this(id, caseNumber, caseName, summary, isBookmarked, isViewed, null, keywordList, null);
-    }
+//    private PrecedentResponse(int id, String caseNumber, String caseName, String summary, boolean isBookmarked, boolean isViewed, List<String> keywordList) {
+//        this(id, caseNumber, caseName, summary, isBookmarked, isViewed, null, keywordList, null);
+//    }
 
-    public PrecedentResponse(int id, String caseNumber, String caseName, String content, boolean isBookmarked, boolean isViewed, double similarity, List<String> keywords) {
-        this(id, caseNumber, caseName, content, isBookmarked, isViewed, similarity, keywords, null);
-    }
+//    public PrecedentResponse(int id, String caseNumber, String caseName, String content, boolean isBookmarked, boolean isViewed, double similarity, List<String> keywords,LocalDate createAt) {
+//        this(id, caseNumber, caseName, content, isBookmarked, isViewed, similarity, keywords, createAt);
+//    }
 
     public static PrecedentResponse of(SearchHistoryPrecedent searchHistoryPrecedent, boolean isViewed, boolean isBookmarked) {
         int id = searchHistoryPrecedent.getPrecedent().getId();
@@ -46,7 +46,7 @@ public class PrecedentResponse {
 
         List<String> keywords = extractKeywordList(searchHistoryPrecedent.getPrecedent());
 
-        return new PrecedentResponse(id, caseNumber, title, content, isBookmarked, isViewed, similarity, keywords);
+        return new PrecedentResponse(id, caseNumber, title, content, isBookmarked, isViewed, similarity, keywords,searchHistoryPrecedent.getPrecedent().getJudgementDate());
     }
 
     public static PrecedentResponse of(Precedent precedent, boolean isViewed, boolean isBookmarked) {
@@ -56,11 +56,11 @@ public class PrecedentResponse {
         String content = precedent.getSummary();
         List<String> keywordList = extractKeywordList(precedent);
 
-        return new PrecedentResponse(id,caseNumber, title, content, isBookmarked, isViewed, keywordList);
+        return new PrecedentResponse(id,caseNumber, title, content, isBookmarked, isViewed, precedent.getJudgementDate(),keywordList);
     }
 
     public static PrecedentResponse of(ViewingHistory viewingHistory, boolean isViewed, boolean isBookmarked) {
-        Precedent precedent = viewingHistory.getId().getPrecedent();
+        Precedent precedent = viewingHistory.getPrecedent();
 
         int id = precedent.getId();
         String caseNumber = precedent.getCaseNumber().toString();
@@ -68,7 +68,7 @@ public class PrecedentResponse {
         String content = precedent.getSummary();
         List<String> keywordList = extractKeywordList(precedent);
 
-        return new PrecedentResponse(id, caseNumber,title, content, isBookmarked, isViewed, viewingHistory.getCreateAt(), keywordList);
+        return new PrecedentResponse(id, caseNumber,title, content, isBookmarked, isViewed, precedent.getJudgementDate(), keywordList);
     }
 
     private static List<String> extractKeywordList(Precedent precedent) {

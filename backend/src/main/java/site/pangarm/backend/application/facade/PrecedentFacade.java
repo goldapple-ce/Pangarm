@@ -62,41 +62,53 @@ public class PrecedentFacade {
         return PrecedentSearchResponse.of(searchHistoryPrecedentPage, keywordList);
     }
 
-    public void savePrecedentHistory(SearchHistory searchHistory, SearchPrecedentClientResponse.Precedent precedentVO) {
+    private void savePrecedentHistory(SearchHistory searchHistory, SearchPrecedentClientResponse.Precedent precedentVO) {
         if(caseTypeService.existsByName(precedentVO.getInfo().getCaseTypeName())){
             CaseType caseType = caseTypeService.findByName(precedentVO.getInfo().getCaseTypeName());
             PrecedentType precedentType = precedentTypeService.save(caseType, precedentVO.getInfo().getType().getCourtName(), precedentVO.getInfo().getType().getVerdict());
             Precedent precedent = precedentService.save(precedentVO.getInfo().getCaseNumber(), precedentVO.getInfo().getCaseName(), precedentVO.getInfo().getJudgementDate(), precedentVO.getSummary(), precedentType);
-            precedentKeywordService.saveAll(precedent, precedentVO.getKeywordList());
+            if(precedentVO.getKeywordList() != null)
+                precedentKeywordService.saveAll(precedent, precedentVO.getKeywordList());
             searchHistoryPrecedentService.save(searchHistory, precedent, precedentVO.getScore());
         }
     }
 
     public PrecedentBookmarkedResponse getBookmarkedPrecedent(User user, Pageable pageable) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
+        Member member = memberService.findByUser(user);
         Page<Object[]> precedentBookmarkPage = precedentBookmarkService.findByMember(member, pageable);
         return PrecedentBookmarkedResponse.of(precedentBookmarkPage);
     }
 
+
     public PrecedentViewedResponse getViewedPrecedent(User user, Pageable pageable) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
+        Member member = memberService.findByUser(user);
+        log.info(member.getEmail());
         Page<Object[]> viewedPrecedentPage = viewingHistoryService.findByMember(member, pageable);
         return PrecedentViewedResponse.of(viewedPrecedentPage);
     }
 
+    @Transactional
     public PrecedentSearchSummaryClientResponse getPrecedentSummary(User user, String caseNumber) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
-        Precedent precedent = precedentService.findByCaseNumber(caseNumber);
-        viewingHistoryService.save(member,precedent);
+        saveViewingHistory(user,caseNumber);
         PrecedentSearchSummaryClientResponse response = precedentFetchAPI.fetchAPI("/summary?caseNumber=",caseNumber, PrecedentSearchSummaryClientResponse.class);
         log.info(response.getConclusion());
         return response;
     }
 
+    @Transactional
     public PrecedentSearchDetailClientResponse getPrecedentDetail(User user, String caseNumber) {
-        Member member = memberService.findById(Integer.parseInt(user.getUsername()));
-        Precedent precedent = precedentService.findByCaseNumber(caseNumber);
-        viewingHistoryService.save(member,precedent);
+        saveViewingHistory(user,caseNumber);
         return precedentFetchAPI.fetchAPI("/detail?caseNumber=",caseNumber, PrecedentSearchDetailClientResponse.class);
     }
+
+    private void saveViewingHistory(User user, String caseNumber){
+        Member member = memberService.findByUser(user);
+        if(member != null && precedentService.existsById(caseNumber)){
+            Precedent precedent = precedentService.findByCaseNumber(caseNumber);
+            log.info(member.getEmail());
+            viewingHistoryService.save(member,precedent);
+        }
+    }
+
+
 }

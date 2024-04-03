@@ -43,12 +43,12 @@ public class AuthorizationExceptionHandler extends OncePerRequestFilter {
             response.setContentType("application/json");
             response.getWriter().write(objectMapper.writeValueAsString(error));
         }catch (Exception e){
-            log.error("에러 발생 "+ e.getMessage());
+            log.error("authorizationFail : {}",e.getMessage());
             ErrorResponse error =
                     ErrorResponse.builder()
-                            .errorMessage("인증 에러가 발생했습니다.")
+                            .errorMessage(e.getMessage())
                             .build();
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            response.setStatus(HttpStatus.I_AM_A_TEAPOT.value());
             response.setContentType("application/json");
             response.getWriter().write(objectMapper.writeValueAsString(error));
         }

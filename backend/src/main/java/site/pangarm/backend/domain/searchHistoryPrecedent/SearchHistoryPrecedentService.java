@@ -19,19 +19,13 @@ public class SearchHistoryPrecedentService {
 
     @Transactional
     public SearchHistoryPrecedent save(SearchHistory searchHistory, Precedent precedent, double score){
-        return searchHistoryPrecedentRepository.save(validation(searchHistory,precedent,score));
+        return searchHistoryPrecedentRepository.findBySearchHistoryAndPrecedent(searchHistory,precedent).orElseGet(()->
+                searchHistoryPrecedentRepository.save(SearchHistoryPrecedent.of(searchHistory,precedent,score)));
     }
 
     public Page<Object[]> findAllWithIsViewedBySearchHistory(SearchHistory searchHistory, SearchHistoryOption option, Pageable page){
-        if(option.getKeywordList().isEmpty())
+        if(option.getKeywordList() == null || option.getKeywordList().isEmpty())
             return searchHistoryPrecedentRepository.findDistinctByOption(searchHistory,option,page);
         return searchHistoryPrecedentRepository.findDistinctByOptionWithKeywordList(searchHistory,option,page);
-    }
-
-    private SearchHistoryPrecedent validation(SearchHistory searchHistory, Precedent precedent,double score){
-        if(searchHistoryPrecedentRepository.existsBySearchHistoryAndPrecedent(searchHistory,precedent)){
-            throw new SearchHistoryPrecedentException(ErrorCode.API_ERROR_ALREADY_EXIST);
-        }
-        return SearchHistoryPrecedent.of(searchHistory,precedent,score);
     }
 }
