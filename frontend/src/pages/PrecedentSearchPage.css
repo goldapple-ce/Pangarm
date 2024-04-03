@@ -1,0 +1,23 @@
+h2 {
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.subtit1 {
+  text-align: center;
+  font-size: x-large;
+  margin-bottom: 20px;
+}
+
+h4 {
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+h5 {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
