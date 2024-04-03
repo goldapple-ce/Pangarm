@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+  jwt:
+    secret: ${SPRING_JWT_SECRET} #ex) hrqwuiehfuhsdajhfuihwefijawhiufhwaefkjhweauhdfkjahduhf1398y4
+    accessExpTime: ${SPRING_JWT_ACCESS-EXPTIME} # ex)100000000
+    refreshExpTime: ${SPRING_JWT_REFRESH-EXPTIME} # ex)100000000
+
+  data:
+
+    elasticsearch:
+      host: ${ELASTIC_SEARCH_HOST} # ex)localhost
+      port: ${ELASTIC_SEARCH_PORT} # ex)9200
+
+  precedent-client:
+    url: ${PRECEDENT_CLIENT_URL} # ex)https://precedent-cherrypick.wookoo.shop
+
+logging:
+  level:
+    root: INFO
