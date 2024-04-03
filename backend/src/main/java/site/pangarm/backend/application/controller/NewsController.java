@@ -62,6 +62,12 @@ public class NewsController {
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_NEWS_DELETE_ALL));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<News>>> searchNews(@RequestParam String keyword, Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ApiResponse<>(ResponseCode.API_SUCCESS_NEWS_SEARCH, newsFacade.searchNews(keyword, pageable)));
+    }
+
     /**
      * News Category
      */

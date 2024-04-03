@@ -18,4 +18,6 @@ public interface NewsService {
     void deleteById(String id);
 
     void deleteAll();
+
+    List<News> searchNews(String keyword, Pageable pageable);
 }

@@ -6,10 +6,9 @@ import site.pangarm.backend.domain.news.entity.News;
 
 import java.util.List;
 
-interface NewsRepository extends ElasticsearchRepository<News, String> {
+interface NewsRepository extends ElasticsearchRepository<News, String> , CustomNewsRepository{
 
     List<News> findAllByOrderByCreatedAtDesc(Pageable pageable);
 
     List<News> findByCategoryListInOrderByCreatedAtDesc(String category, Pageable pageable);
-
 }
