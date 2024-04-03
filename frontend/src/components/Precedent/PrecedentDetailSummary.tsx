@@ -45,11 +45,13 @@ export default function PrecedentDetailSummary({
                 </td>
               </tr>
               <tr className="justify p-2 text-center">
-                <td className="w-1/4 border bg-lightblue p-2 font-bold">
+                <td className="w-1/4 flex-wrap border bg-lightblue p-2 font-bold">
                   사건명
                 </td>
-                <td className="w-1/4 truncate border p-2" colSpan={3}>
-                  {precedentSummary.info.caseName}
+                <td className="w-1/4 border p-2" colSpan={3}>
+                  <p className="flex w-full justify-center text-center ">
+                    {precedentSummary.info.caseName}
+                  </p>
                 </td>
               </tr>
               <tr className="justify text-center">
@@ -89,7 +91,7 @@ export default function PrecedentDetailSummary({
                   <p
                     aria-label={caseNumber}
                     key={caseNumber}
-                  >{`${index > 0 ? " / " : ""}${caseNumber}`}</p>
+                  >{`${index > 0 ? " / " : ""}${caseNumber} `}</p>
                 ),
               )
             ) : (

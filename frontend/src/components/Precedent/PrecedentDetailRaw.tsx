@@ -2,11 +2,11 @@ import { getPrecedentDetail } from "@/services/precedentService";
 import { useQuery } from "@tanstack/react-query";
 import PrecedentLoadingAnimation from "../PrecedentLoadingAnimation";
 import Error500Animation from "../Error/Error500Animation";
+import parse from "html-react-parser";
 
 type PrecedentDetailRawProps = {
   caseNo: string;
 };
-
 export default function PrecedentDetailRaw({
   caseNo,
 }: PrecedentDetailRawProps) {
@@ -32,9 +32,10 @@ export default function PrecedentDetailRaw({
         </div>
       </div>
     );
+
   return (
     <div className="h-[70vh] flex-row overflow-y-auto p-8 font-SubTitle">
-      <div dangerouslySetInnerHTML={{ __html: data?.data.data.body }}></div>
+      {parse(data?.data.data.body)}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { putSubscribeBookmark } from "@/services/authService";
 import { PrecedentItemType } from "@/types";
 import PrecedentDetail from "./PrecedentDetail";
+import { useAuthStore } from "@/stores/authStore";
 
 type PrecedentListItemProps = {
   precedentData: PrecedentItemType;
@@ -19,8 +20,8 @@ export default function PrecedentListItem({
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const isBookmarkedRef = useRef<boolean>(precedentData.bookmarked);
-
-  const { mutate, isSuccess } = useMutation({
+  const isSignedIn = useAuthStore((state) => state.isSignedIn);
+  const { mutate } = useMutation({
     mutationFn: putSubscribeBookmark,
   });
 
@@ -40,7 +41,7 @@ export default function PrecedentListItem({
 
   const handleBookmarkClick = () => {
     mutate(precedentData.id);
-    console.log(isSuccess);
+    // console.log(isSuccess);
     if (lottieRef.current) {
       lottieRef.current.setSpeed(1.5);
       if (isBookmarkedRef.current) {
@@ -93,18 +94,22 @@ export default function PrecedentListItem({
           </div>
 
           <div className="flex items-center">
-            <PiEye className={precedentData.viewed ? "" : "hidden"} />
-            <PiEyeClosedDuotone
-              className={precedentData.viewed ? "hidden" : ""}
-            />
-            <Lottie
-              className="w-8 hover:cursor-pointer"
-              animationData={animationData}
-              loop={false}
-              autoplay={false}
-              lottieRef={lottieRef}
-              onClick={handleBookmarkClick}
-            />
+            {isSignedIn && (
+              <>
+                <PiEye className={precedentData.viewed ? "" : "hidden"} />
+                <PiEyeClosedDuotone
+                  className={precedentData.viewed ? "hidden" : ""}
+                />
+                <Lottie
+                  className="w-8 hover:cursor-pointer"
+                  animationData={animationData}
+                  loop={false}
+                  autoplay={false}
+                  lottieRef={lottieRef}
+                  onClick={handleBookmarkClick}
+                />
+              </>
+            )}
           </div>
         </div>
         <div className=" flex justify-between text-sm">
