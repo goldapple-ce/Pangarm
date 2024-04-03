@@ -7,6 +7,8 @@ import logging
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+import schedule
+
 load_dotenv()
 ELASTIC_SEARCH_URL = os.environ["ELASTIC_SEARCH_URL"]
 
@@ -315,4 +317,7 @@ def pick_news_content_list_from_JSON_response(response):
     return resultJson["contents"]  # json의 contents 내부값만 받아옴
 
 
-crawl_news()
+schedule.every().day.at("06:00:00").do(lambda: crawl_news())
+# schedule.every(1).seconds.do(lambda: main())
+while True:
+    schedule.run_pending()
