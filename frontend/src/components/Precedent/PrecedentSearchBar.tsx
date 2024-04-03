@@ -27,7 +27,6 @@ export default function PrecedentSearchBar({
   const [text, setText] = useState(situation); // textarea의 내용을 관리하는 state
   const { filters } = useSearch();
 
-  //TODO content, filter 종속
   const handleSearch = () => {
     setSituation(text);
     handleLoading();
@@ -52,7 +51,10 @@ export default function PrecedentSearchBar({
         onChange={(e) => setText(e.target.value)}
         value={text}
       />
-      <IoSearchOutline onClick={handleSearch} />
+      <IoSearchOutline
+        className="hover:cursor-pointer"
+        onClick={handleSearch}
+      />
     </form>
   );
 }

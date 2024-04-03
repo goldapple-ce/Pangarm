@@ -7,19 +7,20 @@ import { useQuery } from "@tanstack/react-query";
 import { getPrecedentSummary } from "@/services/precedentService";
 import PrecedentLoadingAnimation from "../PrecedentLoadingAnimation";
 import Error500Animation from "../Error/Error500Animation";
-import { PrecedentItemType } from "@/types";
 import PrecedentDetailRaw from "./PrecedentDetailRaw";
 
 type PrecedentDetailProps = {
   caseNo: string;
-  precedentData: PrecedentItemType;
+  similarity?: number;
+  keywordList?: string[];
   closeDetail: () => void;
 };
 
 export default function PrecedentDetail({
   closeDetail,
   caseNo,
-  precedentData,
+  similarity,
+  keywordList,
 }: PrecedentDetailProps) {
   const [animate, setAnimate] = useState<boolean>(false);
   const [tab, setTab] = useState<boolean>(false);
@@ -27,7 +28,7 @@ export default function PrecedentDetail({
     queryKey: ["precedentSummary", caseNo],
     queryFn: () => getPrecedentSummary(caseNo),
   });
-  console.log(caseNo);
+
   const handleClose = () => {
     setAnimate(false);
     setTimeout(() => {
@@ -71,18 +72,22 @@ export default function PrecedentDetail({
           <>
             <div className="flex-row">
               <p className="font-TitleLight">
-                {precedentData.keywordList &&
-                  precedentData.keywordList.map((keyword) => {
+                {keywordList ? (
+                  keywordList.map((keyword: string) => {
                     return (
                       <span className="me-2" key={keyword}>
                         #{keyword}
                       </span>
                     );
-                  })}
+                  })
+                ) : (
+                  <span>키워드는 검색에서 제공됩니다.</span>
+                )}
               </p>
               <div className="flex justify-between">
-                <p className="font-TitleBold text-4xl">
-                  {precedentData.caseName}
+                <p className="truncate font-TitleBold text-4xl">
+                  {data?.data.data.info.caseNumber} -{" "}
+                  {data?.data.data.info.caseName}
                 </p>
                 <TfiClose
                   className="h-9 w-9 hover:cursor-pointer"
@@ -90,13 +95,14 @@ export default function PrecedentDetail({
                 />
               </div>
               <p className="font-TitleMedium text-4xl">
-                {precedentData.createAt} 선고
-                {/* {PrecedentDetailExample.detail.basicInformation.graph.judgementDate} */}
+                {data?.data.data.info.judgementDate} 선고
               </p>
-              {precedentData.similarity && (
+              {similarity ? (
                 <p className="font-TitleLight">
-                  검색에 대한 유사도 {precedentData.similarity}%
+                  검색에 대한 유사도 {similarity}%
                 </p>
+              ) : (
+                <p className="font-TitleLight">유사도는 검색에서 제공됩니다.</p>
               )}
             </div>
             <div className="mt-4 font-TitleLight">
@@ -121,7 +127,7 @@ export default function PrecedentDetail({
                 </div>
                 <div className="flex">
                   <p className="mx-3">새 창으로 원문 보기</p>
-                  <p className="mx-3">PDF로 원문 보기</p>
+                  <p className="mx-3 opacity-45">PDF로 원문 보기</p>
                 </div>
               </div>
               <div

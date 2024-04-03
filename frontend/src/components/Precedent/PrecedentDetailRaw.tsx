@@ -17,14 +17,19 @@ export default function PrecedentDetailRaw({
 
   if (isLoading)
     return (
-      <div>
+      <div className="flex h-full flex-col items-center justify-center">
         <PrecedentLoadingAnimation />
       </div>
     );
   if (isError)
     return (
-      <div>
-        <Error500Animation />
+      <div className="flex h-full items-center justify-center">
+        <div className="flex-row justify-center">
+          <Error500Animation />
+          <p className="text-center font-TitleMedium text-2xl">
+            무언가 잘못 됐어요... 나중에 다시 시도해주세요...!
+          </p>
+        </div>
       </div>
     );
   return (

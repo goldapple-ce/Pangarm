@@ -13,7 +13,6 @@ import { PrecedentItemType } from "@/types";
 import { useSituationStore } from "@/stores/situationStore";
 
 interface PrecedentListProps {
-  showDetail: (precedentData: PrecedentItemType) => void;
   precedentList: PrecedentItemType[];
   isLoading: boolean;
   isError: boolean;
@@ -28,7 +27,6 @@ interface PrecedentListProps {
 
 // export default function PrecedentList({ precedentList }: PrecedentListProps) {
 export default function PrecedentList({
-  showDetail,
   precedentList,
   isLoading,
   isError,
@@ -74,11 +72,8 @@ export default function PrecedentList({
           <div>
             {precedentList &&
               precedentList.map((precedentData: PrecedentItemType) => (
-                <React.Fragment key={precedentData.id}>
-                  <PrecedentListItem
-                    precedentData={precedentData}
-                    showDetail={showDetail}
-                  />
+                <React.Fragment key={precedentData.caseNumber}>
+                  <PrecedentListItem precedentData={precedentData} />
                   <hr className="opacity-30" />
                 </React.Fragment>
               ))}
