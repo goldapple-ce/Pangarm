@@ -8,6 +8,7 @@ import { getNewsCategoryList } from "@/services/newsService";
 
 import CategoryNewsList from "@/components/News/CategoryNewsList";
 import CategoryButton from "@/components/News/CategoryButton";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 export default function CategoryNews() {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -32,7 +33,7 @@ export default function CategoryNews() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
 
   const filteredCategoryList = data.filter((category: string) =>
