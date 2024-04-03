@@ -40,8 +40,8 @@ export default function SignUpForm() {
       if (axios.isAxiosError(error)) {
         const response = error.response;
         if (response) {
-          const { businessCode, errorMessage } = response.data;
-          console.log(businessCode, errorMessage);
+          const { businessCode } = response.data;
+          // console.log(businessCode, errorMessage);
 
           if (businessCode === "M002") {
             setError("root.signUpError", {

@@ -28,7 +28,7 @@ export default function MyPageSubscribedCategory() {
   }
 
   if (error) {
-    console.log(error);
+    // console.log(error);
     return (
       <div>
         <Error500Animation />

@@ -31,6 +31,7 @@ export default function PrecedentSearchBar({
     setSituation(text);
     handleLoading();
     mutate({ situation: text, page: 0, size: 10, filter: filters });
+    // console.log(filters);
   };
 
   return (

@@ -32,10 +32,10 @@ export default function MyPagePrecedent({
         <Error500Animation />
       </div>
     );
-  console.log(`####### ${queryKey}`);
-  console.log(data);
+  // console.log(`####### ${queryKey}`);
+  // console.log(data);
   const precedentData = data?.data.data.precedentList;
-  console.log(precedentData);
+  // console.log(precedentData);
   return (
     <div className="flex h-[60vh] flex-wrap overflow-y-scroll">
       {precedentData ? (

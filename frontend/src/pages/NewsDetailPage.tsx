@@ -23,7 +23,7 @@ export default function NewsDetailPage() {
   });
 
   if (isLoading) {
-    return <LoadingAnimation />
+    return <LoadingAnimation />;
   }
 
   const { title, content, imageUrl, author, createdAt, categoryList } =

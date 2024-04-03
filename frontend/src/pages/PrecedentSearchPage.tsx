@@ -26,13 +26,13 @@ export default function PrecedentSearchPage() {
       setIsError(false);
       setResultCount(res.data.data.precedentList.totalElements);
       setKeywordList(res.data.data.keywordList);
-      console.log(res);
+      // console.log(res);
       setPrecedentList(res.data.data.precedentList.content);
     },
-    onError: (err) => {
+    onError: () => {
       setIsLoading(false);
       setIsError(true);
-      console.log(err);
+      // console.log(err);
     },
   });
 
@@ -40,13 +40,13 @@ export default function PrecedentSearchPage() {
     <SearchProvider>
       <div>
         <div
-          className={`" mx-3 mt-3 w-full flex-row items-center justify-center gap-6  overflow-hidden px-72`}
+          className={`" mx-3 mt-3 w-full flex-row items-center justify-center gap-6  px-72`}
         >
           <div className="mx-5 flex-row">
             <p className="font-SubTitle text-3xl">다시 검색하기</p>
             <PrecedentSearchBar mutate={mutate} handleLoading={handleLoading} />
           </div>
-          <div className="mx-5 mt-12 flex">
+          <div className="mx-5 mt-12 flex h-auto">
             <PrecedentList
               precedentList={precedentList}
               isLoading={isLoading}
@@ -55,9 +55,7 @@ export default function PrecedentSearchPage() {
               resultCount={resultCount}
             />
             <div className=" mx-7 w-[1px] bg-lightgray" />
-            <div>
-              <PrecedentSearchCondition keywordList={keywordList} />
-            </div>
+            <PrecedentSearchCondition keywordList={keywordList} />
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@ export const postPrecedentSearch = async ({
       },
     },
   );
-  console.log(response);
+  // console.log(response);
   return response;
 };
 
