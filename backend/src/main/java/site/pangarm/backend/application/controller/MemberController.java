@@ -13,7 +13,9 @@ import site.pangarm.backend.application.dto.request.MemberSignUpRequest;
 import site.pangarm.backend.application.dto.response.MemberFindByIdResponse;
 import site.pangarm.backend.application.dto.response.MemberSubscribeInfo;
 import site.pangarm.backend.application.dto.response.PrecedentSearchHistoryResponse;
+
 import site.pangarm.backend.application.facade.MemberFacade;
+import site.pangarm.backend.application.facade.SubscribeFacade;
 import site.pangarm.backend.global.response.api.ApiResponse;
 import site.pangarm.backend.global.response.api.ResponseCode;
 
@@ -27,6 +29,8 @@ import java.util.List;
 public class MemberController {
 
     private final MemberFacade memberFacade;
+
+    private final SubscribeFacade subscribeFacade;
 
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse<Void>> signup(@Valid @RequestBody MemberSignUpRequest memberJoinDto) {
@@ -66,7 +70,7 @@ public class MemberController {
 
     @PostMapping("/category-subscribe")
     public ResponseEntity<ApiResponse<Void>> subscribe(@AuthenticationPrincipal(errorOnInvalidType = true) User user, @RequestParam("name") String categoryName) {;
-        memberFacade.subscribe(Integer.parseInt(user.getUsername()), categoryName);
+        subscribeFacade.subscribe(Integer.parseInt(user.getUsername()), categoryName);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_SUBSCRIBE));
@@ -74,7 +78,7 @@ public class MemberController {
 
     @PostMapping("/category-unsubscribe")
     public ResponseEntity<ApiResponse<Void>> unsubscribe(@AuthenticationPrincipal User user, @RequestParam("name") String categoryName) {
-        memberFacade.unsubscribe(Integer.parseInt(user.getUsername()), categoryName);
+        subscribeFacade.unsubscribe(Integer.parseInt(user.getUsername()), categoryName);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .body(new ApiResponse<>(ResponseCode.API_SUCCESS_MEMBER_UNSUBSCRIBE));
